@@ -1,0 +1,36 @@
+{
+  "name": "template-node-ts",
+  "version": "0.0.1",
+  "description": "Basic template to start a project using nodejs with typescript",
+  "keywords": [
+    "template",
+    "node",
+    "typescript"
+  ],
+  "main": "dist/src/index.js",
+  "author": {
+    "name": "Edixon Alberto",
+    "email": "edixonalbertto@gmail.com"
+  },
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "lint": "prettier --write ./src/**/*.ts",
+    "dev": "nodemon -e ts -w ./src --exec \"ts-node src\"",
+    "build": "tsc",
+    "start": "node dist/src"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^13.7.4",
+    "dotenv": "^8.2.0",
+    "nodemon": "^2.0.2",
+    "prettier": "^1.19.1",
+    "ts-node": "^8.6.2",
+    "typescript": "4.0.3"
+  },
+  "engines": {
+    "node": "^12.18.0",
+    "yarn": "^1.22.5"
+  }
+}
