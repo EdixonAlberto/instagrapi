@@ -1,14 +1,9 @@
 import { loadConfig } from './utils/loadConfig';
-import { endpoints } from '@ENUM';
+import { InstagramApi } from './InstagramApi';
+import { TProfile } from '@types';
 
-async function main() {
-  try {
-    await loadConfig();
+loadConfig();
 
-    console.log(endpoints.API);
-  } catch (error) {
-    console.error(error);
-  }
-}
+const instagrapi = InstagramApi;
 
-main();
+export { instagrapi, TProfile };

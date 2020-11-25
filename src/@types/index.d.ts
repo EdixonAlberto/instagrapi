@@ -1,11 +1,27 @@
-type TConfig = {
-  port: number;
+export type TConfig = {
+  urlBase: string;
+};
+
+export type TProfile = {
+  profileImage: {
+    standard: string;
+    hd: string;
+  };
+  publications: string;
+  followers: number;
+  followed: number;
+  name: string;
+  biography: string;
 };
 
 /************************************ DECLARATIONS **************************************/
 
-declare namespace NodeJS {
-  interface Global {
-    config: TConfig;
+declare global {
+  namespace NodeJS {
+    interface Global {
+      config: TConfig;
+    }
   }
 }
+
+export default global;
