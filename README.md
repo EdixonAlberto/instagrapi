@@ -9,6 +9,10 @@ Library to obtain information from an Instagram account in a friendly and intuit
 The library is used as a wrapper the basic Instagram API, to abstract long or confusing
 property names and have a cleaner and clearer data structure.
 
+```sh
+npm install instagrapi
+```
+
 ## Use
 
 ```js

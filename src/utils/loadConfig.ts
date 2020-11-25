@@ -1,4 +1,4 @@
-import { TConfig } from '@types';
+import { TConfig } from '../types';
 
 export async function loadConfig() {
   const config: TConfig = {

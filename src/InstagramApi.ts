@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { TProfile } from '@types';
+import { TProfile } from './types';
 
 class InstagramApi {
   public static async getProfile(username: string): Promise<TProfile | boolean> {

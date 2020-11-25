@@ -1,6 +1,6 @@
 {
   "name": "instagrapi",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Library to obtain information from an Instagram account in a friendly and intuitive way",
   "keywords": [
     "instagram",

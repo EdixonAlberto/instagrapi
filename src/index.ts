@@ -1,6 +1,6 @@
 import { loadConfig } from './utils/loadConfig';
 import { InstagramApi } from './InstagramApi';
-import { TProfile } from '@types';
+import { TProfile } from './types';
 
 loadConfig();
 
