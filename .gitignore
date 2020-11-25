@@ -7,6 +7,3 @@ dist/
 .env
 *.log
 Procfile
-
-# Remove Later
-yarn.lock
