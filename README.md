@@ -1,20 +1,45 @@
-# template-node-ts
+# instagrapi
 
-[![Linkedin: https://linkedin.com/in/edixonalberto](https://img.shields.io/badge/author-EdixonAlberto-purple.svg)](https://linkedin.com/in/edixonalberto)
-[![MIT license](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE.md)
+[![WebSite](https://img.shields.io/badge/Author-EdixonAlberto-blue.svg)](https://edixonalberto.com)
+[![MIT license](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
 ![GitHub](https://img.shields.io/github/followers/EdixonAlberto.svg?label=Follow&style=social)
 
-Basic template to start a project using nodejs with typescript
+Library to obtain information from an Instagram account in a friendly and intuitive way.
 
-### Comands
-```sh
-yarn install
+The library is used as a wrapper the basic Instagram API, to abstract long or confusing
+property names and have a cleaner and clearer data structure.
 
-yarn run dev # run app in mode developer
-yarn run build # build app
-yarn start # run app in mode production
+## Use
+
+```js
+const { instagrapi } = require('instagrapi');
+
+const profile = instagrapi.getProfile('INSTAGRAM_USERNAME');
+
+console.log(profile.followers); // numbers followers of instagram account
 ```
 
-### Screenshots
+## Methods
 
-![image](./docs/template.png)
+- `getProfile:` get all information of profile instagram inserted.
+
+Type of output in typescript:
+
+```ts
+type TProfile = {
+  profileImage: {
+    standard: string;
+    hd: string;
+  };
+  publications: string;
+  followers: number;
+  followed: number;
+  name: string;
+  biography: string;
+};
+```
+
+## TODO
+
+- Create more methods
+- Access private accounts through login
