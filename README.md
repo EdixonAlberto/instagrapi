@@ -14,9 +14,9 @@ property names and have a cleaner and clearer data structure.
 ```js
 const { instagrapi } = require('instagrapi');
 
-const profile = instagrapi.getProfile('INSTAGRAM_USERNAME');
-
-console.log(profile.followers); // numbers followers of instagram account
+instagrapi.getProfile('INSTAGRAM_USERNAME').then(profile => {
+  console.log(profile.followers); // numbers followers of instagram account
+});
 ```
 
 ## Methods
