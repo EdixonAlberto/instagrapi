@@ -1,7 +1,7 @@
 # instagrapi
 
-[![WebSite](https://img.shields.io/badge/Author-EdixonAlberto-blue.svg)](https://edixonalberto.com)
-[![MIT license](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
+[![Website](https://img.shields.io/badge/Author-Edixon_Piña-blue.svg)](https://edixonalberto.com)
+![MIT license](https://img.shields.io/badge/License-MIT-green.svg)
 ![GitHub](https://img.shields.io/github/followers/EdixonAlberto.svg?label=Follow&style=social)
 
 Library to obtain information from an Instagram account in a friendly and intuitive way.
@@ -45,5 +45,9 @@ type TProfile = {
 
 ## TODO
 
-- Create more methods
-- Access private accounts through login
+- [ ] Create more methods
+- [ ] Access private accounts through login
+
+## License
+
+[MIT License](./LICENSE) &copy; Edixon Piña

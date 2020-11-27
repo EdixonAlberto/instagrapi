@@ -1,5 +1,5 @@
-const { instagrapi } = require('../src');
+const { instagrapi } = require('../dist');
 
-instagrapi.getProfile('edixonalbertto').then(profile => {
-  console.log(profile.followers);
+instagrapi.getProfile('instagram').then(profile => {
+  console.log(profile);
 });
