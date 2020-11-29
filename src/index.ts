@@ -7,3 +7,4 @@ loadConfig();
 const instagrapi = InstagramApi;
 
 export { instagrapi, TProfile };
+export default instagrapi;
