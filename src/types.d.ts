@@ -1,5 +1,5 @@
 export type TProfile = {
-  profileImage: {
+  image: {
     standard: string;
     hd: string;
   };
@@ -8,31 +8,35 @@ export type TProfile = {
   followed: number;
   name: string;
   biography: string;
+  externalUrl: string;
+  isBusiness: boolean;
+  isVerified: boolean;
+  isPrivate: boolean;
 };
 
 export type TPublications = {
   total: number;
-  publications: Array<TPublication>;
+  latestPosts: Array<TPost>;
 };
 
-export type TPublication = {
-  coverImage: {
-    standard: string;
-    small: string;
+export type TPost = {
+  cover: {
+    image: {
+      standard: string;
+      small: string;
+    };
+    video?: string;
   };
   media?: Array<TMedia>;
   content?: string;
   likes: number;
   comments: number;
+  location?: string;
   date: string;
 };
 
-export type TMedia = {
-  image: string;
-  video?: {
-    url: string;
-    views: number;
-    title?: string;
-    duration?: number;
-  };
+type TMedia = {
+  type: 'image' | 'video';
+  url: string;
+  views?: number;
 };

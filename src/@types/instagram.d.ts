@@ -39,10 +39,10 @@ type TInstagramApi = {
       requested_by_viewer: boolean;
       username: string;
       connected_fb_page: any;
-      edge_felix_video_timeline: TTimeLine;
+      edge_felix_video_timeline: any;
       edge_owner_to_timeline_media: TTimeLine;
-      edge_saved_media: TTimeLine;
-      edge_media_collections: TTimeLine;
+      edge_saved_media: any;
+      edge_media_collections: any;
       edge_related_profiles: {
         edges: any;
       };
@@ -81,7 +81,12 @@ type TNode = TNodeBase & {
   taken_at_timestamp: number;
   edge_liked_by: TCount;
   edge_media_preview_like: TCount;
-  location: any;
+  location: {
+    id: string;
+    has_public_page: boolean;
+    name: string;
+    slug: string;
+  } | null;
   thumbnail_src: string;
   thumbnail_resources: Array<TResource>;
   edge_sidecar_to_children?: {
@@ -137,8 +142,8 @@ type TNodeVideo = {
   has_audio: true;
   tracking_token: string;
   video_url: string;
-  video_view_count: number;
+  video_view_count: number | null;
   //
-  felix_profile_grid_crop: any;
+  felix_profile_grid_crop: any | null;
   product_type: string;
 };
