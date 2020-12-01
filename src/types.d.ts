@@ -35,7 +35,7 @@ export type TPost = {
   date: string;
 };
 
-type TMedia = {
+export type TMedia = {
   type: 'image' | 'video';
   url: string;
   views?: number;

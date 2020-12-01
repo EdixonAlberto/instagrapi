@@ -1,6 +1,8 @@
 .vscode/
+.github/
 src/
 test/
+utils/
 tsconfig.json
 .prettierrc
 yarn.lock

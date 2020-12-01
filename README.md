@@ -1,8 +1,8 @@
 # instagrapi
 
-[![Website](https://img.shields.io/badge/Author-Edixon_Piña-blue.svg)](https://edixonalberto.com)
-![MIT license](https://img.shields.io/badge/License-MIT-green.svg)
-![GitHub](https://img.shields.io/github/followers/EdixonAlberto.svg?label=Follow&style=social)
+[![Website](https://img.shields.io/badge/Author-Edixon_Piña-blue.svg?&style=flat-square)](https://edixonalberto.com)
+![GitHub](https://img.shields.io/github/license/edixonalberto/instagrapi?style=flat-square)
+![npm](https://img.shields.io/npm/dw/instagrapi?color=%23CA0000&style=flat-square)
 
 Library to obtain information from an Instagram account in a friendly and intuitive way.
 

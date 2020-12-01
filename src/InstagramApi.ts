@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { TProfile, TPublications, TMedia } from './types';
+import { TProfile, TPublications, TPost, TMedia } from './types';
 
 class InstagramApi {
   private static async request(username: string): Promise<TInstagramApi | false> {
@@ -69,7 +69,7 @@ class InstagramApi {
 
             const caption = node.edge_media_to_caption.edges;
 
-            return {
+            return <TPost>{
               cover: {
                 image: {
                   standard: images.pop()!.src,
