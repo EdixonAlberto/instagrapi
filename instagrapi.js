@@ -23,8 +23,8 @@ class InstagramApi {
             if (status === 200)
                 return data;
             else {
-                console.warn('! WARN-REQUEST ->', status, data);
-                return false;
+                console.warn('WARN-REQUEST ->', status, data);
+                throw new Error('status request api');
             }
         });
     }
@@ -32,31 +32,27 @@ class InstagramApi {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const data = yield InstagramApi.request(username);
-                if (data) {
-                    const user = data.graphql.user;
-                    const profile = {
-                        image: {
-                            standard: user.profile_pic_url,
-                            hd: user.profile_pic_url_hd
-                        },
-                        publications: user.edge_owner_to_timeline_media.count,
-                        followers: user.edge_followed_by.count,
-                        followed: user.edge_follow.count,
-                        name: user.full_name,
-                        biography: user.biography,
-                        externalUrl: user.external_url,
-                        isBusiness: user.is_business_account,
-                        isVerified: user.is_verified,
-                        isPrivate: user.is_private
-                    };
-                    return profile;
-                }
-                else
-                    return false;
+                const user = data.graphql.user;
+                const profile = {
+                    image: {
+                        standard: user.profile_pic_url,
+                        hd: user.profile_pic_url_hd
+                    },
+                    publications: user.edge_owner_to_timeline_media.count,
+                    followers: user.edge_followed_by.count,
+                    followed: user.edge_follow.count,
+                    name: user.full_name,
+                    biography: user.biography,
+                    externalUrl: user.external_url,
+                    isBusiness: user.is_business_account,
+                    isVerified: user.is_verified,
+                    isPrivate: user.is_private
+                };
+                return profile;
             }
             catch (error) {
-                console.error('X ERROR-GET-PROFILE ->', error.message);
-                return false;
+                console.error('ERROR-GET-PROFILE ->', error.message);
+                throw error;
             }
         });
     }
@@ -64,56 +60,52 @@ class InstagramApi {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const data = yield InstagramApi.request(username);
-                if (data) {
-                    const timeline = data.graphql.user.edge_owner_to_timeline_media;
-                    const edges = timeline.edges;
-                    const publications = {
-                        total: timeline.count,
-                        latestPosts: edges.map(edge => {
-                            var _a;
-                            const node = edge.node;
-                            const images = node.thumbnail_resources;
-                            const children = node.edge_sidecar_to_children
-                                ? node.edge_sidecar_to_children.edges
-                                : undefined;
-                            if (children)
-                                children.shift();
-                            const caption = node.edge_media_to_caption.edges;
-                            return {
-                                cover: {
-                                    image: {
-                                        standard: images.pop().src,
-                                        small: images.shift().src
-                                    },
-                                    video: node.is_video ? node.video_url : undefined
+                const timeline = data.graphql.user.edge_owner_to_timeline_media;
+                const edges = timeline.edges;
+                const publications = {
+                    total: timeline.count,
+                    latestPosts: edges.map(edge => {
+                        var _a;
+                        const node = edge.node;
+                        const images = node.thumbnail_resources;
+                        const children = node.edge_sidecar_to_children
+                            ? node.edge_sidecar_to_children.edges
+                            : undefined;
+                        if (children)
+                            children.shift();
+                        const caption = node.edge_media_to_caption.edges;
+                        return {
+                            cover: {
+                                image: {
+                                    standard: images.pop().src,
+                                    small: images.shift().src
                                 },
-                                media: children
-                                    ? children.map((edgeChildren, i) => {
-                                        const nodeChildren = edgeChildren.node;
-                                        const isVideo = nodeChildren.is_video;
-                                        return {
-                                            type: isVideo ? 'video' : 'image',
-                                            url: isVideo ? nodeChildren.video_url : nodeChildren.display_url,
-                                            views: isVideo ? nodeChildren.video_view_count : undefined
-                                        };
-                                    })
-                                    : undefined,
-                                content: caption.length ? caption[0].node.text : undefined,
-                                likes: node.edge_liked_by.count,
-                                comments: node.edge_media_to_comment.count,
-                                location: (_a = node.location) === null || _a === void 0 ? void 0 : _a.name,
-                                date: new Date(node.taken_at_timestamp).toISOString()
-                            };
-                        })
-                    };
-                    return publications;
-                }
-                else
-                    return false;
+                                video: node.is_video ? node.video_url : undefined
+                            },
+                            media: children
+                                ? children.map((edgeChildren, i) => {
+                                    const nodeChildren = edgeChildren.node;
+                                    const isVideo = nodeChildren.is_video;
+                                    return {
+                                        type: isVideo ? 'video' : 'image',
+                                        url: isVideo ? nodeChildren.video_url : nodeChildren.display_url,
+                                        views: isVideo ? nodeChildren.video_view_count : undefined
+                                    };
+                                })
+                                : undefined,
+                            content: caption.length ? caption[0].node.text : undefined,
+                            likes: node.edge_liked_by.count,
+                            comments: node.edge_media_to_comment.count,
+                            location: (_a = node.location) === null || _a === void 0 ? void 0 : _a.name,
+                            date: new Date(node.taken_at_timestamp).toISOString()
+                        };
+                    })
+                };
+                return publications;
             }
             catch (error) {
-                console.error('X ERROR-GET-PUBLICATIONS ->', error.message);
-                return false;
+                console.error('ERROR-GET-PUBLICATIONS ->', error.message);
+                throw error;
             }
         });
     }
