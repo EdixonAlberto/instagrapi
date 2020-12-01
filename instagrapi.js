@@ -1,4 +1,14 @@
-(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.instagrapi = f()}})(function(){var define,module,exports;return (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+(function (global){(function (){
+const { loadConfig } = require('../dist/utils/loadConfig');
+const { InstagramApi } = require('../dist/InstagramApi');
+
+loadConfig();
+
+global.instagrapi = InstagramApi;
+
+}).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"../dist/InstagramApi":2,"../dist/utils/loadConfig":3}],2:[function(require,module,exports){
 (function (global){(function (){
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
@@ -71,23 +81,25 @@ class InstagramApi {
                             const children = node.edge_sidecar_to_children
                                 ? node.edge_sidecar_to_children.edges
                                 : undefined;
+                            if (children)
+                                children.shift();
                             const caption = node.edge_media_to_caption.edges;
                             return {
-                                coverImage: {
-                                    standard: images.pop().src,
-                                    small: images.shift().src
+                                cover: {
+                                    image: {
+                                        standard: images.pop().src,
+                                        small: images.shift().src
+                                    },
+                                    video: node.is_video ? node.video_url : undefined
                                 },
                                 media: children
                                     ? children.map((edgeChildren, i) => {
                                         const nodeChildren = edgeChildren.node;
+                                        const isVideo = nodeChildren.is_video;
                                         return {
-                                            image: i > 0 ? nodeChildren.display_url : undefined,
-                                            video: nodeChildren.is_video
-                                                ? {
-                                                    url: nodeChildren.video_url,
-                                                    views: nodeChildren.video_view_count
-                                                }
-                                                : undefined
+                                            type: isVideo ? 'video' : 'image',
+                                            url: isVideo ? nodeChildren.video_url : nodeChildren.display_url,
+                                            views: isVideo ? nodeChildren.video_view_count : undefined
                                         };
                                     })
                                     : undefined,
@@ -113,18 +125,7 @@ class InstagramApi {
 exports.InstagramApi = InstagramApi;
 
 }).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"axios":4}],2:[function(require,module,exports){
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.instagrapi = void 0;
-const loadConfig_1 = require("./utils/loadConfig");
-const InstagramApi_1 = require("./InstagramApi");
-loadConfig_1.loadConfig();
-const instagrapi = InstagramApi_1.InstagramApi;
-exports.instagrapi = instagrapi;
-exports.default = instagrapi;
-
-},{"./InstagramApi":1,"./utils/loadConfig":3}],3:[function(require,module,exports){
+},{"axios":4}],3:[function(require,module,exports){
 (function (global){(function (){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -1900,5 +1901,4 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}]},{},[2])(2)
-});
+},{}]},{},[1]);
