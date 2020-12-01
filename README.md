@@ -33,7 +33,8 @@ instagrapi.getProfile('INSTAGRAM_USERNAME').then(profile => {
 
 - Bundle from node_modules
 
-![file-bundle](./.github/file-bundle.png)
+After installing the library you can access the bundle `instagrapi.js` from the path
+`node_modules/dist/bundle` and place it in your assets.
 
 ## Methods
 
@@ -67,7 +68,7 @@ Type of output in typescript:
 ```ts
 type TPublications = {
   total: number;
-  latestPost: Array<TPost>;
+  latestPosts: Array<TPost>;
 };
 
 type TPost = {
