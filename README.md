@@ -25,29 +25,71 @@ instagrapi.getProfile('INSTAGRAM_USERNAME').then(profile => {
 });
 ```
 
-- Bundle
+- Bundle from url
 
 ```html
 <script src="https://edixonalberto.github.io/instagrapi/instagrapi.js"></script>
 ```
 
+- Bundle from node_modules
+
+![file-bundle](./.github/file-bundle.png)
+
 ## Methods
 
-- `getProfile:` get all information of profile instagram inserted.
+- `getProfile:` get all information of profile the entered instagram account.
 
 Type of output in typescript:
 
 ```ts
 type TProfile = {
-  profileImage: {
+  image: {
     standard: string;
     hd: string;
   };
-  publications: string;
+  publications: number;
   followers: number;
   followed: number;
   name: string;
   biography: string;
+  externalUrl: string;
+  isBusiness: boolean;
+  isVerified: boolean;
+  isPrivate: boolean;
+};
+```
+
+- `getPublications:` get the total number of posts and the last 12 posts from the entered
+  instagram account.
+
+Type of output in typescript:
+
+```ts
+type TPublications = {
+  total: number;
+  latestPost: Array<TPost>;
+};
+
+type TPost = {
+  cover: {
+    image: {
+      standard: string;
+      small: string;
+    };
+    video?: string;
+  };
+  media?: Array<TMedia>;
+  content?: string;
+  likes: number;
+  comments: number;
+  location?: string;
+  date: string;
+};
+
+type TMedia = {
+  type: 'image' | 'video';
+  url: string;
+  views?: number;
 };
 ```
 
