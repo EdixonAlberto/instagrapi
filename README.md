@@ -15,12 +15,20 @@ npm install instagrapi
 
 ## Use
 
+- Module
+
 ```js
 const { instagrapi } = require('instagrapi');
 
 instagrapi.getProfile('INSTAGRAM_USERNAME').then(profile => {
   console.log(profile.followers); // numbers followers of instagram account
 });
+```
+
+- Bundle
+
+```html
+<script src="https://edixonalberto.github.io/instagrapi/instagrapi.js"></script>
 ```
 
 ## Methods

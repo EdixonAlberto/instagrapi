@@ -22,8 +22,9 @@
     "test": "node test",
     "lint": "prettier --write ./src/**/*.ts",
     "dev": "nodemon -e ts -w ./src --exec \"ts-node src\"",
-    "prepublish": "yarn lint && yarn clean && yarn build && yarn distribute",
-    "distribute": "browserify dist/index.js --standalone instagrapi -o dist/bundle.js",
+    "prepublish": "yarn lint && yarn clean && yarn build && yarn bundle && yarn deploy",
+    "bundle": "browserify utils/createBundle.js -o dist/bundle/instagrapi.js",
+    "deploy": "gh-pages -o github -d ./dist/bundle",
     "build": "tsc",
     "start": "node dist"
   },
@@ -33,6 +34,7 @@
   "devDependencies": {
     "@types/node": "^13.7.4",
     "browserify": "^17.0.0",
+    "gh-pages": "^3.1.0",
     "nodemon": "^2.0.2",
     "prettier": "^1.19.1",
     "rimraf": "^3.0.2",
