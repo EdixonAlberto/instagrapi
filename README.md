@@ -28,13 +28,17 @@ instagrapi.getProfile('INSTAGRAM_USERNAME').then(profile => {
 - Bundle from url
 
 ```html
+<!-- Bundle to development -->
 <script src="https://edixonalberto.github.io/instagrapi/instagrapi.js"></script>
+
+<!-- Bundle optimized to production -->
+<script src="https://edixonalberto.github.io/instagrapi/instagrapi.min.js"></script>
 ```
 
 - Bundle from node_modules
 
-After installing the library you can access the bundle `instagrapi.js` from the path
-`node_modules/dist/bundle` and place it in your assets.
+After installing the library you can access the bundle `instagrapi.js` or
+`instagrapi.min.js` from the path `node_modules/dist/bundle` and place it in your assets.
 
 ## Methods
 
@@ -98,6 +102,7 @@ type TMedia = {
 
 - [ ] Create more methods
 - [ ] Access private accounts through login
+- [ ] Obtain all post from an account
 
 ## License
 

@@ -2,7 +2,8 @@
 .github/
 src/
 test/
-utils/
+tools/
 tsconfig.json
 .prettierrc
 yarn.lock
+*.log
