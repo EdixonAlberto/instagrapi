@@ -90,7 +90,7 @@ class InstagramApi {
             likes: node.edge_liked_by.count,
             comments: node.edge_media_to_comment.count,
             location: node.location?.name,
-            date: new Date(node.taken_at_timestamp).toISOString()
+            date: new Date(node.taken_at_timestamp * 1000).toISOString()
           };
         })
       };
