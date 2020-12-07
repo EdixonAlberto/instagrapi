@@ -1,6 +1,6 @@
 {
   "name": "instagrapi",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Library to obtain information from an Instagram account in a friendly and intuitive way",
   "keywords": [
     "instagram",
@@ -24,8 +24,8 @@
     "lint": "prettier --write ./src/**/*.ts",
     "dev": "nodemon -e ts -w ./src --exec \"ts-node src\"",
     "pre-publish": "yarn lint && yarn clean && yarn build && yarn test-js && yarn bundle && yarn minify",
-    "bundle": "browserify utils/createBundle.js -d -o dist/bundle/instagrapi.js",
-    "minify": "node utils/minifyBundle.js",
+    "bundle": "browserify tools/createBundle.js -d -o dist/bundle/instagrapi.js",
+    "minify": "node tools/minifyBundle.js",
     "deploy": "gh-pages -o github -d ./dist/bundle",
     "build": "tsc",
     "start": "node dist"
