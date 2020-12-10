@@ -19,11 +19,10 @@
   "private": false,
   "scripts": {
     "clean": "rimraf ./dist",
-    "test-ts": "ts-node test/index.ts",
-    "test-js": "node test/index.js",
+    "test": "jest",
     "lint": "prettier --write ./src/**/*.ts",
     "dev": "nodemon -e ts -w ./src --exec \"ts-node src\"",
-    "pre-publish": "yarn lint && yarn clean && yarn build && yarn test-js && yarn bundle && yarn minify",
+    "pre-publish": "yarn test && yarn lint && yarn clean && yarn build && yarn bundle && yarn minify",
     "bundle": "browserify tools/createBundle.js -d -o dist/bundle/instagrapi.js",
     "minify": "node tools/minifyBundle.js",
     "deploy": "gh-pages -o github -d ./dist/bundle",
@@ -34,12 +33,15 @@
     "axios": "^0.21.0"
   },
   "devDependencies": {
+    "@types/jest": "^26.0.17",
     "@types/node": "^13.7.4",
     "browserify": "^17.0.0",
     "gh-pages": "^3.1.0",
+    "jest": "^26.6.3",
     "nodemon": "^2.0.2",
     "prettier": "^1.19.1",
     "rimraf": "^3.0.2",
+    "ts-jest": "^26.4.4",
     "ts-node": "^8.6.2",
     "typescript": "4.0.3",
     "uglify-js": "^3.12.1"
