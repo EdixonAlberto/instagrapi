@@ -1,4 +1,5 @@
 import { Time } from '../src/utils/Time';
+import { instagrapi, TProfile, TPublications } from '../src/index';
 
 describe('Utils', () => {
   test('Convert ms to date', () => {
@@ -6,5 +7,17 @@ describe('Utils', () => {
     const date = Time.msToDate(ms);
 
     expect(date).toBe('2020-12-07T18:24:06.000Z');
+  });
+});
+
+describe('Instagrapi', () => {
+  test('Get Profile', async () => {
+    const profile: TProfile = await instagrapi.getProfile('instagram');
+    expect(profile).toMatchObject(<TProfile>{ name: 'Instagram' });
+  });
+
+  test('Get Publication', async () => {
+    const publications: TPublications = await instagrapi.getPublications('instagram');
+    expect(publications).toBeTruthy();
   });
 });
