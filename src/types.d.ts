@@ -6,6 +6,7 @@ export type TProfile = {
   publications: number;
   followers: number;
   followed: number;
+  posts: number;
   name: string;
   biography: string;
   externalUrl: string;
@@ -14,17 +15,10 @@ export type TProfile = {
   isPrivate: boolean;
 };
 
-export type TPublications = {
-  total: number;
-  latestPosts: Array<TPost>;
-};
-
-export type TPost = {
+export type TLastPosts = Array<{
+  code: string;
   cover: {
-    image: {
-      standard: string;
-      small: string;
-    };
+    image: string;
     video?: string;
   };
   media?: Array<TMedia>;
@@ -33,7 +27,7 @@ export type TPost = {
   comments: number;
   location?: string;
   date: string;
-};
+}>;
 
 export type TMedia = {
   type: 'image' | 'video';

@@ -55,6 +55,7 @@ type TProfile = {
   publications: number;
   followers: number;
   followed: number;
+  posts: number;
   name: string;
   biography: string;
   externalUrl: string;
@@ -64,23 +65,15 @@ type TProfile = {
 };
 ```
 
-- `getPublications:` get the total number of posts and the last 12 posts from the entered
-  instagram account.
+- `getLastPosts:` get the last 12 posts from the entered instagram account.
 
 Type of output in typescript:
 
 ```ts
-type TPublications = {
-  total: number;
-  latestPosts: Array<TPost>;
-};
-
-type TPost = {
+type TLastPosts = Array<{
+  code: string;
   cover: {
-    image: {
-      standard: string;
-      small: string;
-    };
+    image: string;
     video?: string;
   };
   media?: Array<TMedia>;
@@ -89,7 +82,7 @@ type TPost = {
   comments: number;
   location?: string;
   date: string;
-};
+}>;
 
 type TMedia = {
   type: 'image' | 'video';

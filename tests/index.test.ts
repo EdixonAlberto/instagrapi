@@ -1,5 +1,5 @@
 import { Time } from '../src/utils/Time';
-import { instagrapi, TProfile, TPublications } from '../src/index';
+import { instagrapi, TProfile, TLastPosts } from '../src/index';
 
 describe('Utils', () => {
   test('Convert ms to date', () => {
@@ -16,8 +16,8 @@ describe('Instagrapi', () => {
     expect(profile).toMatchObject(<TProfile>{ name: 'Instagram' });
   });
 
-  test('Get Publication', async () => {
-    const publications: TPublications = await instagrapi.getPublications('instagram');
-    expect(publications).toBeTruthy();
+  test('Get Last Posts', async () => {
+    const lastPosts: TLastPosts = await instagrapi.getLastPosts('instagram');
+    expect(lastPosts).toBeTruthy();
   });
 });
