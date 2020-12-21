@@ -32,7 +32,7 @@ type TInstagramApi = {
       is_verified: boolean;
       edge_mutual_followed_by: {
         count: number;
-        edges: any;
+        edges: Array<any>;
       };
       profile_pic_url: string;
       profile_pic_url_hd: string;
@@ -44,7 +44,7 @@ type TInstagramApi = {
       edge_saved_media: any;
       edge_media_collections: any;
       edge_related_profiles: {
-        edges: any;
+        edges: Array<any>;
       };
     };
   };
@@ -67,15 +67,7 @@ type TEdge = {
 };
 
 type TNode = TNodeBase & {
-  edge_media_to_caption: {
-    edges: [
-      {
-        node: {
-          text: string;
-        };
-      }
-    ];
-  };
+  edge_media_to_caption: TCaption;
   edge_media_to_comment: TCount;
   comments_disabled: boolean;
   taken_at_timestamp: number;
@@ -111,7 +103,7 @@ type TNodeBase = {
   dimensions: TDimensions;
   display_url: string;
   edge_media_to_tagged_user: {
-    edges: any;
+    edges: Array<any>;
   };
   fact_check_overall_rating: any;
   fact_check_information: any;
@@ -145,8 +137,6 @@ type TNodeVideo = {
   product_type: string;
 };
 
-// TODO: descompose: '{"street_address": "100 Observatory St", "zip_code": "48109", "city_name": "Hell, Michigan", "region_name": "", "country_code": "US", "exact_city_match": false, "exact_region_match": false, "exact_country_match": false}';
-
 type TPostApi = {
   graphql: {
     shortcode_media: {
@@ -163,26 +153,30 @@ type TPostApi = {
         bloks_app_url: any;
       };
       media_overlay_info: any;
-      media_preview: any;
+      media_preview: string;
       display_url: string;
       display_resources: Array<TResource>;
+      accessibility_caption?: string;
+      dash_info?: {
+        is_dash_eligible: boolean;
+        video_dash_manifest: any;
+        number_of_qualities: number;
+      };
+      has_audio?: boolean;
+      video_url?: string;
+      video_view_count?: number;
+      video_play_count?: number;
       is_video: boolean;
       tracking_token: string;
-      edge_media_to_tagged_user: TMediaToTaggedUser;
-      edge_media_to_caption: {
-        edges: [
-          {
-            node: {
-              text: string;
-            };
-          }
-        ];
-      };
+      edge_media_to_tagged_user: Array<{
+        node: TMediaToTaggedUser;
+      }>;
+      edge_media_to_caption: TCaption;
       caption_is_edited: boolean;
       has_ranked_comments: boolean;
       edge_media_to_parent_comment: TMediaToParentComment;
       edge_media_to_hoisted_comment: {
-        edges: [];
+        edges: Array<any>;
       };
       edge_media_preview_comment: {
         count: number;
@@ -193,17 +187,17 @@ type TPostApi = {
       taken_at_timestamp: number;
       edge_media_preview_like: {
         count: number;
-        edges: [];
+        edges: Array<any>;
       };
       edge_media_to_sponsor_user: {
-        edges: [];
+        edges: Array<any>;
       };
       location: {
         id: string;
         has_public_page: boolean;
         name: string;
         slug: string;
-        address_json: string; // TODO: descomponer json
+        address_json: string;
       };
       viewer_has_liked: boolean;
       viewer_has_saved: boolean;
@@ -229,57 +223,69 @@ type TPostApi = {
       };
       is_ad: boolean;
       edge_web_media_to_related_media: {
-        edges: any;
+        edges: Array<any>;
       };
-      edge_sidecar_to_children: TSidecarToChildren;
+      edge_sidecar_to_children?: {
+        edges: Array<{
+          node: TSidecarToChildren;
+        }>;
+      };
+      encoding_status?: any;
+      is_published?: boolean;
+      product_type?: string;
+      title?: string;
+      video_duration?: number;
+      thumbnail_src?: string;
+      clips_music_attribution_info?: {
+        artist_name: string;
+        song_name: string;
+        uses_original_audio: boolean;
+        should_mute_audio: boolean;
+      };
       edge_related_profiles: {
-        edges: any;
+        edges: Array<any>;
       };
     };
   };
 };
 
 type TMediaToTaggedUser = {
-  edges: Array<{
-    node: {
-      user: {
-        full_name: string;
-        id: string;
-        is_verified: boolean;
-        profile_pic_url: string;
-        username: string;
-      };
-      x: number;
-      y: number;
-    };
-  }>;
+  user: {
+    full_name: string;
+    id: string;
+    is_verified: boolean;
+    profile_pic_url: string;
+    username: string;
+  };
+  x: number;
+  y: number;
 };
 
 type TSidecarToChildren = {
-  edges: Array<{
-    node: {
-      __typename: string;
-      id: string;
-      shortcode: string;
-      dimensions: TDimensions;
-      gating_info: any;
-      fact_check_overall_rating: any;
-      fact_check_information: any;
-      sensitivity_friction_info: any;
-      sharing_friction_info: {
-        should_have_sharing_friction: boolean;
-        bloks_app_url: any;
-      };
-      media_overlay_info: any;
-      media_preview: string;
-      display_url: string;
-      display_resources: Array<TResource>;
-      accessibility_caption: string;
-      is_video: boolean;
-      tracking_token: string;
-      edge_media_to_tagged_user: TMediaToTaggedUser;
-    };
-  }>;
+  __typename: string;
+  id: string;
+  shortcode: string;
+  dimensions: TDimensions;
+  gating_info: any;
+  fact_check_overall_rating: any;
+  fact_check_information: any;
+  sensitivity_friction_info: any;
+  sharing_friction_info: {
+    should_have_sharing_friction: boolean;
+    bloks_app_url: any;
+  };
+  media_overlay_info: any;
+  media_preview: string;
+  display_url: string;
+  display_resources: Array<TResource>;
+  accessibility_caption: string;
+  is_video: boolean;
+  tracking_token: string;
+  edge_media_to_tagged_user: {
+    edges: Array<{
+      node: TMediaToTaggedUser;
+    }>;
+  };
 };
 
 type TMediaToParentComment = {
@@ -300,7 +306,12 @@ type TCommentBase = {
   text: string;
   created_at: number;
   did_report_as_spam: boolean;
-  owner: TOwner;
+  owner: {
+    id: string;
+    is_verified: boolean;
+    profile_pic_url: string;
+    username: string;
+  };
   viewer_has_liked: boolean;
   edge_liked_by: TCount;
   is_restricted_pending: boolean;
@@ -321,9 +332,23 @@ type TDimensions = {
   width: number;
 };
 
-type TOwner = {
-  id: string;
-  is_verified: boolean;
-  profile_pic_url: string;
-  username: string;
+type TCaption = {
+  edges: [
+    {
+      node: {
+        text: string;
+      };
+    }
+  ];
+};
+
+type TLocation = {
+  street_address: string;
+  zip_code: string;
+  city_name: string;
+  region_name: string;
+  country_code: string;
+  exact_city_match: boolean;
+  exact_region_match: boolean;
+  exact_country_match: boolean;
 };

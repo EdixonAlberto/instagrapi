@@ -1,12 +1,12 @@
 export type TProfile = {
+  username: string;
   image: {
     standard: string;
     hd: string;
   };
-  publications: number;
   followers: number;
   followed: number;
-  posts: number;
+  qtyPosts: number;
   name: string;
   biography: string;
   externalUrl: string;
@@ -16,21 +16,75 @@ export type TProfile = {
 };
 
 export type TLastPosts = Array<{
-  code: string;
+  postUrl: string;
   cover: {
     image: string;
     video?: string;
   };
-  media?: Array<TMedia>;
-  content?: string;
+  content: string;
   likes: number;
-  comments: number;
-  location?: string;
-  date: string;
+  qtyComments: number;
 }>;
 
+export type TPost = {
+  postUrl: string;
+  cover: {
+    image: {
+      standard: string;
+      hd: string;
+    };
+    video?: string;
+  };
+  content: string;
+  likes: number;
+  qtyComments: number;
+  media?: Array<TMedia>;
+  author: {
+    username: string;
+    image: string;
+    followed: number;
+    qtyPosts: number;
+    name: string;
+    isVerified: boolean;
+    isPrivate: boolean;
+  };
+  taggedUsers: Array<TTagged>;
+  lastComments: Array<TComment>;
+  isSpam: boolean;
+};
+
 export type TMedia = {
-  type: 'image' | 'video';
-  url: string;
-  views?: number;
+  image: {
+    standard: string;
+    hd: string;
+  };
+  video?: {
+    url: string;
+    isAudio: boolean;
+    views: number;
+  };
+  taggedUsers: Array<TTagged>;
+};
+
+export type TTagged = {
+  image: string;
+  name: string;
+  isVerified: boolean;
+  coordinates: {
+    x: number;
+    y: number;
+  };
+};
+
+export type TComment = {
+  content: string;
+  author: {
+    username: string;
+    image: string;
+    isVerified: boolean;
+  };
+  likes: number;
+  responses: Array<TComment>;
+  isSpam: boolean;
+  date: string;
 };
