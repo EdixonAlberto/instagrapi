@@ -279,6 +279,15 @@ type TSidecarToChildren = {
   display_url: string;
   display_resources: Array<TResource>;
   accessibility_caption: string;
+  dash_info?: {
+    is_dash_eligible: boolean;
+    video_dash_manifest: any;
+    number_of_qualities: boolean;
+  };
+  has_audio?: boolean;
+  video_url?: string;
+  video_view_count?: number;
+  video_play_count?: number | null;
   is_video: boolean;
   tracking_token: string;
   edge_media_to_tagged_user: {

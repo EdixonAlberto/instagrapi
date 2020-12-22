@@ -17,10 +17,8 @@ export type TProfile = {
 
 export type TLastPosts = Array<{
   postUrl: string;
-  cover: {
-    image: string;
-    video?: string;
-  };
+  image: string;
+  video?: string;
   content: string;
   likes: number;
   qtyComments: number;
@@ -28,13 +26,6 @@ export type TLastPosts = Array<{
 
 export type TPost = {
   postUrl: string;
-  cover: {
-    image: {
-      standard: string;
-      hd: string;
-    };
-    video?: string;
-  };
   content: string;
   likes: number;
   qtyComments: number;
@@ -48,9 +39,7 @@ export type TPost = {
     isVerified: boolean;
     isPrivate: boolean;
   };
-  taggedUsers: Array<TTagged>;
   lastComments: Array<TComment>;
-  isSpam: boolean;
 };
 
 export type TMedia = {
@@ -84,7 +73,7 @@ export type TComment = {
     isVerified: boolean;
   };
   likes: number;
-  responses: Array<TComment>;
+  responses?: Array<TComment>;
   isSpam: boolean;
   date: string;
 };
