@@ -1,7 +1,7 @@
 import { loadConfig } from './utils/loadConfig';
-import type { TProfile, TLastPosts, TMedia, TPost, TTagged, TComment } from './types';
+import type { TProfile, TLastPosts, TPost, TMedia, TTagged, TComment } from './types';
 
 loadConfig();
 
-export { TProfile, TLastPosts, TMedia, TPost, TTagged, TComment };
+export { TProfile, TLastPosts, TPost,TMedia, TTagged, TComment };
 export { InstagramApi as instagrapi } from './InstagramApi';

@@ -1,12 +1,11 @@
 import axios from 'axios';
 
 class Request {
-  public static async api(
-    query: 'instagram' | 'post',
-    param: string
-  ): Promise<TInstagramApi | TPostApi> {
-    const _param = query === 'post' ? `p/${param}` : param;
-    const { status, data } = await axios.get(`${global.config.urlBase}/${_param}/?__a=1`);
+  public static async api(query: string): Promise<TInstagramApi | TPostApi> {
+    const isUrl = query.search(/^(https)/) > -1;
+    const url: string = isUrl ? query : `${global.config.urlBase}/${query}`;
+
+    const { status, data } = await axios.get(url + '/?__a=1');
 
     if (status === 200) return data;
     else {
