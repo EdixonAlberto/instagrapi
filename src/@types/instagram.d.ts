@@ -40,7 +40,14 @@ type TInstagramApi = {
       username: string;
       connected_fb_page: any;
       edge_felix_video_timeline: any;
-      edge_owner_to_timeline_media: TTimeLine;
+      edge_owner_to_timeline_media: {
+        count: number;
+        page_info: {
+          has_next_page: boolean;
+          end_cursor: string;
+        };
+        edges: Array<TEdgeMedia>;
+      };
       edge_saved_media: any;
       edge_media_collections: any;
       edge_related_profiles: {
@@ -53,57 +60,36 @@ type TInstagramApi = {
   profile_pic_edit_sync_props: any;
 };
 
-type TTimeLine = {
-  count: number;
-  page_info: {
-    has_next_page: boolean;
-    end_cursor: string;
-  };
-  edges: Array<TEdge>;
-};
-
-type TEdge = {
-  node: TNode;
-};
-
-type TNode = TNodeBase & {
-  edge_media_to_caption: TCaption;
-  edge_media_to_comment: TCount;
-  comments_disabled: boolean;
-  taken_at_timestamp: number;
-  edge_liked_by: TCount;
-  edge_media_preview_like: TCount;
-  location: {
-    id: string;
-    has_public_page: boolean;
-    name: string;
-    slug: string;
-  } | null;
-  thumbnail_src: string;
-  thumbnail_resources: Array<TResource>;
-  edge_sidecar_to_children?: {
-    edges: Array<{ node: TNodeBase }>;
+type TEdgeMedia = {
+  node: TEdgeMediaBase & {
+    edge_media_to_caption: TCaption;
+    edge_media_to_comment: TCount;
+    comments_disabled: boolean;
+    taken_at_timestamp: number;
+    edge_liked_by: TCount;
+    edge_media_preview_like: TCount;
+    location: {
+      id: string;
+      has_public_page: boolean;
+      name: string;
+      slug: string;
+    } | null;
+    thumbnail_src: string;
+    thumbnail_resources: Array<TResource>;
+    edge_sidecar_to_children?: {
+      edges: Array<{ node: TEdgeMediaBase }>;
+    };
   };
 };
 
-type TCount = {
-  count: number;
-};
-
-type TResource = {
-  src: string;
-  config_width: number;
-  config_height: number;
-};
-
-type TNodeBase = {
+type TEdgeMediaBase = {
   __typename: string;
   id: string;
   shortcode: string;
   dimensions: TDimensions;
   display_url: string;
   edge_media_to_tagged_user: {
-    edges: Array<any>;
+    edges: Array<TEdgeTagged>;
   };
   fact_check_overall_rating: any;
   fact_check_information: any;
@@ -120,21 +106,17 @@ type TNodeBase = {
   };
   is_video: boolean;
   accessibility_caption: string;
-} & TNodeVideo;
-
-type TNodeVideo = {
-  dash_info: {
+  dash_info?: {
     is_dash_eligible: boolean;
     video_dash_manifest: any;
     number_of_qualities: number;
   };
-  has_audio: boolean;
-  tracking_token: string;
-  video_url: string;
-  video_view_count: number | null;
-  //
-  felix_profile_grid_crop: any | null;
-  product_type: string;
+  has_audio?: boolean;
+  tracking_token?: string;
+  video_url?: string;
+  video_view_count?: number | null;
+  felix_profile_grid_crop?: any | null;
+  product_type?: string;
 };
 
 type TPostApi = {
@@ -168,13 +150,20 @@ type TPostApi = {
       video_play_count?: number;
       is_video: boolean;
       tracking_token: string;
-      edge_media_to_tagged_user: Array<{
-        node: TMediaToTaggedUser;
-      }>;
+      edge_media_to_tagged_user: {
+        edges: Array<TEdgeTagged>;
+      };
       edge_media_to_caption: TCaption;
       caption_is_edited: boolean;
       has_ranked_comments: boolean;
-      edge_media_to_parent_comment: TMediaToParentComment;
+      edge_media_to_parent_comment: {
+        count: number;
+        page_info: {
+          has_next_page: boolean;
+          end_cursor: string;
+        };
+        edges: Array<TEdgeComment>;
+      };
       edge_media_to_hoisted_comment: {
         edges: Array<any>;
       };
@@ -225,10 +214,8 @@ type TPostApi = {
       edge_web_media_to_related_media: {
         edges: Array<any>;
       };
-      edge_sidecar_to_children?: {
-        edges: Array<{
-          node: TSidecarToChildren;
-        }>;
+      edge_sidecar_to_children: {
+        edges: Array<TEdgeSidecar>;
       };
       encoding_status?: any;
       is_published?: boolean;
@@ -249,96 +236,96 @@ type TPostApi = {
   };
 };
 
-type TMediaToTaggedUser = {
-  user: {
-    full_name: string;
+type TEdgeSidecar = {
+  node: {
+    __typename: string;
     id: string;
-    is_verified: boolean;
-    profile_pic_url: string;
-    username: string;
+    shortcode: string;
+    dimensions: TDimensions;
+    gating_info: any;
+    fact_check_overall_rating: any;
+    fact_check_information: any;
+    sensitivity_friction_info: any;
+    sharing_friction_info: {
+      should_have_sharing_friction: boolean;
+      bloks_app_url: any;
+    };
+    media_overlay_info: any;
+    media_preview: string;
+    display_url: string;
+    display_resources: Array<TResource>;
+    accessibility_caption: string;
+    dash_info?: {
+      is_dash_eligible: boolean;
+      video_dash_manifest: any;
+      number_of_qualities: boolean;
+    };
+    has_audio: boolean;
+    video_url: string;
+    video_view_count: number;
+    video_play_count?: number | null;
+    is_video: boolean;
+    tracking_token: string;
+    edge_media_to_tagged_user: {
+      edges: Array<TEdgeTagged>;
+    };
   };
-  x: number;
-  y: number;
-};
-
-type TSidecarToChildren = {
-  __typename: string;
-  id: string;
-  shortcode: string;
-  dimensions: TDimensions;
-  gating_info: any;
-  fact_check_overall_rating: any;
-  fact_check_information: any;
-  sensitivity_friction_info: any;
-  sharing_friction_info: {
-    should_have_sharing_friction: boolean;
-    bloks_app_url: any;
-  };
-  media_overlay_info: any;
-  media_preview: string;
-  display_url: string;
-  display_resources: Array<TResource>;
-  accessibility_caption: string;
-  dash_info?: {
-    is_dash_eligible: boolean;
-    video_dash_manifest: any;
-    number_of_qualities: boolean;
-  };
-  has_audio?: boolean;
-  video_url?: string;
-  video_view_count?: number;
-  video_play_count?: number | null;
-  is_video: boolean;
-  tracking_token: string;
-  edge_media_to_tagged_user: {
-    edges: Array<{
-      node: TMediaToTaggedUser;
-    }>;
-  };
-};
-
-type TMediaToParentComment = {
-  count: number;
-  page_info: {
-    has_next_page: boolean;
-    end_cursor: string;
-  };
-  edges: Array<TEdgeComment>;
 };
 
 type TEdgeComment = {
-  node: TCommentBase;
-};
-
-type TCommentBase = {
-  id: string;
-  text: string;
-  created_at: number;
-  did_report_as_spam: boolean;
-  owner: {
+  node: {
     id: string;
-    is_verified: boolean;
-    profile_pic_url: string;
-    username: string;
+    text: string;
+    created_at: number;
+    did_report_as_spam: boolean;
+    owner: {
+      id: string;
+      is_verified: boolean;
+      profile_pic_url: string;
+      username: string;
+      is_private: boolean;
+    };
+    viewer_has_liked: boolean;
+    edge_liked_by: TCount;
+    is_restricted_pending: boolean;
+    edge_threaded_comments?: {
+      count: number;
+      page_info: {
+        has_next_page: boolean;
+        end_cursor: any;
+      };
+      edges: Array<TEdgeComment>;
+    };
   };
-  viewer_has_liked: boolean;
-  edge_liked_by: TCount;
-  is_restricted_pending: boolean;
-  edge_threaded_comments: TEdgeThreaded | null;
 };
 
-type TEdgeThreaded = {
+type TCount = {
   count: number;
-  page_info: {
-    has_next_page: boolean;
-    end_cursor: any;
-  };
-  edges: Array<TEdgeComment>;
+};
+
+type TResource = {
+  src: string;
+  config_width: number;
+  config_height: number;
 };
 
 type TDimensions = {
   height: number;
   width: number;
+};
+
+type TEdgeTagged = {
+  node: {
+    user: {
+      full_name: string;
+      id: string;
+      is_verified: boolean;
+      profile_pic_url: string;
+      username: string;
+    };
+    x: number;
+    y: number;
+  };
 };
 
 type TCaption = {

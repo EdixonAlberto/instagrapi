@@ -18,7 +18,7 @@ export type TProfile = {
 export type TLastPosts = Array<{
   postUrl: string;
   image: string;
-  video?: string;
+  video: string | null;
   content: string;
   likes: number;
   qtyComments: number;
@@ -29,7 +29,7 @@ export type TPost = {
   content: string;
   likes: number;
   qtyComments: number;
-  media?: Array<TMedia>;
+  media: Array<TMedia> | null;
   author: {
     username: string;
     image: string;
@@ -39,7 +39,14 @@ export type TPost = {
     isVerified: boolean;
     isPrivate: boolean;
   };
-  lastComments: Array<TComment>;
+  lastComments: Array<TComment> | null;
+  location: {
+    country: string;
+    region: string;
+    city: string;
+    street: string;
+    zipCode: string;
+  };
 };
 
 export type TMedia = {
@@ -47,11 +54,11 @@ export type TMedia = {
     standard: string;
     hd: string;
   };
-  video?: {
+  video: {
     url: string;
     isAudio: boolean;
     views: number;
-  };
+  } | null;
   taggedUsers: Array<TTagged>;
 };
 
@@ -73,7 +80,7 @@ export type TComment = {
     isVerified: boolean;
   };
   likes: number;
-  responses?: Array<TComment>;
+  responses: Array<TComment> | null;
   isSpam: boolean;
   date: string;
 };
