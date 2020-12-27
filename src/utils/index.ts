@@ -2,7 +2,7 @@ import { TComment, TPost } from '../types';
 
 class Utils {
   public static msToDate(ms: number): string {
-    const _ms = ms / 10000000000 < 1 ? ms * 1000 : ms;
+    const _ms = ms / 1e10 < 1 ? ms * 1000 : ms;
     const date = new Date(_ms).toISOString();
     return date;
   }
