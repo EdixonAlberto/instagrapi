@@ -50,7 +50,6 @@ class InstagramApi {
           : null,
         content: Utils.getCaption(media),
         likes: media.edge_liked_by.count,
-
         qtyComments: media.edge_media_to_comment.count
       }));
 

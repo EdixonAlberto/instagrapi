@@ -23,7 +23,7 @@
     "lint": "prettier --write ./src/**/*.ts",
     "dev": "nodemon -e ts -w ./src --exec \"ts-node src\"",
     "pre-publish": "yarn test && yarn lint && yarn clean && yarn build && yarn bundle && yarn minify",
-    "bundle": "browserify tools/templateBundle.js -d -o dist/bundle/instagrapi.js",
+    "bundle": "node tools/createBundle.js",
     "minify": "node tools/minifyBundle.js",
     "deploy": "gh-pages -o github -d ./dist/bundle",
     "build": "tsc",
