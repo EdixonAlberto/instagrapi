@@ -61,28 +61,28 @@ type TInstagramApi = {
 };
 
 type TEdgeMedia = {
-  node: TEdgeMediaBase & {
+  node: TNodeMedia & {
     edge_media_to_caption: TCaption;
     edge_media_to_comment: TCount;
     comments_disabled: boolean;
     taken_at_timestamp: number;
     edge_liked_by: TCount;
     edge_media_preview_like: TCount;
-    location: {
+    location: null | {
       id: string;
       has_public_page: boolean;
       name: string;
       slug: string;
-    } | null;
+    };
     thumbnail_src: string;
     thumbnail_resources: Array<TResource>;
     edge_sidecar_to_children?: {
-      edges: Array<{ node: TEdgeMediaBase }>;
+      edges: Array<{ node: TNodeMedia }>;
     };
   };
 };
 
-type TEdgeMediaBase = {
+type TNodeMedia = {
   __typename: string;
   id: string;
   shortcode: string;
@@ -105,18 +105,19 @@ type TEdgeMediaBase = {
     username: string;
   };
   is_video: boolean;
-  accessibility_caption: string;
+  accessibility_caption: string | null;
   dash_info?: {
     is_dash_eligible: boolean;
     video_dash_manifest: any;
     number_of_qualities: number;
   };
-  has_audio?: boolean;
+  has_audio: boolean;
   tracking_token?: string;
-  video_url?: string;
-  video_view_count?: number | null;
+  video_url: string;
+  title: string;
+  video_view_count: number | null;
   felix_profile_grid_crop?: any | null;
-  product_type?: string;
+  product_type: string;
 };
 
 type TPostApi = {
@@ -138,15 +139,15 @@ type TPostApi = {
       media_preview: string;
       display_url: string;
       display_resources: Array<TResource>;
-      accessibility_caption?: string;
+      accessibility_caption: string | null;
       dash_info?: {
         is_dash_eligible: boolean;
         video_dash_manifest: any;
         number_of_qualities: number;
       };
-      has_audio?: boolean;
-      video_url?: string;
-      video_view_count?: number;
+      has_audio: boolean;
+      video_url: string;
+      video_view_count: number;
       video_play_count?: number;
       is_video: boolean;
       tracking_token: string;
@@ -181,7 +182,7 @@ type TPostApi = {
       edge_media_to_sponsor_user: {
         edges: Array<any>;
       };
-      location: {
+      location: null | {
         id: string;
         has_public_page: boolean;
         name: string;
@@ -214,16 +215,16 @@ type TPostApi = {
       edge_web_media_to_related_media: {
         edges: Array<any>;
       };
-      edge_sidecar_to_children: {
+      edge_sidecar_to_children?: {
         edges: Array<TEdgeSidecar>;
       };
       encoding_status?: any;
       is_published?: boolean;
-      product_type?: string;
-      title?: string;
-      video_duration?: number;
+      product_type: string;
+      title: string;
+      video_duration: number;
       thumbnail_src?: string;
-      clips_music_attribution_info?: {
+      clips_music_attribution_info: null | {
         artist_name: string;
         song_name: string;
         uses_original_audio: boolean;
@@ -262,7 +263,7 @@ type TEdgeSidecar = {
     };
     has_audio: boolean;
     video_url: string;
-    video_view_count: number;
+    video_view_count: number | null;
     video_play_count?: number | null;
     is_video: boolean;
     tracking_token: string;
@@ -283,7 +284,6 @@ type TEdgeComment = {
       is_verified: boolean;
       profile_pic_url: string;
       username: string;
-      is_private: boolean;
     };
     viewer_has_liked: boolean;
     edge_liked_by: TCount;

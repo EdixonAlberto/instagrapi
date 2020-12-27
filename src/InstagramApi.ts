@@ -15,9 +15,9 @@ class InstagramApi {
           standard: user.profile_pic_url,
           hd: user.profile_pic_url_hd
         },
+        qtyPosts: user.edge_owner_to_timeline_media.count,
         followers: user.edge_followed_by.count,
         followed: user.edge_follow.count,
-        qtyPosts: user.edge_owner_to_timeline_media.count,
         name: user.full_name,
         biography: user.biography,
         externalUrl: user.external_url,
@@ -42,9 +42,15 @@ class InstagramApi {
       const lastPosts: TLastPosts = edges.map(({ node: media }: TEdgeMedia) => ({
         postUrl: Utils.getPostUrl(media.shortcode),
         image: media.display_url,
-        video: media?.video_url || null,
+        video: media.is_video
+          ? {
+              url: media.video_url,
+              views: media?.video_view_count
+            }
+          : null,
         content: Utils.getCaption(media),
         likes: media.edge_liked_by.count,
+
         qtyComments: media.edge_media_to_comment.count
       }));
 
@@ -62,59 +68,81 @@ class InstagramApi {
       const media = data.graphql.shortcode_media;
 
       // Note: if there are children, they will always be older than one
-      const children = media.edge_sidecar_to_children.edges;
+      const children = media.edge_sidecar_to_children?.edges || [];
+      // The first medium is deleted, because it is the same as the cover
+      if (children.length) children.shift();
+
+      const images = media.display_resources;
       const user = media.owner;
       const commentList = media.edge_media_to_parent_comment.edges;
 
       const post: TPost = {
         postUrl: Utils.getPostUrl(media.shortcode),
+        image: {
+          standard: images.shift()!.src,
+          hd: images.pop()!.src
+        },
+        video: media.is_video
+          ? {
+              url: media.video_url,
+              type: media.product_type,
+              views: media.video_view_count,
+              duration: media.video_duration,
+              hasAudio: media.clips_music_attribution_info
+                ? {
+                    artist: media.clips_music_attribution_info.artist_name,
+                    song: media.clips_music_attribution_info.song_name
+                  }
+                : media.has_audio
+            }
+          : null,
         content: Utils.getCaption(media),
         likes: media.edge_media_preview_like.count,
         qtyComments: media.edge_media_to_parent_comment.count,
-        media: children.length
-          ? children.map(
-              ({ node: sidecar }: TEdgeSidecar): TMedia => {
-                const images = sidecar.display_resources;
-                const taggeds = sidecar.edge_media_to_tagged_user.edges;
+        media: children.map(
+          ({ node: sidecar }: TEdgeSidecar): TMedia => {
+            const images = sidecar.display_resources;
+            const taggeds = sidecar.edge_media_to_tagged_user.edges;
 
-                return {
-                  image: {
-                    standard: images.shift()!.src,
-                    hd: images.pop()!.src
-                  },
-                  video: sidecar.is_video
-                    ? {
-                        isAudio: sidecar.has_audio,
-                        url: sidecar.video_url,
-                        views: sidecar.video_view_count
-                      }
-                    : null,
-                  taggedUsers: taggeds.map(
-                    ({ node: tagged }: TEdgeTagged): TTagged => ({
-                      image: tagged.user.profile_pic_url,
-                      name: tagged.user.full_name,
-                      isVerified: tagged.user.is_verified,
-                      coordinates: {
-                        x: tagged.x,
-                        y: tagged.y
-                      }
-                    })
-                  )
-                };
-              }
-            )
-          : null,
+            return {
+              image: {
+                standard: images.shift()!.src,
+                hd: images.pop()!.src
+              },
+              video: sidecar.is_video
+                ? {
+                    url: sidecar.video_url,
+                    type: media.product_type,
+                    views: sidecar.video_view_count,
+                    duration: media.video_duration,
+                    hasAudio: sidecar.has_audio
+                  }
+                : null,
+              taggedUsers: taggeds.map(
+                ({ node: tagged }: TEdgeTagged): TTagged => ({
+                  image: tagged.user.profile_pic_url,
+                  name: tagged.user.full_name,
+                  isVerified: tagged.user.is_verified,
+                  coordinates: {
+                    x: tagged.x,
+                    y: tagged.y
+                  }
+                })
+              )
+            };
+          }
+        ),
         author: {
           username: user.username,
           image: user.profile_pic_url,
-          followed: user.edge_followed_by.count,
           qtyPosts: user.edge_owner_to_timeline_media.count,
+          followers: user.edge_followed_by.count,
           name: user.full_name,
           isVerified: user.is_verified,
           isPrivate: user.is_private
         },
-        lastComments: commentList.length ? Utils.getComment(commentList) : null,
-        location: Utils.getLocation(media.location.address_json)
+        lastComments: Utils.getComments(commentList),
+        location: media.location ? Utils.getLocation(media.location.address_json) : null
       };
 
       return post;

@@ -4,9 +4,9 @@ export type TProfile = {
     standard: string;
     hd: string;
   };
+  qtyPosts: number;
   followers: number;
   followed: number;
-  qtyPosts: number;
   name: string;
   biography: string;
   externalUrl: string;
@@ -18,34 +18,42 @@ export type TProfile = {
 export type TLastPosts = Array<{
   postUrl: string;
   image: string;
-  video: string | null;
-  content: string;
+  video: null | {
+    url: string;
+    views: number | null;
+  };
+  content: string | null;
   likes: number;
   qtyComments: number;
 }>;
 
 export type TPost = {
   postUrl: string;
-  content: string;
+  image: {
+    standard: string;
+    hd: string;
+  };
+  video: TVideo | null;
+  content: string | null;
   likes: number;
   qtyComments: number;
-  media: Array<TMedia> | null;
+  media: Array<TMedia>;
   author: {
     username: string;
     image: string;
-    followed: number;
     qtyPosts: number;
+    followers: number;
     name: string;
     isVerified: boolean;
     isPrivate: boolean;
   };
-  lastComments: Array<TComment> | null;
-  location: {
-    country: string;
-    region: string;
-    city: string;
-    street: string;
-    zipCode: string;
+  lastComments: Array<TComment>;
+  location: null | {
+    country: string | null;
+    region: string | null;
+    city: string | null;
+    street: string | null;
+    zipCode: string | null;
   };
 };
 
@@ -54,12 +62,21 @@ export type TMedia = {
     standard: string;
     hd: string;
   };
-  video: {
-    url: string;
-    isAudio: boolean;
-    views: number;
-  } | null;
+  video: TVideo | null;
   taggedUsers: Array<TTagged>;
+};
+
+export type TVideo = {
+  url: string;
+  type: string | 'clips' | 'igtv' | 'feed';
+  views: number | null;
+  duration: number;
+  hasAudio:
+    | boolean
+    | {
+        artist: string;
+        song: string;
+      };
 };
 
 export type TTagged = {
@@ -80,7 +97,7 @@ export type TComment = {
     isVerified: boolean;
   };
   likes: number;
-  responses: Array<TComment> | null;
+  responses: Array<TComment>;
   isSpam: boolean;
   date: string;
 };

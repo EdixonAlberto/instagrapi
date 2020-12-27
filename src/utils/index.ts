@@ -13,42 +13,45 @@ class Utils {
 
   public static getCaption(
     media: TEdgeMedia['node'] | TPostApi['graphql']['shortcode_media']
-  ): string {
-    return media.edge_media_to_caption.edges.length
+  ): string | null {
+    const caption = media.edge_media_to_caption.edges.length
       ? media.edge_media_to_caption.edges[0].node.text
       : media.accessibility_caption || '';
+
+    return caption ? caption : media.is_video ? media.title : null;
   }
 
-  public static getComment(commentList: Array<TEdgeComment>): TComment[] {
-    return commentList.map(({ node: comment }: TEdgeComment) => {
-      const commentList = comment.edge_threaded_comments?.edges;
-      const user = comment.owner;
+  public static getComments(commentList: Array<TEdgeComment> | undefined): TComment[] {
+    if (commentList?.length) {
+      return commentList.map(({ node: comment }: TEdgeComment) => {
+        const user = comment.owner;
+        const commentList = comment.edge_threaded_comments?.edges;
 
-      return {
-        content: comment.text,
-        author: {
-          username: user.username,
-          image: user.profile_pic_url,
-          isVerified: user.is_verified,
-          isPrivate: user.is_private
-        },
-        likes: comment.edge_liked_by.count,
-        responses: commentList?.length ? Utils.getComment(commentList) : null,
-        isSpam: comment.did_report_as_spam,
-        date: Utils.msToDate(comment.created_at)
-      };
-    });
+        return {
+          content: comment.text,
+          author: {
+            username: user.username,
+            image: user.profile_pic_url,
+            isVerified: user.is_verified
+          },
+          likes: comment.edge_liked_by.count,
+          responses: Utils.getComments(commentList),
+          isSpam: comment.did_report_as_spam,
+          date: Utils.msToDate(comment.created_at)
+        };
+      });
+    } else return [];
   }
 
   public static getLocation(addressJson: string): TPost['location'] {
     const address: TLocation = JSON.parse(addressJson);
 
     const location: TPost['location'] = {
-      country: address.country_code,
-      region: address.region_name,
-      city: address.city_name,
-      street: address.street_address,
-      zipCode: address.zip_code
+      country: address.country_code || null,
+      region: address.region_name || null,
+      city: address.city_name || null,
+      street: address.street_address || null,
+      zipCode: address.zip_code || null
     };
 
     return location;
