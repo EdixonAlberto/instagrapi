@@ -3,7 +3,11 @@
 src/
 test/
 tools/
+demo/
+tests/
+
 tsconfig.json
+jest.config.js
 .prettierrc
 yarn.lock
 *.log
