@@ -55,15 +55,7 @@ export type TPost = {
     street: string | null;
     zipCode: string | null;
   };
-};
-
-export type TMedia = {
-  image: {
-    standard: string;
-    hd: string;
-  };
-  video: TVideo | null;
-  taggedUsers: Array<TTagged>;
+  date: string;
 };
 
 export type TVideo = {
@@ -77,6 +69,15 @@ export type TVideo = {
         artist: string;
         song: string;
       };
+};
+
+export type TMedia = {
+  image: {
+    standard: string;
+    hd: string;
+  };
+  video: TVideo | null;
+  taggedUsers: Array<TTagged>;
 };
 
 export type TTagged = {

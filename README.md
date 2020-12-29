@@ -11,7 +11,7 @@ The library works as a wrapper for the basic Instagram API, to abstract long or 
 property names and have a clean and readable data structure.
 
 Created with NodeJS and Typescript, all types are exposed for use.
-<img src="./.github/typescript.png" width="15px" alt="" /> + 💗
+<img src="./.github/typescript.png" width="17px" alt="" /> + 💗
 
 ```sh
 npm install instagrapi

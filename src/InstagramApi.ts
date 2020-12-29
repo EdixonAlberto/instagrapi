@@ -141,7 +141,8 @@ class InstagramApi {
           isPrivate: user.is_private
         },
         lastComments: Utils.getComments(commentList),
-        location: media.location ? Utils.getLocation(media.location.address_json) : null
+        location: media.location ? Utils.getLocation(media.location.address_json) : null,
+        date: Utils.msToDate(media.taken_at_timestamp)
       };
 
       return post;
