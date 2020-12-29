@@ -1,7 +1,8 @@
 # instagrapi
 
-[![](https://img.shields.io/badge/Author-Edixon_Piña-blue.svg?&style=flat-square)](https://www.edixonalberto.com)
+[![](https://img.shields.io/badge/author-Edixon_Piña-blue.svg?&style=flat-square)](https://www.edixonalberto.com)
 [![](https://img.shields.io/github/license/edixonalberto/instagrapi?style=flat-square)](./LICENSE)
+[![](https://img.shields.io/npm/v/instagrapi?style=flat-square)](https://www.npmjs.com/package/instagrapi)
 [![](https://img.shields.io/npm/dw/instagrapi?color=%23CA0000&style=flat-square)](https://www.npmjs.com/package/instagrapi)
 [![](https://data.jsdelivr.com/v1/package/npm/instagrapi/badge)](https://www.jsdelivr.com/package/npm/instagrapi?path=dist%2Fbundle)
 
@@ -130,15 +131,7 @@ type TPost = {
     street: string | null;
     zipCode: string | null;
   };
-};
-
-type TMedia = {
-  image: {
-    standard: string;
-    hd: string;
-  };
-  video: TVideo | null;
-  taggedUsers: Array<TTagged>;
+  date: string;
 };
 
 type TVideo = {
@@ -152,6 +145,15 @@ type TVideo = {
         artist: string;
         song: string;
       };
+};
+
+type TMedia = {
+  image: {
+    standard: string;
+    hd: string;
+  };
+  video: TVideo | null;
+  taggedUsers: Array<TTagged>;
 };
 
 type TTagged = {
