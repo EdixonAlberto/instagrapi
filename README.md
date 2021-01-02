@@ -14,20 +14,12 @@ property names and have a clean and readable data structure.
 Created with NodeJS and Typescript, all types are exposed for use.
 <img src="./.github/typescript.png" width="17px" alt="" /> + 💗
 
-```sh
-npm install instagrapi
-```
-
-## Use
+## Installation
 
 - NPM
 
-```js
-const { instagrapi } = require('instagrapi');
-
-instagrapi.getProfile('USERNAME').then(profile => {
-  console.log(profile.followers); // numbers followers of instagram account
-});
+```sh
+npm install instagrapi
 ```
 
 - CDN
@@ -45,6 +37,40 @@ instagrapi.getProfile('USERNAME').then(profile => {
 Download the bundle from
 [jsdelivr](https://www.jsdelivr.com/package/npm/instagrapi?path=dist%2Fbundle) selecting
 `instagrapi.js` or `instagrapi.min.js` and create the corresponding file in your assets.
+
+## Usage
+
+```js
+const { instagrapi } = require('instagrapi');
+
+instagrapi.getProfile('USERNAME').then(profile => {
+  console.log(profile.followers); // Numbers followers of instagram account
+});
+```
+
+Using typescript and async/await.
+
+```ts
+import { instagrapi, TPost, TComment } from 'instagrapi';
+
+async function getComments(): Promise<string[] | undefined> {
+  try {
+    const post: TPost = await instagrapi.getPost('POST_URL');
+
+    const comments: string[] = post.lastComments.map(
+      (comment: TComment) => comment.content
+    );
+
+    console.log(comments); // Last comments of the post
+
+    return comments;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+getComments();
+```
 
 ## Methods
 
