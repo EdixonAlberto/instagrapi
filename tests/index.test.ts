@@ -1,5 +1,5 @@
 import { Utils } from '../src/utils';
-import { instagrapi, TProfile, TLastPosts, TPost, TComment } from '../src/index';
+import { instagrapi, TProfile, TLastPosts, TPost, TComment } from '../src';
 
 describe('Utils', () => {
   test('Convert ms to date', () => {
