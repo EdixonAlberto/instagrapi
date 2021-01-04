@@ -28,7 +28,7 @@
     "deploy": "gh-pages -o github -d ./dist/bundle",
     "build": "tsc",
     "start": "node dist",
-    "serve": "live-server --port 80 ./demo/index.html"
+    "serve": "live-server --port=80 ./demo"
   },
   "dependencies": {
     "axios": "^0.21.0"
