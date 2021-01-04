@@ -1,0 +1,318 @@
+/* VARIABLES */
+
+:root {
+  --color-gray: #55504a;
+  --color-primary: #ffb545;
+  --color-secondary: #f92672;
+  --color-instagram: linear-gradient(
+    220deg,
+    var(--color-secondary) 0%,
+    var(--color-primary) 50%,
+    var(--color-secondary) 100%
+  );
+}
+
+@font-face {
+  src: url('../fonts/FontsFree-Net-Segoe-UI.ttf');
+  font-family: 'Segoe-UI';
+  font-weight: 400;
+}
+
+/* GLOBAL */
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+h1,
+h2,
+p,
+button,
+li {
+  font-family: 'Segoe-UI', Helvetica, sans-serif;
+}
+
+article {
+  padding: 20px;
+  margin: 0;
+  background-color: white;
+}
+
+pre[class*='language-'] {
+  margin: 0 !important;
+  width: 100%;
+}
+
+pre[class*='language-'] span.token.string {
+  color: var(--color-primary) !important;
+}
+
+section,
+section.row {
+  margin: 60px 0 !important;
+}
+
+section h2 {
+  font-size: 35px;
+  font-weight: 600;
+  color: var(--color-primary);
+  text-shadow: -1px 1px 1px var(--color-gray);
+}
+
+/***************************************** MAIN *****************************************/
+
+main {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-instagram);
+
+  color: white;
+}
+
+main .title {
+  position: relative;
+}
+
+.title h1 {
+  text-align: center;
+  font-size: 55px;
+  font-weight: 500;
+  text-shadow: -1px 1px 3px var(--color-gray);
+  margin-bottom: 40px;
+}
+
+.title .version {
+  position: absolute;
+  top: 65px;
+  right: 220px;
+
+  font-size: 20px;
+  font-weight: 700;
+}
+
+main p {
+  text-align: center;
+  margin: 0;
+  font-size: 25px;
+  font-weight: 500;
+  color: var(--color-gray);
+}
+
+.features ul {
+  width: 100%;
+  margin: 40px auto;
+  list-style: none;
+  padding-left: 65px;
+}
+
+.features ul > li {
+  margin: 20px 0;
+  font-weight: 400;
+  color: white;
+  text-shadow: -1px 1px 3px var(--color-gray);
+}
+
+.links button {
+  width: 150px;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 20px;
+  margin: 0 25px;
+
+  box-shadow: -3px 3px 3px black;
+  transition: all 0.15s ease;
+}
+
+.links button:hover {
+  cursor: pointer;
+  box-shadow: none;
+  transform: translateY(2px);
+}
+
+.links button:focus {
+  outline: none;
+}
+
+.links a {
+  color: white;
+  text-decoration: none;
+}
+
+.links a:hover {
+  color: white;
+}
+
+.started {
+  background-color: var(--color-primary);
+}
+
+.npm {
+  background-color: #ca0000;
+}
+
+.github {
+  background-color: #374853;
+}
+
+/* SEARCH */
+
+.search {
+  display: flex;
+  justify-content: center;
+}
+
+/*************************************** PROFILE ****************************************/
+
+.render-profile {
+  height: 421px;
+  display: flex;
+  align-items: top;
+  justify-content: center;
+  text-align: center;
+}
+
+.profile-container {
+  color: var(--color-gray);
+}
+
+.border-color {
+  background: var(--color-instagram);
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  margin: auto;
+  text-align: center;
+}
+
+.profile-container img {
+  width: 150px;
+  border: none;
+  border-radius: 50%;
+  margin-top: 5px;
+}
+
+.profile-container h3 {
+  font-weight: 500;
+}
+
+.profile-container p {
+  margin-bottom: 2px;
+}
+
+.followers {
+  color: var(--color-primary);
+}
+
+.external-url a {
+  color: #f92672;
+  text-decoration: none;
+}
+
+.external-url span {
+  font-weight: 700;
+  font-family: 'Segoe-UI', Helvetica, sans-serif;
+}
+
+.external-url a:hover {
+  color: #f92672;
+}
+
+/*************************************** LAST-POSTS *************************************/
+
+#lastposts h2 {
+  text-align: right;
+  padding-right: 30px;
+}
+
+.post-card {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  height: 152.8px;
+  width: 100%;
+}
+
+.post-card:hover {
+  cursor: pointer;
+}
+
+.post-card .content {
+  visibility: hidden;
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-items: center;
+
+  text-align: center;
+  padding: 20px;
+}
+
+.post-card .content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #212529a1;
+}
+
+.post-card:hover .content {
+  visibility: visible;
+}
+
+.post-card .content p,
+.post-data .fa,
+.post-data span {
+  position: relative;
+  color: white;
+}
+
+.post-card .content p {
+  font-size: 0.8rem;
+}
+
+.post-data {
+  display: inline-flex;
+  width: 100%;
+}
+
+.post-data .data {
+  margin: auto;
+}
+
+.post-data span {
+  font-family: 'Segoe-UI', Helvetica, sans-serif;
+  font-size: 0.7rem;
+}
+
+.code-lastposts .language-js {
+  height: 458.4px;
+}
+
+/*********************************** CUSTOM SCROLL **************************************/
+
+::-webkit-scrollbar {
+  height: 9px;
+  width: 9px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  height: 40px;
+  background-color: white;
+}
+
+::-webkit-scrollbar-thumb:hover {
+}
