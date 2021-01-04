@@ -2,7 +2,20 @@
 
 :root {
   --color-gray: #55504a;
-  --color-instagram: linear-gradient(220deg, #f92672 0%, #ffb545 50%, #f92672 100%);
+  --color-primary: #ffb545;
+  --color-secondary: #f92672;
+  --color-instagram: linear-gradient(
+    220deg,
+    var(--color-secondary) 0%,
+    var(--color-primary) 50%,
+    var(--color-secondary) 100%
+  );
+}
+
+@font-face {
+  src: url('../fonts/FontsFree-Net-Segoe-UI.ttf');
+  font-family: 'Segoe-UI';
+  font-weight: 400;
 }
 
 /* GLOBAL */
@@ -15,13 +28,15 @@ body {
 h1,
 h2,
 p,
-span {
-  font-family: Helvetica, sans-serif;
+button,
+li {
+  font-family: 'Segoe-UI', Helvetica, sans-serif;
 }
 
 article {
   padding: 20px;
   margin: 0;
+  background-color: white;
 }
 
 pre[class*='language-'] {
@@ -29,12 +44,23 @@ pre[class*='language-'] {
   width: 100%;
 }
 
-section,
-section.row {
-  margin: 40px 0 !important;
+pre[class*='language-'] span.token.string {
+  color: var(--color-primary) !important;
 }
 
-/* MAIN */
+section,
+section.row {
+  margin: 60px 0 !important;
+}
+
+section h2 {
+  font-size: 35px;
+  font-weight: 600;
+  color: var(--color-primary);
+  text-shadow: -1px 1px 1px var(--color-gray);
+}
+
+/***************************************** MAIN *****************************************/
 
 main {
   height: 100vh;
@@ -47,41 +73,89 @@ main {
   color: white;
 }
 
-main h1 {
+main .title {
+  position: relative;
+}
+
+.title h1 {
   text-align: center;
   font-size: 55px;
-  margin-bottom: 20px;
+  font-weight: 500;
+  text-shadow: -1px 1px 3px var(--color-gray);
+  margin-bottom: 40px;
+}
+
+.title .version {
+  position: absolute;
+  top: 65px;
+  right: 220px;
+
+  font-size: 20px;
+  font-weight: 700;
 }
 
 main p {
   text-align: center;
-  margin-bottom: 20px;
+  margin: 0;
   font-size: 25px;
-}
-
-main .features {
-  display: inline-flex;
-  margin-bottom: 20px;
+  font-weight: 500;
+  color: var(--color-gray);
 }
 
 .features ul {
-  width: 50%;
+  width: 100%;
+  margin: 40px auto;
+  list-style: none;
+  padding-left: 65px;
 }
 
 .features ul > li {
   margin: 20px 0;
-}
-
-.links {
+  font-weight: 400;
+  color: white;
+  text-shadow: -1px 1px 3px var(--color-gray);
 }
 
 .links button {
   width: 150px;
-
   border: none;
   border-radius: 10px;
   padding: 8px 20px;
   margin: 0 25px;
+
+  box-shadow: -3px 3px 3px black;
+  transition: all 0.15s ease;
+}
+
+.links button:hover {
+  cursor: pointer;
+  box-shadow: none;
+  transform: translateY(2px);
+}
+
+.links button:focus {
+  outline: none;
+}
+
+.links a {
+  color: white;
+  text-decoration: none;
+}
+
+.links a:hover {
+  color: white;
+}
+
+.started {
+  background-color: var(--color-primary);
+}
+
+.npm {
+  background-color: #ca0000;
+}
+
+.github {
+  background-color: #374853;
 }
 
 /* SEARCH */
@@ -91,14 +165,14 @@ main .features {
   justify-content: center;
 }
 
-/* PROFILE */
+/*************************************** PROFILE ****************************************/
 
 .render-profile {
   height: 421px;
   display: flex;
-  text-align: center;
-  align-items: center;
+  align-items: top;
   justify-content: center;
+  text-align: center;
 }
 
 .profile-container {
@@ -121,21 +195,33 @@ main .features {
   margin-top: 5px;
 }
 
-.profile-container h3,
+.profile-container h3 {
+  font-weight: 500;
+}
+
 .profile-container p {
+  margin-bottom: 2px;
+}
+
+.followers {
+  color: var(--color-primary);
+}
+
+.external-url a {
+  color: #f92672;
+  text-decoration: none;
+}
+
+.external-url span {
   font-weight: 700;
-  margin: 10px 0;
+  font-family: 'Segoe-UI', Helvetica, sans-serif;
 }
 
-.profile-container p {
-  margin: 0;
+.external-url a:hover {
+  color: #f92672;
 }
 
-.profile-container .followers {
-  color: rgba(240, 145, 0, 1);
-}
-
-/* LAST-POSTS */
+/*************************************** LAST-POSTS *************************************/
 
 #lastposts h2 {
   text-align: right;
@@ -203,6 +289,7 @@ main .features {
 }
 
 .post-data span {
+  font-family: 'Segoe-UI', Helvetica, sans-serif;
   font-size: 0.7rem;
 }
 
@@ -218,7 +305,7 @@ main .features {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-instagram);
+  background: var(--color-primary);
   border-radius: 10px;
 }
 

@@ -25,9 +25,9 @@
     "pre-publish": "yarn test && yarn lint && yarn clean && yarn build && yarn bundle && yarn minify",
     "bundle": "node tools/createBundle.js",
     "minify": "node tools/minifyBundle.js",
-    "deploy": "gh-pages -o github -d ./dist/bundle",
     "build": "tsc",
     "start": "node dist",
+    "deploy": "gh-pages -o github -d ./demo",
     "serve": "live-server --port=80 ./demo"
   },
   "dependencies": {
