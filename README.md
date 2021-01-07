@@ -1,4 +1,4 @@
-# instagrapi
+# Instagrapi
 
 [![](https://img.shields.io/badge/author-Edixon_Piña-blue.svg?&style=flat-square)](https://www.edixonalberto.com)
 [![](https://img.shields.io/github/license/edixonalberto/instagrapi?style=flat-square)](./LICENSE)
@@ -12,7 +12,9 @@ The library works as a wrapper for the basic Instagram API, to abstract long or 
 property names and have a clean and readable data structure.
 
 Created with NodeJS and Typescript, all types are exposed for use.
-<img src="./.github/typescript.png" width="17px" alt="" /> + 💗
+<img src="./.github/typescript.png" width="17px" alt="Logo typescript" /> + 💗
+
+<!-- ## [Demo website](https://edixonalberto.github.io/instagrapi/) &#x279c; -->
 
 ## Installation
 

@@ -6,25 +6,39 @@ const vue = new Vue({
   },
 
   data: {
-    lastPosts: [],
+    features: {
+      col1: [
+        'Data based on the official instagram api',
+        'Easy and fast to use',
+        'Data exposed in full JSON format',
+        'Images returned in standard and HD format',
+        'Dates returned in unirversal ISO format'
+      ],
+      col2: [
+        'Developed in NodeJS and Typescript',
+        'All types of data are exposed',
+        'Methods based in promises',
+        'Bundle optimized for use on the client',
+        'Code open source published in Github'
+      ]
+    },
     username: 'instagram',
+    lastPosts: [],
     profile: null
   },
 
   created() {
-    if (this.username) {
-      this.searchProfile();
-    }
+    this.searchProfile();
   },
 
   methods: {
-    async getPosts() {
-      this.lastPosts = await instagrapi.getLastPosts(this.username);
-    },
-
     async searchProfile() {
       this.profile = await instagrapi.getProfile(this.username);
       this.getPosts();
+    },
+
+    async getPosts() {
+      this.lastPosts = await instagrapi.getLastPosts(this.username);
     }
   }
 });
