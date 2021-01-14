@@ -152,6 +152,7 @@ main p {
 li .icon-container {
   height: 16px;
   width: 16px;
+  min-width: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -161,8 +162,8 @@ li .icon-container {
 }
 
 .icon-container img {
+  height: 12px;
   width: 12px;
-  position: absolute;
 }
 
 .links a {
@@ -207,6 +208,7 @@ li .icon-container {
 
 .search button {
   margin-left: 15px;
+  margin-right: 0;
   background-color: var(--color-primary);
 }
 
@@ -282,6 +284,7 @@ li .icon-container {
   background-repeat: no-repeat;
   position: relative;
   height: 152.8px;
+  /* max-height: 120px; */
   width: 100%;
 }
 
@@ -343,6 +346,7 @@ li .icon-container {
 
 .code-lastposts .language-js {
   height: 458.4px;
+  /* max-height: 361px; */
 }
 
 /*********************************** CUSTOM SCROLL **************************************/
@@ -363,4 +367,35 @@ li .icon-container {
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: #ff9f0d;
+}
+
+/*************************************** RESPONSIVE *************************************/
+
+@media screen and (min-width: 1920px) {
+}
+
+@media screen and (min-width: 1440px) and (max-width: 1919px) {
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1439px) {
+}
+
+@media screen and (max-width: 400px) {
+  main p {
+    font-size: 18px;
+  }
+
+  .features ul {
+    padding-left: 13px;
+    margin: 20px 0 25px 0;
+  }
+
+  .features ul > li {
+    font-size: 14px;
+    margin: 5px 0;
+  }
+
+  .links button {
+    margin-bottom: 12px;
+  }
 }

@@ -90,13 +90,13 @@
           <section id="profile" class="row m-auto">
             <h2>Profile</h2>
 
-            <div class="col-6 p-0">
+            <div class="col-md-6 col-12 p-0 mb-3">
               <code-highlight class="code-profile" language="js">
                 {{ profile }}
               </code-highlight>
             </div>
 
-            <div class="col-6 p-0">
+            <div class="col-md-6 col-12 p-0">
               <div class="render-profile">
                 <div v-if="profile" class="profile-container">
                   <div class="border-color">
@@ -135,7 +135,7 @@
 
             <div class="col-6">
               <div class="row">
-                <div class="col-3 p-0" v-for="(post, i) in lastPosts" :key="i">
+                <div class="col-md-6 col-12 p-0" v-for="(post, i) in lastPosts" :key="i">
                   <div
                     class="post-card"
                     :style="`background-image: url('${post.image}')`"
@@ -162,9 +162,9 @@
               </div>
             </div>
 
-            <div class="col-6 align-self-center">
-              <code-highlight class="code-lastposts" language="js">
-                {{ lastPosts }}
+            <div class="col-md-6 col-12 align-self-center">
+              <code-highlight class="code-lastposts" language="js"
+                >{{ lastPosts }}
               </code-highlight>
             </div>
           </section>

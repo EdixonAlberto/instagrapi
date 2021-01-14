@@ -28,13 +28,17 @@ const vue = new Vue({
   },
 
   created() {
-    this.searchProfile();
+    this.loadData();
   },
 
   methods: {
+    async loadData() {
+      await this.searchProfile();
+      await this.getPosts();
+    },
+
     async searchProfile() {
       this.profile = await instagrapi.getProfile(this.username);
-      this.getPosts();
     },
 
     async getPosts() {
