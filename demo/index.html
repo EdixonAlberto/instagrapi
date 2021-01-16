@@ -55,7 +55,7 @@
           </div>
 
           <div class="row m-auto">
-            <div class="links col-12 text-center align-self-center">
+            <div class="links col-12 text-center">
               <a href="#demo">
                 <button class="ig-btn started">Demostration</button>
               </a>
@@ -88,15 +88,15 @@
 
         <template v-if="profile">
           <section id="profile" class="row m-auto">
-            <h2>Profile</h2>
+            <h2 class="order-0">Profile</h2>
 
-            <div class="col-md-6 col-12 p-0 mb-3">
+            <div class="col-md-6 col-12 p-0 mb-3 order-3">
               <code-highlight class="code-profile" language="js">
                 {{ profile }}
               </code-highlight>
             </div>
 
-            <div class="col-md-6 col-12 p-0">
+            <div class="col-md-6 col-12 p-0 order-1">
               <div class="render-profile">
                 <div v-if="profile" class="profile-container">
                   <div class="border-color">
@@ -133,36 +133,42 @@
           <section id="lastposts" class="row m-auto">
             <h2>Last Posts</h2>
 
-            <div class="col-6">
-              <div class="row">
-                <div class="col-md-6 col-12 p-0" v-for="(post, i) in lastPosts" :key="i">
-                  <div
-                    class="post-card"
-                    :style="`background-image: url('${post.image}')`"
+            <div class="col-md-6 col-12 p-0 mb-3">
+              <div class="posts row">
+                <div class="col-md-3 col-6 p-0" v-for="(post, i) in lastPosts" :key="i">
+                  <a
+                    data-bs-toggle="modal"
+                    data-bs-target="#modal-post"
+                    @click="getPost(post.postUrl)"
                   >
-                    <div class="content">
-                      <div>
-                        <p>{{ post.content | cut }}</p>
+                    <div
+                      class="post-card"
+                      :style="`background-image: url('${post.image}')`"
+                    >
+                      <div class="content">
+                        <div>
+                          <p>{{ post.content | cut }}</p>
 
-                        <div class="post-data">
-                          <div class="data">
-                            <i class="fa fa-heart-o" aria-hidden="true"></i>
-                            <span>{{ post.likes | round }}</span>
-                          </div>
+                          <div class="post-data">
+                            <div class="data">
+                              <i class="fa fa-heart-o" aria-hidden="true"></i>
+                              <span>{{ post.likes | round }}</span>
+                            </div>
 
-                          <div class="data">
-                            <i class="fa fa-comment-o" aria-hidden="true"></i>
-                            <span>{{ post.qtyComments | round }}</span>
+                            <div class="data">
+                              <i class="fa fa-comment-o" aria-hidden="true"></i>
+                              <span>{{ post.qtyComments | round }}</span>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </a>
                 </div>
               </div>
             </div>
 
-            <div class="col-md-6 col-12 align-self-center">
+            <div class="col-md-6 col-12 p-0 align-self-center">
               <code-highlight class="code-lastposts" language="js"
                 >{{ lastPosts }}
               </code-highlight>
@@ -182,7 +188,21 @@
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-body">
-              BODY
+              <div class="row">
+                <div class="col-6">
+                  <div v-if="post" class="post-detail-card">
+                    <img :src="post.image.hd" alt="Post image" />
+                  </div>
+
+                  <div v-else>
+                    <div class="spinner-border" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-6"></div>
+              </div>
             </div>
 
             <div class="modal-footer"></div>
@@ -192,9 +212,9 @@
     </div>
 
     <!-- VUE-PRODUCTION -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2"></script> -->
     <!-- VUE-DEVELOPMENT -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <!-- VUE-HIGHLIGHT -->
     <script src="https://cdn.jsdelivr.net/npm/vue-code-highlight@0.7.6/dist/vue-code-highlight.min.js"></script>
     <!-- INSTAGRAPI -->

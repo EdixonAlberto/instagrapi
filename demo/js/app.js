@@ -9,7 +9,7 @@ const vue = new Vue({
     features: {
       col1: [
         'Data based on the official instagram api',
-        'Easy and fast to use',
+        'Data easy and fast to use',
         'Data exposed in full JSON format',
         'Images returned in standard and HD format',
         'Dates returned in unirversal ISO format'
@@ -23,8 +23,10 @@ const vue = new Vue({
       ]
     },
     username: 'instagram',
+    urlPost: '',
+    profile: null,
     lastPosts: [],
-    profile: null
+    post: null
   },
 
   created() {
@@ -43,6 +45,10 @@ const vue = new Vue({
 
     async getPosts() {
       this.lastPosts = await instagrapi.getLastPosts(this.username);
+    },
+
+    async getPost() {
+      this.post = await instagrapi.getPost(urlPost);
     }
   }
 });
