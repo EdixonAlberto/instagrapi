@@ -34,6 +34,15 @@ li {
   font-family: 'Segoe-UI', Helvetica, sans-serif;
 }
 
+a {
+  color: white;
+  text-decoration: none;
+}
+
+a:hover {
+  color: white;
+}
+
 article {
   padding: 20px;
   margin: 0;
@@ -45,7 +54,7 @@ pre[class*='language-'] {
   width: 100%;
 }
 
-pre[class*='language-'] span.token.string {
+pre[class*='language-'] span.token:nth-of-type(odd) {
   color: var(--color-primary) !important;
 }
 
@@ -55,6 +64,7 @@ section.row {
 }
 
 section h2 {
+  text-align: center;
   font-size: 35px;
   font-weight: 600;
   color: var(--color-primary);
@@ -96,14 +106,15 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--color-instagram);
 
+  background: var(--color-instagram);
   color: white;
 }
 
 main .title {
   position: relative;
   width: 250px;
+  max-width: 450px;
   margin: auto;
   margin-bottom: 10px;
 }
@@ -113,6 +124,7 @@ main .title {
   font-size: 55px;
   font-weight: 500;
   text-shadow: -1px 1px 3px var(--color-gray);
+  margin: 0;
   padding-bottom: 30px;
 }
 
@@ -128,7 +140,7 @@ main .title {
 main p {
   text-align: center;
   margin: 0;
-  font-size: 25px;
+  font-size: 20px;
   font-weight: 500;
   color: var(--color-gray);
 }
@@ -141,6 +153,7 @@ main p {
 }
 
 .features ul > li {
+  height: 36px;
   display: flex;
   align-items: center;
   margin: 20px 0;
@@ -164,15 +177,6 @@ li .icon-container {
 .icon-container img {
   height: 12px;
   width: 12px;
-}
-
-.links a {
-  color: white;
-  text-decoration: none;
-}
-
-.links a:hover {
-  color: white;
 }
 
 .started {
@@ -259,7 +263,6 @@ li .icon-container {
 
 .external-url a {
   color: #f92672;
-  text-decoration: none;
 }
 
 .external-url span {
@@ -274,8 +277,11 @@ li .icon-container {
 /*************************************** LAST-POSTS *************************************/
 
 #lastposts h2 {
-  text-align: right;
   padding-right: 30px;
+}
+
+.posts {
+  margin: 0 20px;
 }
 
 .post-card {
@@ -284,7 +290,6 @@ li .icon-container {
   background-repeat: no-repeat;
   position: relative;
   height: 152.8px;
-  /* max-height: 120px; */
   width: 100%;
 }
 
@@ -345,8 +350,7 @@ li .icon-container {
 }
 
 .code-lastposts .language-js {
-  height: 458.4px;
-  /* max-height: 361px; */
+  height: 468px;
 }
 
 /*********************************** CUSTOM SCROLL **************************************/
@@ -371,7 +375,11 @@ li .icon-container {
 
 /*************************************** RESPONSIVE *************************************/
 
+/* DESKTOP */
 @media screen and (min-width: 1920px) {
+  .title h1 {
+    font-size: 100px;
+  }
 }
 
 @media screen and (min-width: 1440px) and (max-width: 1919px) {
@@ -380,22 +388,45 @@ li .icon-container {
 @media screen and (min-width: 1200px) and (max-width: 1439px) {
 }
 
-@media screen and (max-width: 400px) {
+/* MOBILE */
+@media screen and (max-width: 767px) {
+  section {
+    padding-bottom: 30px !important;
+  }
+
+  section.row {
+    padding-bottom: 0 !important;
+  }
+
+  main .title {
+    margin-bottom: 0;
+  }
+
   main p {
-    font-size: 18px;
+    font-size: 15px;
+    margin: 0 5px;
+  }
+
+  main .row {
+    padding-right: 13px;
   }
 
   .features ul {
     padding-left: 13px;
-    margin: 20px 0 25px 0;
+    margin: 25px 0;
   }
 
   .features ul > li {
-    font-size: 14px;
-    margin: 5px 0;
+    height: 25px;
+    font-size: 12px;
+    margin: 18px 0;
   }
 
   .links button {
     margin-bottom: 12px;
+  }
+
+  .search {
+    padding-top: 30px;
   }
 }
