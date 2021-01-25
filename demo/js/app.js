@@ -22,29 +22,57 @@ const vue = new Vue({
         'Code open source published in Github'
       ]
     },
-    username: 'instagram',
+    username: '',
     urlPost: '',
     profile: null,
     lastPosts: [],
     post: null
   },
 
+  computed: {
+    cache: {
+      get() {
+        const data = JSON.parse(localStorage.getItem('data'));
+        return data || { profile: null, posts: [] };
+      },
+      set(newData) {
+        localStorage.clear();
+        localStorage.setItem('data', JSON.stringify(newData));
+      }
+    }
+  },
+
   created() {
-    this.loadData();
+    this.username = this.cache.profile?.username || 'instagram';
+    this.loadData(false);
   },
 
   methods: {
-    async loadData() {
+    async loadData(cacheClear = true) {
+      if (cacheClear) this.cache = { profile: null, posts: [] };
+      console.log(this.cache);
+
       await this.searchProfile();
       await this.getPosts();
+
+      this.cache = {
+        profile: this.profile,
+        posts: this.lastPosts
+      };
     },
 
     async searchProfile() {
-      this.profile = await instagrapi.getProfile(this.username);
+      const profile = this.cache.profile;
+
+      this.profile = !profile ? await instagrapi.getProfile(this.username) : profile;
     },
 
     async getPosts() {
-      this.lastPosts = await instagrapi.getLastPosts(this.username);
+      const posts = this.cache.posts;
+
+      this.lastPosts = !posts.length
+        ? await instagrapi.getLastPosts(this.username)
+        : posts;
     },
 
     async getPost() {

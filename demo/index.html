@@ -82,8 +82,8 @@
 
       <article>
         <section id="demo" class="search">
-          <input type="text" placeholder="Input username Instagram" v-model="username" />
-          <button class="ig-btn" @click="searchProfile()">Buscar</button>
+          <input type="text" placeholder="Enter Username" v-model="username" />
+          <button class="ig-btn" @click="loadData()">Buscar</button>
         </section>
 
         <template v-if="profile">
