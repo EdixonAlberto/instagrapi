@@ -54,10 +54,6 @@ pre[class*='language-'] {
   width: 100%;
 }
 
-pre[class*='language-'] span.token:nth-of-type(odd) {
-  color: var(--color-primary) !important;
-}
-
 section,
 section.row {
   padding-bottom: 60px !important;
