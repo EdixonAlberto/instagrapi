@@ -1,18 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+
     <!-- VUE-CODE-HIGHLIGHT -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vue-code-highlight@0.7.6/themes/prism-okaidia.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vue-code-highlight@0.7.6/themes/window.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/vue-code-highlight@0.7.6/themes/prism-okaidia.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/vue-code-highlight@0.7.6/themes/window.min.css"
+    />
     <!-- STYLES-BOOTSTRAP -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <title>Instagrapi</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+      crossorigin="anonymous"
+    />
     <!-- STYLES-CSS -->
     <link rel="stylesheet" href="css/index.css" />
+
+    <title>Instagrapi</title>
   </head>
 
   <body>
@@ -24,70 +36,67 @@
             <p class="version">(3.0.2)</p>
           </div>
 
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos, a.</p>
+          <p>
+            Library to obtain information from an Instagram account <br />
+            in a friendly and intuitive way.
+          </p>
 
           <div class="row m-auto">
-            <div class="features col-6">
+            <div class="features col-6 p-0" v-for="(columns, i) in features" :key="i">
               <ul>
-                <li>Data based on the official instagram api</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-              </ul>
-            </div>
-
-            <div class="features col-6">
-              <ul>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
+                <li v-for="(feature, i) in columns" :key="i">
+                  <div class="icon-container">
+                    <img src="./icon/check.svg" alt="Icono de check" />
+                  </div>
+                  {{ feature }}
+                </li>
               </ul>
             </div>
           </div>
 
           <div class="row m-auto">
-            <div class="links col-12 text-center align-self-center">
-              <button class="started">
-                <a href="" target="_blank" rel="noopener noreferrer">
-                  Getting Started
-                </a>
-              </button>
+            <div class="links col-12 text-center">
+              <a href="#demo">
+                <button class="ig-btn started">Demostration</button>
+              </a>
 
-              <button class="npm">
-                <a href="https://www.npmjs.com/package/instagrapi" target="_blank" rel="noopener noreferrer">
-                  NPM
-                </a>
-              </button>
+              <a
+                href="https://www.npmjs.com/package/instagrapi"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <button class="ig-btn npm">NPM</button>
+              </a>
 
-              <button class="github">
-                <a class="github" href="https://github.com/EdixonAlberto/instagrapi" target="_blank"
-                  rel="noopener noreferrer">
-                  Github
-                </a>
-              </button>
+              <a
+                href="https://github.com/EdixonAlberto/instagrapi"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <button class="ig-btn github">Github</button>
+              </a>
             </div>
           </div>
         </div>
       </main>
 
       <article>
-        <section class="search">
-          <input type="text" placeholder="Input username Instagram" v-model="username" />
-          <button @click="searchProfile()">Buscar</button>
+        <section id="demo" class="search">
+          <input type="text" placeholder="Enter Username" v-model="username" />
+          <button class="ig-btn" @click="loadData()">Buscar</button>
         </section>
 
         <template v-if="profile">
           <section id="profile" class="row m-auto">
-            <h2>Profile</h2>
+            <h2 class="order-0">Profile</h2>
 
-            <div class="col-6 p-0">
-              <code-highlight class="code-profile" language="js">{{ profile }}</code-highlight>
+            <div class="col-md-6 col-12 p-0 mb-3 order-3">
+              <code-highlight class="code-profile" language="js">
+                {{ profile }}
+              </code-highlight>
             </div>
 
-            <div class="col-6 p-0">
+            <div class="col-md-6 col-12 p-0 order-1">
               <div class="render-profile">
                 <div v-if="profile" class="profile-container">
                   <div class="border-color">
@@ -96,13 +105,21 @@
 
                   <h3>{{ profile.name }}</h3>
                   <p><strong>@{{ profile.username }}</strong></p>
-                  <p class="followers">
-                    <strong>{{ profile.followers | round }} Seguidores</strong>
-                  </p>
+
+                  <div class="status">
+                    <span>{{ profile.qtyPosts | round }} Publications |</span>
+                    <span>{{ profile.followers | round }} Followers | </span>
+                    <span>{{ profile.followed | round }} Followed</span>
+                  </div>
+
                   <p>{{ profile.biography }}</p>
 
-                  <div class="external-url mt-4">
-                    <a href="profile.externalUrl" target="_blank" rel="noopener noreferrer">
+                  <div class="external-url">
+                    <a
+                      href="profile.externalUrl"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <span>{{ profile.externalUrl }}</span>
                     </a>
                   </div>
@@ -116,52 +133,101 @@
           <section id="lastposts" class="row m-auto">
             <h2>Last Posts</h2>
 
-            <div class="col-6">
-              <div class="row">
-                <div class="col-3 p-0" v-for="(post, i) in lastPosts" :key="i">
-                  <div class="post-card" :style="`background-image: url('${post.image}')`">
-                    <div class="content">
-                      <div>
-                        <p>{{ post.content | cut }}</p>
+            <div class="col-md-6 col-12 p-0 mb-3">
+              <div class="posts row">
+                <div class="col-md-3 col-6 p-0" v-for="(post, i) in lastPosts" :key="i">
+                  <a
+                    data-bs-toggle="modal"
+                    data-bs-target="#modal-post"
+                    @click="getPost(post.postUrl)"
+                  >
+                    <div
+                      class="post-card"
+                      :style="`background-image: url('${post.image}')`"
+                    >
+                      <div class="content">
+                        <div>
+                          <p>{{ post.content | cut }}</p>
 
-                        <div class="post-data">
-                          <div class="data">
-                            <i class="fa fa-heart-o" aria-hidden="true"></i>
-                            <span>{{ post.likes | round }}</span>
-                          </div>
+                          <div class="post-data">
+                            <div class="data">
+                              <i class="fa fa-heart-o" aria-hidden="true"></i>
+                              <span>{{ post.likes | round }}</span>
+                            </div>
 
-                          <div class="data">
-                            <i class="fa fa-comment-o" aria-hidden="true"></i>
-                            <span>{{ post.qtyComments | round }}</span>
+                            <div class="data">
+                              <i class="fa fa-comment-o" aria-hidden="true"></i>
+                              <span>{{ post.qtyComments | round }}</span>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </a>
                 </div>
               </div>
             </div>
 
-            <div class="col-6 align-self-center">
-              <code-highlight class="code-lastposts" language="js">{{ lastPosts }}</code-highlight>
+            <div class="col-md-6 col-12 p-0 align-self-center">
+              <code-highlight class="code-lastposts" language="js"
+                >{{ lastPosts }}
+              </code-highlight>
             </div>
           </section>
         </template>
       </article>
+
+      <!-- MODAL -->
+      <div
+        id="modal-post"
+        class="modal fade"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-6">
+                  <div v-if="post" class="post-detail-card">
+                    <img :src="post.image.hd" alt="Post image" />
+                  </div>
+
+                  <div v-else>
+                    <div class="spinner-border" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-6">In construction</div>
+              </div>
+            </div>
+
+            <div class="modal-footer"></div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- VUE-PRODUCTION -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2"></script> -->
     <!-- VUE-DEVELOPMENT -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <!-- VUE-HIGHLIGHT -->
     <script src="https://cdn.jsdelivr.net/npm/vue-code-highlight@0.7.6/dist/vue-code-highlight.min.js"></script>
     <!-- INSTAGRAPI -->
     <script src="https://cdn.jsdelivr.net/npm/instagrapi@3/dist/bundle/instagrapi.min.js"></script>
     <!-- FONTAWESOME -->
     <script src="https://use.fontawesome.com/c681f17b23.js"></script>
+    <!-- BOOTSTRAP -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+      crossorigin="anonymous"
+    ></script>
     <!-- APP -->
     <script src="js/app.js"></script>
   </body>
-
 </html>
