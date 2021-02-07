@@ -1,4 +1,26 @@
-const vue = new Vue({
+// CACHE
+
+const cache = {
+  data: {
+    profile: null,
+    lastPosts: []
+  },
+
+  getData() {
+    const localData = JSON.parse(localStorage.getItem('data'));
+    return localData || this.data;
+  },
+
+  setData(newData) {
+    localStorage.setItem('data', JSON.stringify(newData));
+  },
+
+  cleanData() {
+    localStorage.clear();
+  }
+};
+
+new Vue({
   el: '#app',
 
   components: {
@@ -29,54 +51,48 @@ const vue = new Vue({
     post: null
   },
 
-  computed: {
-    cache: {
-      get() {
-        const data = JSON.parse(localStorage.getItem('data'));
-        return data || { profile: null, posts: [] };
-      },
-      set(newData) {
-        localStorage.clear();
-        localStorage.setItem('data', JSON.stringify(newData));
-      }
-    }
-  },
+  computed: {},
 
   created() {
-    this.username = this.cache.profile?.username || 'instagram';
+    this.username = cache.getData().profile?.username || 'instagram';
     this.loadData(false);
   },
 
   methods: {
-    async loadData(cacheClear = true) {
-      if (cacheClear) this.cache = { profile: null, posts: [] };
-      console.log(this.cache);
+    async loadData(cleanCache = true) {
+      if (cleanCache) this.reset();
 
       await this.searchProfile();
       await this.getPosts();
 
-      this.cache = {
+      cache.setData({
         profile: this.profile,
         posts: this.lastPosts
-      };
+      });
     },
 
     async searchProfile() {
-      const profile = this.cache.profile;
+      const profile = cache.getData().profile;
 
       this.profile = !profile ? await instagrapi.getProfile(this.username) : profile;
     },
 
     async getPosts() {
-      const posts = this.cache.posts;
+      const lastPosts = cache.getData().lastPosts;
 
-      this.lastPosts = !posts.length
+      this.lastPosts = !lastPosts.length
         ? await instagrapi.getLastPosts(this.username)
-        : posts;
+        : lastPosts;
     },
 
     async getPost() {
       this.post = await instagrapi.getPost(urlPost);
+    },
+
+    reset() {
+      this.profile = null;
+      this.lastPosts = [];
+      cache.cleanData();
     }
   }
 });
@@ -84,9 +100,13 @@ const vue = new Vue({
 // FILTERS
 
 Vue.filter('round', nro => {
+  let round = '';
+
   if (nro / 1e6 < 1) {
-    return nro / 1e3 < 1 ? nro : (nro / 1e3).toFixed(0) + 'K';
-  } else return (nro / 1e6).toFixed(0) + 'M';
+    round = nro / 1e3 < 1 ? nro.toString() : (nro / 1e3).toFixed(0) + 'K';
+  } else resp = (nro / 1e6).toFixed(0) + 'M';
+
+  return round;
 });
 
 Vue.filter('cut', str => {
