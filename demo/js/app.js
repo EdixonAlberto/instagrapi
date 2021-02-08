@@ -3,7 +3,8 @@
 const cache = {
   data: {
     profile: null,
-    lastPosts: []
+    lastPosts: [],
+    post: ''
   },
 
   getData() {
@@ -12,7 +13,11 @@ const cache = {
   },
 
   setData(newData) {
-    localStorage.setItem('data', JSON.stringify(newData));
+    const localData = {
+      ...this.getData(),
+      ...newData
+    };
+    localStorage.setItem('data', JSON.stringify(localData));
   },
 
   cleanData() {
@@ -45,10 +50,11 @@ new Vue({
       ]
     },
     username: '',
-    urlPost: '',
+    postUrl: '',
     profile: null,
     lastPosts: [],
-    post: null
+    post: null,
+    panelOpen: false
   },
 
   created() {
@@ -83,8 +89,14 @@ new Vue({
         : lastPosts;
     },
 
-    async getPost(urlPost) {
-      this.post = await instagrapi.getPost(urlPost);
+    async getPost(postUrl) {
+      this.post = null;
+      const post = cache.getData().post;
+
+      if (!post || post.postUrl !== postUrl) {
+        this.post = await instagrapi.getPost(postUrl);
+        cache.setData({ post: this.post });
+      } else this.post = post;
     },
 
     reset() {

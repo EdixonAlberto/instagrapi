@@ -1,3 +1,5 @@
+@import './modal-post.css';
+
 /*************************************** VARIABLES **************************************/
 
 :root {
@@ -11,6 +13,7 @@
     var(--color-primary) 50%,
     var(--color-secondary) 100%
   );
+  --height-modal-post: 540px;
 }
 
 @font-face {
@@ -54,7 +57,7 @@ pre[class*='language-'] {
   width: 100%;
 }
 
-section,
+section:not(#post),
 section.row {
   padding-bottom: 60px !important;
 }
@@ -271,10 +274,6 @@ li .icon-container {
 }
 
 /*************************************** LAST-POSTS *************************************/
-
-#lastposts h2 {
-  padding-right: 30px;
-}
 
 .posts {
   margin: 0 20px;
