@@ -10,7 +10,7 @@ module.exports.getHeaderMessage = () => {
   return `/*!
  *   ${pkg.name} v${pkg.version}
  *   ${pkg.description}
- *   Copyright (c) ${year} ${pkg.author.name}
+ *   Copyright (c) 2020-${year} ${pkg.author.name}
  *   Released under the ${pkg.license} License.
  */`;
 };
