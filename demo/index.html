@@ -11,6 +11,19 @@
     />
     <meta name="author" content="Edixon Piña" />
     <meta name="keywords" content="instagram, api, nodejs, typescript" />
+    <!-- OPEN-GRAPH -->
+    <meta property="og:url" content="https://edixonalberto.github.io/instagrapi" />
+    <meta property="og:title" content="Instagrapi" />
+    <meta
+      property="og:description"
+      content="Library to obtain information from an Instagram account in a friendly and intuitive way"
+    />
+    <meta property="og:type" content="image/png" />
+    <meta
+      property="og:image"
+      content="https://raw.githubusercontent.com/EdixonAlberto/instagrapi/main/.github/template-github.png"
+    />
+
     <!-- VUE-CODE-HIGHLIGHT -->
     <link
       rel="stylesheet"
@@ -115,7 +128,7 @@
                   <div class="status">
                     <span>{{ profile.qtyPosts | round }} Publications |</span>
                     <span>{{ profile.followers | round }} Followers | </span>
-                    <span>{{ profile.followed | round }} Followed</span>
+                    <span>{{ profile.following | round }} Following</span>
                   </div>
 
                   <p>{{ profile.biography }}</p>
@@ -151,6 +164,12 @@
                       class="post-card"
                       :style="`background-image: url('${post.image}')`"
                     >
+                      <!-- <i
+                        v-if="post.video"
+                        class="fa fa-video-camera"
+                        aria-hidden="true"
+                      ></i> -->
+
                       <div class="content">
                         <div>
                           <p>{{ post.content | cut }}</p>
@@ -247,8 +266,6 @@
                 </div>
               </div>
             </section>
-
-            <!-- <div class="modal-footer">FOOTER</div> -->
           </div>
         </div>
       </div>
@@ -261,7 +278,7 @@
     <!-- VUE-HIGHLIGHT -->
     <script src="https://cdn.jsdelivr.net/npm/vue-code-highlight@0.7.6/dist/vue-code-highlight.min.js"></script>
     <!-- INSTAGRAPI -->
-    <script src="https://cdn.jsdelivr.net/npm/instagrapi@3/dist/bundle/instagrapi.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/instagrapi@3.2.3/dist/bundle/instagrapi.min.js"></script>
     <!-- FONTAWESOME -->
     <script src="https://use.fontawesome.com/c681f17b23.js"></script>
     <!-- BOOTSTRAP -->

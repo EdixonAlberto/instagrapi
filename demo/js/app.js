@@ -96,7 +96,7 @@ Vue.filter('round', nro => {
 
   if (nro / 1e6 < 1) {
     round = nro / 1e3 < 1 ? nro.toString() : (nro / 1e3).toFixed(0) + 'K';
-  } else resp = (nro / 1e6).toFixed(0) + 'M';
+  } else round = (nro / 1e6).toFixed(0) + 'M';
 
   return round;
 });
