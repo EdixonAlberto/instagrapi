@@ -54,7 +54,7 @@ new Vue({
     profile: null,
     lastPosts: [],
     post: null,
-    panelOpen: false
+    isPlay: false
   },
 
   created() {
@@ -103,6 +103,15 @@ new Vue({
       this.profile = null;
       this.lastPosts = [];
       cache.cleanData();
+    },
+
+    play() {
+      const video = this.$refs.video;
+
+      if (this.isPlay) video.pause();
+      else video.play();
+
+      this.isPlay = !this.isPlay;
     }
   }
 });

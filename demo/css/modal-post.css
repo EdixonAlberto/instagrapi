@@ -4,7 +4,25 @@ section#post .post-card {
   position: relative;
 }
 
-section#post .post-card > video:focus {
+section#post .post-card .video {
+  cursor: pointer;
+}
+
+section#post .post-card .video .fa {
+  height: 100%;
+  position: absolute;
+  right: 0;
+  left: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 40px;
+  color: var(--color-secondary);
+}
+
+section#post .post-card .video video:focus {
   outline: none;
 }
 
@@ -13,7 +31,8 @@ section#post .post-card > video:hover {
 }
 
 section#post .post-card > img,
-section#post .post-card > video {
+section#post .post-card .video,
+section#post .post-card .video video {
   height: 100%;
   width: 100%;
 }
@@ -22,7 +41,7 @@ section#post .post-card .panel-comments {
   position: absolute;
   width: 100%;
   min-width: 200px;
-  bottom: -2px;
+  bottom: 0;
   left: 0;
 
   border: 2px solid var(--color-primary);
@@ -33,22 +52,18 @@ section#post .post-card .panel-comments {
   border-top-left-radius: 40px;
   background-color: white;
   margin: 0 auto;
-  padding: 5px 20px;
+  padding: 0 20px;
   overflow-y: hidden;
 
-  transition: height 0.2s ease-in-out;
+  transition: height 0.25s ease-in-out;
 }
 
 section#post .post-card .panel-comments > ul {
   cursor: default;
   height: 90%;
-  overflow: scroll;
+  overflow-y: scroll;
   list-style: none;
   padding: 0;
-}
-
-section#post .post-card .panel-comments > ul::-webkit-scrollbar-thumb {
-  display: none;
 }
 
 .post-card .panel-comments > ul li {
@@ -72,21 +87,11 @@ section#post .post-card .panel-comments > ul::-webkit-scrollbar-thumb {
   color: var(--color-secondary);
 }
 
-.panel-comments > ul .comment > img:hover {
-  cursor: pointer;
-  width: 100px;
-}
-
-section#post .post-card .panel-comments:hover {
-  cursor: pointer;
-  height: 70px !important;
-}
-
-section#post .post-card .panel-comments.panel-close {
+section#post .post-card .panel-comments {
   height: 60px;
 }
 
-section#post .post-card .panel-comments.panel-open {
+section#post .post-card .panel-comments:hover {
   height: 400px !important;
 }
 
