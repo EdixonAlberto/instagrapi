@@ -1,0 +1,72 @@
+.posts {
+  margin: 0 20px;
+}
+
+.post-card {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  height: 152.8px;
+  width: 100%;
+}
+
+.post-card:hover {
+  cursor: pointer;
+}
+
+.post-card .content {
+  visibility: hidden;
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-items: center;
+
+  text-align: center;
+  padding: 20px;
+}
+
+.post-card .content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #212529a1;
+}
+
+.post-card:hover .content {
+  visibility: visible;
+}
+
+.post-card .content p,
+.post-data .fa,
+.post-data span {
+  position: relative;
+  color: white;
+}
+
+.post-card .content p {
+  font-size: 0.8rem;
+}
+
+.post-data {
+  display: inline-flex;
+  width: 100%;
+}
+
+.post-data .data {
+  margin: auto;
+}
+
+.post-data span {
+  font-family: 'Segoe-UI', Helvetica, sans-serif;
+  font-size: 0.7rem;
+}
+
+.code-lastposts .language-js {
+  height: 468px;
+}

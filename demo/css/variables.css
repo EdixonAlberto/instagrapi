@@ -1,0 +1,19 @@
+:root {
+  --color-gray: #55504a;
+  --color-primary: #ffb545;
+  --color-secondary: #f92672;
+  --color-background: #fffdfa;
+  --color-instagram: linear-gradient(
+    220deg,
+    var(--color-secondary) 0%,
+    var(--color-primary) 50%,
+    var(--color-secondary) 100%
+  );
+  --height-modal-post: 540px;
+}
+
+@font-face {
+  src: url('../fonts/FontsFree-Net-Segoe-UI.ttf');
+  font-family: 'Segoe-UI';
+  font-weight: 400;
+}

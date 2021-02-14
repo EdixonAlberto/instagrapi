@@ -1,0 +1,55 @@
+.render-profile {
+  height: 421px;
+  display: flex;
+  align-items: top;
+  justify-content: center;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.profile-container {
+  color: var(--color-gray);
+}
+
+.border-color {
+  background: var(--color-instagram);
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  margin: auto;
+  text-align: center;
+}
+
+.profile-container img {
+  width: 150px;
+  border: none;
+  border-radius: 50%;
+  margin-top: 5px;
+}
+
+.profile-container h3 {
+  font-weight: 500;
+}
+
+.profile-container p {
+  margin-bottom: 5px;
+}
+
+.status {
+  color: var(--color-primary);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.external-url a {
+  color: #f92672;
+}
+
+.external-url span {
+  font-weight: 700;
+  font-family: 'Segoe-UI', Helvetica, sans-serif;
+}
+
+.external-url a:hover {
+  color: #f92672;
+}
