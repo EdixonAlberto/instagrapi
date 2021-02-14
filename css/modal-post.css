@@ -67,18 +67,19 @@ section#post .post-card .panel-comments > ul {
 }
 
 .post-card .panel-comments > ul li {
-  margin: 12px 0;
+  margin: 22px 0;
 }
 
 .panel-comments > ul .comment {
   display: flex;
-  align-items: center;
+  align-items: end;
+  text-align: left;
 }
 
 .panel-comments > ul .comment > img {
-  width: 25px;
+  width: 35px;
   clip-path: circle();
-  margin: 10px;
+  margin: 0 10px;
   transition: all 0.25s ease-in-out;
 }
 

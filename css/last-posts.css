@@ -9,6 +9,16 @@
   position: relative;
   height: 152.8px;
   width: 100%;
+
+  text-align: right;
+}
+
+.post-card .fa-video-camera {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  /* margin: 5px; */
+  color: var(--color-secondary);
 }
 
 .post-card:hover {
