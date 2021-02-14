@@ -161,51 +161,6 @@ type TPost = {
   };
   date: string;
 };
-
-type TVideo = {
-  url: string;
-  type: string | 'clips' | 'igtv' | 'feed';
-  views: number | null;
-  duration: number;
-  hasAudio:
-    | boolean
-    | {
-        artist: string;
-        song: string;
-      };
-};
-
-type TMedia = {
-  image: {
-    standard: string;
-    hd: string;
-  };
-  video: TVideo | null;
-  taggedUsers: Array<TTagged>;
-};
-
-type TTagged = {
-  image: string;
-  name: string;
-  isVerified: boolean;
-  coordinates: {
-    x: number;
-    y: number;
-  };
-};
-
-type TComment = {
-  content: string;
-  author: {
-    username: string;
-    image: string;
-    isVerified: boolean;
-  };
-  likes: number;
-  responses: Array<TComment>;
-  isSpam: boolean;
-  date: string;
-};
 ```
 
 ## License
