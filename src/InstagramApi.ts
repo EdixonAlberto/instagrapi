@@ -17,7 +17,7 @@ class InstagramApi {
         },
         qtyPosts: user.edge_owner_to_timeline_media.count,
         followers: user.edge_followed_by.count,
-        followed: user.edge_follow.count,
+        following: user.edge_follow.count,
         name: user.full_name,
         biography: user.biography,
         externalUrl: user.external_url,

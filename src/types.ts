@@ -6,7 +6,7 @@ export type TProfile = {
   };
   qtyPosts: number;
   followers: number;
-  followed: number;
+  following: number;
   name: string;
   biography: string;
   externalUrl: string;
