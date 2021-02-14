@@ -1,0 +1,270 @@
+/***************************************** GLOBAL ***************************************/
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+h1,
+h2,
+p,
+button,
+li {
+  font-family: 'Segoe-UI', Helvetica, sans-serif;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+a:hover {
+  color: white;
+}
+
+article {
+  padding: 20px;
+  margin: 0;
+  background-color: white;
+}
+
+pre[class*='language-'] {
+  margin: 0 !important;
+  width: 100%;
+}
+
+section:not(#post),
+section.row {
+  padding-bottom: 60px !important;
+}
+
+section h2 {
+  text-align: center;
+  font-size: 35px;
+  font-weight: 600;
+  color: var(--color-primary);
+  text-shadow: -1px 1px 1px var(--color-gray);
+}
+
+article {
+  background-color: var(--color-background);
+}
+
+.ig-btn {
+  width: 150px;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 20px;
+  margin: 0 25px;
+
+  font-size: 1rem;
+  color: white;
+  box-shadow: -3px 3px 3px black;
+  transition: all 0.15s ease;
+}
+
+.ig-btn:hover {
+  cursor: pointer;
+  box-shadow: none;
+  transform: translateY(2px);
+}
+
+.ig-btn:focus {
+  outline: none;
+}
+
+/***************************************** MAIN *****************************************/
+
+main {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--color-instagram);
+  color: white;
+}
+
+main .title {
+  position: relative;
+  width: 250px;
+  max-width: 450px;
+  margin: auto;
+  margin-bottom: 10px;
+}
+
+.title h1 {
+  text-align: center;
+  font-size: 55px;
+  font-weight: 500;
+  text-shadow: -1px 1px 3px var(--color-gray);
+  margin: 0;
+  padding-bottom: 30px;
+}
+
+.title .version {
+  position: absolute;
+  bottom: 0;
+  right: -20px;
+
+  font-size: 20px;
+  font-weight: 700;
+}
+
+main p {
+  text-align: center;
+  margin: 0;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--color-gray);
+}
+
+.features ul {
+  width: 100%;
+  margin: 40px auto;
+  list-style: none;
+  margin-left: 48px;
+}
+
+.features ul > li {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+  font-weight: 400;
+  color: white;
+  text-shadow: -1px 1px 3px var(--color-gray);
+}
+
+li .icon-container {
+  height: 16px;
+  width: 16px;
+  min-width: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.icon-container img {
+  height: 12px;
+  width: 12px;
+}
+
+.started {
+  background-color: var(--color-primary);
+}
+
+.npm {
+  background-color: #ca0000;
+}
+
+.github {
+  background-color: #374853;
+}
+
+/****************************************** SEARCH **************************************/
+
+.search {
+  display: flex;
+  justify-content: center;
+  padding-top: 60px;
+}
+
+.search input {
+  padding: 0 10px;
+  outline: none;
+  border: 2px solid var(--color-primary);
+  border-radius: 10px;
+
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-gray);
+}
+
+.search button {
+  margin-left: 15px;
+  margin-right: 0;
+  background-color: var(--color-primary);
+}
+
+/*********************************** CUSTOM SCROLL **************************************/
+
+::-webkit-scrollbar {
+  height: 9px;
+  width: 9px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary);
+}
+
+::-webkit-scrollbar-track {
+  height: 40px;
+  background-color: var(--color-background);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #ff9f0d;
+}
+
+/*************************************** RESPONSIVE *************************************/
+
+/* DESKTOP */
+@media screen and (min-width: 1920px) {
+  .title h1 {
+    font-size: 100px;
+  }
+}
+
+@media screen and (min-width: 1440px) and (max-width: 1919px) {
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1439px) {
+}
+
+/* MOBILE */
+@media screen and (max-width: 767px) {
+  section {
+    padding-bottom: 30px !important;
+  }
+
+  section.row {
+    padding-bottom: 0 !important;
+  }
+
+  main .title {
+    margin-bottom: 0;
+  }
+
+  main p {
+    font-size: 15px;
+    margin: 0 5px;
+  }
+
+  main .row {
+    padding-right: 13px;
+  }
+
+  .features ul {
+    padding-left: 13px;
+    margin: 25px 0;
+  }
+
+  .features ul > li {
+    height: 25px;
+    font-size: 12px;
+    margin: 18px 0;
+  }
+
+  .links button {
+    margin-bottom: 12px;
+  }
+
+  .search {
+    padding-top: 30px;
+  }
+}

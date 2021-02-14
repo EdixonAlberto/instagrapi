@@ -4,7 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-
+    <!-- SEO -->
+    <meta
+      name="description"
+      content="Library to obtain information from an Instagram account in a friendly and intuitive way"
+    />
+    <meta name="author" content="Edixon Piña" />
+    <meta name="keywords" content="instagram, api, nodejs, typescript" />
     <!-- VUE-CODE-HIGHLIGHT -->
     <link
       rel="stylesheet"
@@ -48,7 +54,7 @@
                   <div class="icon-container">
                     <img src="./icon/check.svg" alt="Icono de check" />
                   </div>
-                  {{ feature }}
+                  <span v-text="feature"></span>
                 </li>
               </ul>
             </div>
@@ -185,36 +191,73 @@
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-xl">
           <div class="modal-content">
-            <div class="modal-body">
-              <div class="row">
-                <div class="col-6">
-                  <div v-if="post" class="post-detail-card">
-                    <img :src="post.image.hd" alt="Post image" />
-                  </div>
+            <section id="post" class="modal-body">
+              <h2>Last Posts</h2>
 
-                  <div v-else>
-                    <div class="spinner-border" role="status">
-                      <span class="visually-hidden">Loading...</span>
+              <div v-if="post" class="row">
+                <div class="col-md-6 col-12 mb-md-0 mb-4">
+                  <div class="post-card">
+                    <div v-if="post.video" class="video">
+                      <i v-if="!isPlay" class="fa fa-play" aria-hidden="true"></i>
+
+                      <video
+                        ref="video"
+                        :src="post.video.url"
+                        type="video/mp4"
+                        loop
+                        @click="play()"
+                      ></video>
+                    </div>
+
+                    <img v-else :src="post.image.hd" alt="Post image" />
+
+                    <div class="panel-comments">
+                      <h2>Last Comments</h2>
+
+                      <ul>
+                        <li
+                          v-for="(com, i) in post.lastComments"
+                          :key="i"
+                          class="comment"
+                        >
+                          <img :src="com.author.image" alt="Avatar comment" />
+
+                          <div class="d-block">
+                            <span class="user">@{{ com.author.username }}</span>
+                            <span>{{ com.content }}</span>
+                          </div>
+                        </li>
+                      </ul>
                     </div>
                   </div>
                 </div>
 
-                <div class="col-6">In construction</div>
+                <div class="col-md-6 col-12">
+                  <code-highlight class="code-post" language="js"
+                    >{{ post }}
+                  </code-highlight>
+                </div>
               </div>
-            </div>
 
-            <div class="modal-footer"></div>
+              <div v-else>
+                <div class="spinner-border" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </div>
+            </section>
+
+            <!-- <div class="modal-footer">FOOTER</div> -->
           </div>
         </div>
       </div>
     </div>
 
     <!-- VUE-PRODUCTION -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <!-- VUE-DEVELOPMENT -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script> -->
     <!-- VUE-HIGHLIGHT -->
     <script src="https://cdn.jsdelivr.net/npm/vue-code-highlight@0.7.6/dist/vue-code-highlight.min.js"></script>
     <!-- INSTAGRAPI -->
@@ -228,6 +271,7 @@
       crossorigin="anonymous"
     ></script>
     <!-- APP -->
+    <script src="js/cache.js"></script>
     <script src="js/app.js"></script>
   </body>
 </html>

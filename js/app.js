@@ -1,25 +1,3 @@
-// CACHE
-
-const cache = {
-  data: {
-    profile: null,
-    lastPosts: []
-  },
-
-  getData() {
-    const localData = JSON.parse(localStorage.getItem('data'));
-    return localData || this.data;
-  },
-
-  setData(newData) {
-    localStorage.setItem('data', JSON.stringify(newData));
-  },
-
-  cleanData() {
-    localStorage.clear();
-  }
-};
-
 new Vue({
   el: '#app',
 
@@ -45,13 +23,12 @@ new Vue({
       ]
     },
     username: '',
-    urlPost: '',
+    postUrl: '',
     profile: null,
     lastPosts: [],
-    post: null
+    post: null,
+    isPlay: false
   },
-
-  computed: {},
 
   created() {
     this.username = cache.getData().profile?.username || 'instagram';
@@ -67,7 +44,7 @@ new Vue({
 
       cache.setData({
         profile: this.profile,
-        posts: this.lastPosts
+        lastPosts: this.lastPosts
       });
     },
 
@@ -85,14 +62,29 @@ new Vue({
         : lastPosts;
     },
 
-    async getPost() {
-      this.post = await instagrapi.getPost(urlPost);
+    async getPost(postUrl) {
+      this.post = null;
+      const post = cache.getData().post;
+
+      if (!post || post.postUrl !== postUrl) {
+        this.post = await instagrapi.getPost(postUrl);
+        cache.setData({ post: this.post });
+      } else this.post = post;
     },
 
     reset() {
       this.profile = null;
       this.lastPosts = [];
       cache.cleanData();
+    },
+
+    play() {
+      const video = this.$refs.video;
+
+      if (this.isPlay) video.pause();
+      else video.play();
+
+      this.isPlay = !this.isPlay;
     }
   }
 });
