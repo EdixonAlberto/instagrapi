@@ -4,7 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-
+    <!-- SEO -->
+    <meta
+      name="description"
+      content="Library to obtain information from an Instagram account in a friendly and intuitive way"
+    />
+    <meta name="author" content="Edixon Piña" />
+    <meta name="keywords" content="instagram, api, nodejs, typescript" />
     <!-- VUE-CODE-HIGHLIGHT -->
     <link
       rel="stylesheet"
@@ -48,7 +54,7 @@
                   <div class="icon-container">
                     <img src="./icon/check.svg" alt="Icono de check" />
                   </div>
-                  {{ feature }}
+                  <span v-text="feature"></span>
                 </li>
               </ul>
             </div>
@@ -265,6 +271,7 @@
       crossorigin="anonymous"
     ></script>
     <!-- APP -->
+    <script src="js/cache.js"></script>
     <script src="js/app.js"></script>
   </body>
 </html>
