@@ -38,7 +38,7 @@ new Vue({
 
   methods: {
     async loadJson() {
-      const resp = await fetch('instagrapi/js/data.json', { method: 'GET' });
+      const resp = await fetch('js/data.json', { method: 'GET' });
       const data = await resp.json();
 
       this.profile = data.user;
