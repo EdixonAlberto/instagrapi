@@ -31,16 +31,25 @@ new Vue({
   },
 
   created() {
-    this.username = cache.getData().profile?.username || 'instagram';
-    this.loadData(false);
+    // this.username = cache.getData().profile?.username || 'instagram';
+    // this.loadData(false);
+    this.loadJson(); // NOTA: load of data temporary
   },
 
   methods: {
+    async loadJson() {
+      const resp = await fetch('/js/data.json', { method: 'GET' });
+      const data = await resp.json();
+
+      this.profile = data.user;
+      this.lastPosts = data.lastPosts;
+    },
+
     async loadData(cleanCache = true) {
       if (cleanCache) this.reset();
 
-      await this.searchProfile();
-      await this.getPosts();
+      this.profile = await this.searchProfile();
+      this.lastPosts = await this.getPosts();
 
       cache.setData({
         profile: this.profile,
@@ -50,16 +59,12 @@ new Vue({
 
     async searchProfile() {
       const profile = cache.getData().profile;
-
-      this.profile = !profile ? await instagrapi.getProfile(this.username) : profile;
+      return !profile ? await instagrapi.getProfile(this.username) : profile;
     },
 
     async getPosts() {
       const lastPosts = cache.getData().lastPosts;
-
-      this.lastPosts = !lastPosts.length
-        ? await instagrapi.getLastPosts(this.username)
-        : lastPosts;
+      return !lastPosts.length ? await instagrapi.getLastPosts(this.username) : lastPosts;
     },
 
     async getPost(postUrl) {
@@ -68,8 +73,14 @@ new Vue({
 
       if (!post || post.postUrl !== postUrl) {
         this.post = await instagrapi.getPost(postUrl);
+
         cache.setData({ post: this.post });
       } else this.post = post;
+    },
+
+    async getPostJson(postUrl) {
+      this.post = null;
+      this.post = this.lastPosts.find(post => post.postUrl === postUrl);
     },
 
     reset() {
@@ -85,6 +96,13 @@ new Vue({
       else video.play();
 
       this.isPlay = !this.isPlay;
+    },
+
+    goDemo() {
+      scrollTo({
+        top: document.getElementById('profile').offsetTop,
+        behavior: 'smooth'
+      });
     }
   }
 });
