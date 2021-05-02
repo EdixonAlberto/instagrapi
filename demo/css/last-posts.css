@@ -3,11 +3,15 @@
 }
 
 .post-card {
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  position: relative;
+  cursor: pointer;
   height: 152.8px;
+  width: 100%;
+  position: relative;
+}
+
+.post-card img {
+  position: absolute;
+  height: 100%;
   width: 100%;
   text-align: right;
 }
@@ -16,12 +20,7 @@
   position: absolute;
   top: 5px;
   right: 5px;
-  /* margin: 5px; */
   color: var(--color-secondary);
-}
-
-.post-card:hover {
-  cursor: pointer;
 }
 
 .post-card .content {
