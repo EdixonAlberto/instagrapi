@@ -35,14 +35,8 @@
       content="https://raw.githubusercontent.com/EdixonAlberto/instagrapi/main/.github/template-github.png"
     />
     <!-- VUE-CODE-HIGHLIGHT -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/vue-code-highlight@0.7.6/themes/prism-dark.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/vue-code-highlight@0.7.6/themes/window.min.css"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vue-code-highlight@0.7.6/themes/prism-dark.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vue-code-highlight@0.7.6/themes/window.min.css" />
     <!-- STYLES-BOOTSTRAP -->
     <link
       rel="stylesheet"
@@ -88,19 +82,11 @@
               <button class="ig-btn started">Demostration</button>
             </a>
 
-            <a
-              href="https://www.npmjs.com/package/instagrapi"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href="https://www.npmjs.com/package/instagrapi" target="_blank" rel="noopener noreferrer">
               <button class="ig-btn npm">NPM</button>
             </a>
 
-            <a
-              href="https://github.com/EdixonAlberto/instagrapi"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href="https://github.com/EdixonAlberto/instagrapi" target="_blank" rel="noopener noreferrer">
               <button class="ig-btn github">Github</button>
             </a>
           </div>
@@ -118,20 +104,14 @@
             <h2 class="order-0">Profile</h2>
 
             <div class="col-md-6 col-12 p-0 mb-3 order-3">
-              <code-highlight class="code-profile" language="js"
-                >{{ profile }}
-              </code-highlight>
+              <code-highlight class="code-profile" language="js">{{ profile }} </code-highlight>
             </div>
 
             <div class="col-md-6 col-12 p-0 order-1">
               <div class="render-profile">
                 <div v-if="profile" class="profile-container">
                   <div class="border-color">
-                    <img
-                      :src="profile.image.standard"
-                      alt="Logo profile"
-                      crossorigin="anonymous"
-                    />
+                    <img :src="profile.image.standard" alt="Logo profile" crossorigin="anonymous" />
                   </div>
 
                   <h3>{{ profile.name }}</h3>
@@ -146,11 +126,7 @@
                   <p>{{ profile.biography }}</p>
 
                   <div class="external-url">
-                    <a
-                      :href="profile.externalUrl"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
+                    <a :href="profile.externalUrl" target="_blank" rel="noopener noreferrer">
                       <span>{{ profile.externalUrl }}</span>
                     </a>
                   </div>
@@ -167,22 +143,10 @@
             <div class="col-md-6 col-12 p-0 mb-3">
               <div class="posts row">
                 <div class="col-md-3 col-6 p-0" v-for="(post, i) in lastPosts" :key="i">
-                  <a
-                    data-bs-toggle="modal"
-                    data-bs-target="#modal-post"
-                    @click="getPost(post.postUrl)"
-                  >
+                  <a data-bs-toggle="modal" data-bs-target="#modal-post" @click="getPost(post.postUrl)">
                     <div class="post-card">
-                      <img
-                        :src="post.image"
-                        :alt="`Post ${i + 1}`"
-                        crossorigin="anonymous"
-                      />
-                      <i
-                        v-if="post.video"
-                        class="fa fa-video-camera"
-                        aria-hidden="true"
-                      ></i>
+                      <img :src="post.image" :alt="`Post ${i + 1}`" crossorigin="anonymous" />
+                      <i v-if="post.video" class="fa fa-video-camera" aria-hidden="true"></i>
 
                       <div class="content">
                         <div>
@@ -208,22 +172,14 @@
             </div>
 
             <div class="col-md-6 col-12 p-0 align-self-center">
-              <code-highlight class="code-lastposts" language="js"
-                >{{ lastPosts }}
-              </code-highlight>
+              <code-highlight class="code-lastposts" language="js">{{ lastPosts }} </code-highlight>
             </div>
           </section>
         </template>
       </article>
 
       <!-- MODAL -->
-      <div
-        id="modal-post"
-        class="modal fade"
-        tabindex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
+      <div id="modal-post" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl">
           <div class="modal-content">
             <section id="post" class="modal-body">
@@ -245,27 +201,14 @@
                       ></video>
                     </div>
 
-                    <img
-                      v-else
-                      :src="post.image"
-                      alt="Post image"
-                      crossorigin="anonymous"
-                    />
+                    <img v-else :src="post.image" alt="Post image" crossorigin="anonymous" />
 
                     <div class="panel-comments">
                       <h2>Last Comments</h2>
 
                       <ul>
-                        <li
-                          v-for="(com, i) in post.lastComments"
-                          :key="i"
-                          class="comment"
-                        >
-                          <img
-                            :src="com.author.image"
-                            alt="Avatar comment"
-                            crossorigin="anonymous"
-                          />
+                        <li v-for="(com, i) in post.lastComments" :key="i" class="comment">
+                          <img :src="com.author.image" alt="Avatar comment" crossorigin="anonymous" />
 
                           <div class="d-block">
                             <span class="user">@{{ com.author.username }}</span>
@@ -278,9 +221,7 @@
                 </div>
 
                 <div class="col-md-6 col-12">
-                  <code-highlight class="code-post" language="js"
-                    >{{ post }}
-                  </code-highlight>
+                  <code-highlight class="code-post" language="js">{{ post }} </code-highlight>
                 </div>
               </div>
 

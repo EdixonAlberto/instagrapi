@@ -1,7 +1,7 @@
 export function loadConfig() {
   const config: TConfig = {
     urlBase: 'https://www.instagram.com'
-  };
+  }
 
-  global.config = config;
+  global.config = config
 }

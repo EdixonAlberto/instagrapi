@@ -31,80 +31,80 @@ new Vue({
   },
 
   created() {
-    this.username = cache.getData().profile?.username || 'instagram';
-    this.loadData(false);
+    this.username = cache.getData().profile?.username || 'instagram'
+    this.loadData(false)
   },
 
   methods: {
     async loadData(cleanCache = true) {
-      if (cleanCache) this.reset();
+      if (cleanCache) this.reset()
 
-      this.profile = await this.searchProfile();
-      this.lastPosts = await this.getPosts();
+      this.profile = await this.searchProfile()
+      this.lastPosts = await this.getPosts()
 
       cache.setData({
         profile: this.profile,
         lastPosts: this.lastPosts
-      });
+      })
     },
 
     async searchProfile() {
-      const profile = cache.getData().profile;
-      return !profile ? await instagrapi.getProfile(this.username) : profile;
+      const profile = cache.getData().profile
+      return !profile ? await instagrapi.getProfile(this.username) : profile
     },
 
     async getPosts() {
-      const lastPosts = cache.getData().lastPosts;
-      return !lastPosts.length ? await instagrapi.getLastPosts(this.username) : lastPosts;
+      const lastPosts = cache.getData().lastPosts
+      return !lastPosts.length ? await instagrapi.getLastPosts(this.username) : lastPosts
     },
 
     async getPost(postUrl) {
-      this.post = null;
-      const post = cache.getData().post;
+      this.post = null
+      const post = cache.getData().post
 
       if (!post || post.postUrl !== postUrl) {
-        this.post = await instagrapi.getPost(postUrl);
+        this.post = await instagrapi.getPost(postUrl)
 
-        cache.setData({ post: this.post });
-      } else this.post = post;
+        cache.setData({ post: this.post })
+      } else this.post = post
     },
 
     reset() {
-      this.profile = null;
-      this.lastPosts = [];
-      cache.cleanData();
+      this.profile = null
+      this.lastPosts = []
+      cache.cleanData()
     },
 
     play() {
-      const video = this.$refs.video;
+      const video = this.$refs.video
 
-      if (this.isPlay) video.pause();
-      else video.play();
+      if (this.isPlay) video.pause()
+      else video.play()
 
-      this.isPlay = !this.isPlay;
+      this.isPlay = !this.isPlay
     },
 
     goDemo() {
       scrollTo({
         top: document.getElementById('profile').offsetTop,
         behavior: 'smooth'
-      });
+      })
     }
   }
-});
+})
 
 // FILTERS
 
 Vue.filter('round', nro => {
-  let round = '';
+  let round = ''
 
   if (nro / 1e6 < 1) {
-    round = nro / 1e3 < 1 ? nro.toString() : (nro / 1e3).toFixed(0) + 'K';
-  } else round = (nro / 1e6).toFixed(0) + 'M';
+    round = nro / 1e3 < 1 ? nro.toString() : (nro / 1e3).toFixed(0) + 'K'
+  } else round = (nro / 1e6).toFixed(0) + 'M'
 
-  return round;
-});
+  return round
+})
 
 Vue.filter('cut', str => {
-  return str.substr(0, 60) + '...';
-});
+  return str.substr(0, 60) + '...'
+})

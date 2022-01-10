@@ -20,7 +20,7 @@
   "scripts": {
     "clean": "rimraf ./dist",
     "test": "jest",
-    "lint": "prettier --write src/**/*.ts",
+    "lint": "prettier --write src/**/*.ts demo/**/*.{js,css,html}",
     "dev": "nodemon -e ts -w src --exec \"ts-node src\"",
     "pre-publish": "yarn lint && yarn clean && yarn build && yarn bundle && yarn minify",
     "bundle": "node tools/createBundle.js",

@@ -1,17 +1,17 @@
-const fs = require('fs');
-const { resolve } = require('path');
-const UglifyJS = require('uglify-js');
-const { PATH_BASE, getHeaderMessage } = require('.');
+const fs = require('fs')
+const { resolve } = require('path')
+const UglifyJS = require('uglify-js')
+const { PATH_BASE, getHeaderMessage } = require('.')
 
-const code = fs.readFileSync(resolve(PATH_BASE, 'instagrapi.js'), 'utf8');
+const code = fs.readFileSync(resolve(PATH_BASE, 'instagrapi.js'), 'utf8')
 
 const options = {
   output: {
     preamble: getHeaderMessage()
   },
   warnings: true
-};
-const result = UglifyJS.minify(code, options);
+}
+const result = UglifyJS.minify(code, options)
 
 if (result.code) {
   fs.writeFile(
@@ -21,5 +21,5 @@ if (result.code) {
       encoding: 'utf8'
     },
     () => console.log(`Bundle minified in ${PATH_BASE}`)
-  );
-} else console.error('ERROR-MINIFY ->', result.error.message || result.warnings);
+  )
+} else console.error('ERROR-MINIFY ->', result.error.message || result.warnings)

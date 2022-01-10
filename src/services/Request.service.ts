@@ -1,24 +1,24 @@
-import axios from 'axios';
+import axios from 'axios'
 
 class RequestService {
   constructor(private id: string) {}
 
   public async api(query: string): Promise<TInstagramApi | TPostApi> {
-    const isUrl = query.search(/^(https)/) > -1;
-    const url: string = isUrl ? query : `${global.config.urlBase}/${query}`;
+    const isUrl = query.search(/^(https)/) > -1
+    const url: string = isUrl ? query : `${global.config.urlBase}/${query}`
 
     const { status, data } = await axios.get(url + '/?__a=1', {
       headers: {
         cookie: `sessionid=${this.id}`
       }
-    });
+    })
 
-    if (status === 200) return data;
+    if (status === 200) return data
     else {
-      console.warn('WARN-REQUEST ->', status, data);
-      throw new Error('status request api');
+      console.warn('WARN-REQUEST ->', status, data)
+      throw new Error('status request api')
     }
   }
 }
 
-export { RequestService };
+export { RequestService }

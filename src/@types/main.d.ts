@@ -1,11 +1,11 @@
 type TConfig = {
-  urlBase: string;
-};
+  urlBase: string
+}
 
 // DECLARATIONS ________________________________________________________________________________________________________
 
 declare namespace NodeJS {
   interface Global {
-    config: TConfig;
+    config: TConfig
   }
 }
