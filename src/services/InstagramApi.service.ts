@@ -1,11 +1,17 @@
-import { Request } from './Request';
-import { Utils } from './utils';
-import { TProfile, TLastPosts, TPost, TMedia, TTagged } from './types';
+import { RequestService } from './Request.service';
+import { Utils } from '../utils';
+import { TProfile, TLastPosts, TPost, TMedia, TTagged } from '../types';
 
-class InstagramApi {
-  public static async getProfile(username: string): Promise<TProfile> {
+class InstagramApiService {
+  private request: RequestService;
+
+  constructor(sessionId: string) {
+    this.request = new RequestService(sessionId);
+  }
+
+  public async getProfile(username: string): Promise<TProfile> {
     try {
-      const data = <TInstagramApi>await Request.api(username);
+      const data = <TInstagramApi>await this.request.api(username);
 
       const user = data.graphql.user;
 
@@ -28,14 +34,14 @@ class InstagramApi {
 
       return profile;
     } catch (error) {
-      console.error('ERROR-GET-PROFILE ->', error.message);
+      console.error('ERROR-GET-PROFILE ->', (error as Error).message);
       throw error;
     }
   }
 
-  public static async getLastPosts(username: string): Promise<TLastPosts> {
+  public async getLastPosts(username: string): Promise<TLastPosts> {
     try {
-      const data = <TInstagramApi>await Request.api(username);
+      const data = <TInstagramApi>await this.request.api(username);
 
       const { edges } = data.graphql.user.edge_owner_to_timeline_media;
 
@@ -55,14 +61,14 @@ class InstagramApi {
 
       return lastPosts;
     } catch (error) {
-      console.error('ERROR-GET-LAST-POSTS ->', error.message);
+      console.error('ERROR-GET-LAST-POSTS ->', (error as Error).message);
       throw error;
     }
   }
 
-  public static async getPost(postUrl: string): Promise<TPost> {
+  public async getPost(postUrl: string): Promise<TPost> {
     try {
-      const data = <TPostApi>await Request.api(postUrl);
+      const data = <TPostApi>await this.request.api(postUrl);
 
       const media = data.graphql.shortcode_media;
 
@@ -147,10 +153,10 @@ class InstagramApi {
 
       return post;
     } catch (error) {
-      console.error('ERROR-GET-POST ->', error.message);
+      console.error('ERROR-GET-POST ->', (error as Error).message);
       throw error;
     }
   }
 }
 
-export { InstagramApi };
+export { InstagramApiService };
