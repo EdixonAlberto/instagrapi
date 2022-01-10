@@ -13,16 +13,16 @@
   "author": {
     "name": "Edixon Piña",
     "email": "edixonalbertto@gmail.com",
-    "url": "https://www.edixonalberto.com"
+    "url": "https://edixonalberto.com"
   },
   "license": "MIT",
   "private": false,
   "scripts": {
     "clean": "rimraf ./dist",
     "test": "jest",
-    "lint": "prettier --write ./src/**/*.ts",
-    "dev": "nodemon -e ts -w ./src --exec \"ts-node src\"",
-    "pre-publish": "yarn test && yarn lint && yarn clean && yarn build && yarn bundle && yarn minify",
+    "lint": "prettier --write src/**/*.ts",
+    "dev": "nodemon -e ts -w src --exec \"ts-node src\"",
+    "pre-publish": "yarn lint && yarn clean && yarn build && yarn bundle && yarn minify",
     "bundle": "node tools/createBundle.js",
     "minify": "node tools/minifyBundle.js",
     "build": "tsc",
@@ -47,10 +47,6 @@
     "ts-node": "^8.6.2",
     "typescript": "4.0.3",
     "uglify-js": "^3.12.1"
-  },
-  "engines": {
-    "node": "^12.18.0",
-    "yarn": "^1.22.5"
   },
   "homepage": "https://github.com/EdixonAlberto/instagrapi#readme",
   "repository": {
