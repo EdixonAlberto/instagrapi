@@ -34,11 +34,10 @@
       name="twitter:image"
       content="https://raw.githubusercontent.com/EdixonAlberto/instagrapi/main/.github/template-github.png"
     />
-
     <!-- VUE-CODE-HIGHLIGHT -->
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/vue-code-highlight@0.7.6/themes/prism-okaidia.css"
+      href="https://cdn.jsdelivr.net/npm/vue-code-highlight@0.7.6/themes/prism-dark.css"
     />
     <link
       rel="stylesheet"
@@ -60,58 +59,56 @@
   <body>
     <div id="app">
       <main>
-        <div>
-          <div class="title">
-            <h1>Instagrapi</h1>
-            <p class="version">(3.0.2)</p>
+        <div class="title">
+          <h1>Instagrapi</h1>
+          <p class="version">(3.0.2)</p>
+        </div>
+
+        <p>
+          Library to obtain information from an Instagram account <br />
+          in a friendly and intuitive way.
+        </p>
+
+        <div class="row m-auto">
+          <div class="features col-6 p-0" v-for="(columns, i) in features" :key="i">
+            <ul>
+              <li v-for="(feature, i) in columns" :key="i">
+                <div class="icon-container">
+                  <img src="./icon/check.svg" alt="Icono de check" />
+                </div>
+                <span v-text="feature"></span>
+              </li>
+            </ul>
           </div>
+        </div>
 
-          <p>
-            Library to obtain information from an Instagram account <br />
-            in a friendly and intuitive way.
-          </p>
+        <div class="row m-auto">
+          <div class="links col-12 text-center">
+            <a @click="goDemo()">
+              <button class="ig-btn started">Demostration</button>
+            </a>
 
-          <div class="row m-auto">
-            <div class="features col-6 p-0" v-for="(columns, i) in features" :key="i">
-              <ul>
-                <li v-for="(feature, i) in columns" :key="i">
-                  <div class="icon-container">
-                    <img src="./icon/check.svg" alt="Icono de check" />
-                  </div>
-                  <span v-text="feature"></span>
-                </li>
-              </ul>
-            </div>
-          </div>
+            <a
+              href="https://www.npmjs.com/package/instagrapi"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <button class="ig-btn npm">NPM</button>
+            </a>
 
-          <div class="row m-auto">
-            <div class="links col-12 text-center">
-              <a href="#demo">
-                <button class="ig-btn started">Demostration</button>
-              </a>
-
-              <a
-                href="https://www.npmjs.com/package/instagrapi"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <button class="ig-btn npm">NPM</button>
-              </a>
-
-              <a
-                href="https://github.com/EdixonAlberto/instagrapi"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <button class="ig-btn github">Github</button>
-              </a>
-            </div>
+            <a
+              href="https://github.com/EdixonAlberto/instagrapi"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <button class="ig-btn github">Github</button>
+            </a>
           </div>
         </div>
       </main>
 
       <article>
-        <section id="demo" class="search">
+        <section v-if="false" id="demo" class="search">
           <input type="text" placeholder="Enter Username" v-model="username" />
           <button class="ig-btn" @click="loadData()">Buscar</button>
         </section>
@@ -121,8 +118,8 @@
             <h2 class="order-0">Profile</h2>
 
             <div class="col-md-6 col-12 p-0 mb-3 order-3">
-              <code-highlight class="code-profile" language="js">
-                {{ profile }}
+              <code-highlight class="code-profile" language="js"
+                >{{ profile }}
               </code-highlight>
             </div>
 
@@ -130,7 +127,11 @@
               <div class="render-profile">
                 <div v-if="profile" class="profile-container">
                   <div class="border-color">
-                    <img :src="profile.image.standard" alt="" />
+                    <img
+                      :src="profile.image.standard"
+                      alt="Logo profile"
+                      crossorigin="anonymous"
+                    />
                   </div>
 
                   <h3>{{ profile.name }}</h3>
@@ -171,10 +172,12 @@
                     data-bs-target="#modal-post"
                     @click="getPost(post.postUrl)"
                   >
-                    <div
-                      class="post-card"
-                      :style="`background-image: url('${post.image}')`"
-                    >
+                    <div class="post-card">
+                      <img
+                        :src="post.image"
+                        :alt="`Post ${i + 1}`"
+                        crossorigin="anonymous"
+                      />
                       <i
                         v-if="post.video"
                         class="fa fa-video-camera"
@@ -237,11 +240,17 @@
                         :src="post.video.url"
                         type="video/mp4"
                         loop
+                        crossorigin="anonymous"
                         @click="play()"
                       ></video>
                     </div>
 
-                    <img v-else :src="post.image.hd" alt="Post image" />
+                    <img
+                      v-else
+                      :src="post.image"
+                      alt="Post image"
+                      crossorigin="anonymous"
+                    />
 
                     <div class="panel-comments">
                       <h2>Last Comments</h2>
@@ -252,7 +261,11 @@
                           :key="i"
                           class="comment"
                         >
-                          <img :src="com.author.image" alt="Avatar comment" />
+                          <img
+                            :src="com.author.image"
+                            alt="Avatar comment"
+                            crossorigin="anonymous"
+                          />
 
                           <div class="d-block">
                             <span class="user">@{{ com.author.username }}</span>
@@ -282,16 +295,12 @@
       </div>
     </div>
 
-    <!-- VUE-PRODUCTION -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2"></script> -->
-    <!-- VUE-DEVELOPMENT -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <!-- VUE -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <!-- VUE-HIGHLIGHT -->
     <script src="https://cdn.jsdelivr.net/npm/vue-code-highlight@0.7.6/dist/vue-code-highlight.min.js"></script>
-    <!-- INSTAGRAPI -->
-    <script src="https://cdn.jsdelivr.net/npm/instagrapi@3.2.3/dist/bundle/instagrapi.min.js"></script>
     <!-- FONTAWESOME -->
-    <script src="https://use.fontawesome.com/c681f17b23.js"></script>
+    <script type="module" src="https://use.fontawesome.com/c681f17b23.js"></script>
     <!-- BOOTSTRAP -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
