@@ -1,6 +1,3 @@
-const { loadConfig } = require('../dist/utils/loadConfig');
-const { InstagramApi } = require('../dist/InstagramApi');
-
-loadConfig();
-
-global.instagrapi = InstagramApi;
+require('../dist/utils/loadConfig')
+const { InstagramApiService } = require('../dist/services/InstagramApi.service')
+global.instagrapi = InstagramApiService

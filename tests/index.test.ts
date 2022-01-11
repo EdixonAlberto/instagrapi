@@ -16,7 +16,7 @@ describe('Instagrapi', () => {
   config()
 
   const instagrapi = new Instagrapi({
-    sessionId: process.env.SESSION_ID
+    sessionId: process.env.SESSION_ID as string
   })
 
   test('Get Profile', async () => {
@@ -31,11 +31,8 @@ describe('Instagrapi', () => {
 
   test('Get post', async () => {
     const post: TPost = await instagrapi.getPost('https://www.instagram.com/p/CI8nNX0DC4U')
+    const comment: TComment = post.lastComments[0]
 
-    const responses = post.lastComments.filter((comment: TComment) => comment.responses.length > 0)
-
-    expect(post.video!.duration).toBe(150.153)
-    expect(post.author.name).toBe('Instagram')
-    expect(responses).toBeTruthy()
+    expect(comment.author).toBeDefined()
   })
 })
