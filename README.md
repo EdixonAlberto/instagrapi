@@ -1,10 +1,12 @@
 # Instagrapi
 
-[![](https://img.shields.io/badge/author-Edixon_Piña-blue.svg?&style=flat-square)](https://www.edixonalberto.com)
 [![](https://img.shields.io/github/license/edixonalberto/instagrapi?style=flat-square)](./LICENSE)
-[![](https://img.shields.io/npm/v/instagrapi?style=flat-square)](https://www.npmjs.com/package/instagrapi)
-[![](https://img.shields.io/npm/dw/instagrapi?color=%23CA0000&style=flat-square)](https://www.npmjs.com/package/instagrapi)
 [![](https://data.jsdelivr.com/v1/package/npm/instagrapi/badge)](https://www.jsdelivr.com/package/npm/instagrapi?path=dist%2Fbundle)
+[![](https://img.shields.io/npm/v/instagrapi?color=CB0000&style=flat-square)](https://npmjs.com/package/@edixon/instagrapi)
+[![](https://img.shields.io/npm/dt/instagrapi?color=CB0000&style=flat-square)](https://npmjs.com/package/@edixon/instagrapi)
+
+[![](https://img.shields.io/badge/types-TypeScript-blue?style=flat-square)](https://github.com/microsoft/TypeScript)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 Library to obtain information from an Instagram account in a friendly and intuitive way.
 
@@ -12,9 +14,9 @@ The library works as a wrapper for the basic Instagram API, to abstract long or 
 property names and have a clean and readable data structure.
 
 Created with NodeJS and Typescript, all types are exposed for use.
-<img src="./.github/typescript.png" width="17px" alt="Logo typescript" /> + 💗
+<img src="https://github.com/EdixonAlberto/instagrapi/blob/main/images/typescript.png" width="17px" alt="Logo typescript" /> + 💗
 
-### 🌐 [Demo website](https://edixonalberto.github.io/instagrapi/) &#x279c;
+### 🌐 [Demo website](https://edixonalberto.github.io/instagrapi) &#x279c;
 
 ## Installation
 
@@ -27,23 +29,34 @@ npm install instagrapi
 - CDN
 
 ```html
-<!-- Bundle to development -->
-<script src="https://cdn.jsdelivr.net/npm/instagrapi@3/dist/bundle/instagrapi.js"></script>
-
-<!-- Bundle optimized to production -->
+<!-- Bundle minify and optimized to production -->
 <script src="https://cdn.jsdelivr.net/npm/instagrapi@3/dist/bundle/instagrapi.min.js"></script>
 ```
 
 - DOWNLOAD
 
 Download the bundle from
-[jsdelivr](https://www.jsdelivr.com/package/npm/instagrapi?path=dist%2Fbundle) selecting
-`instagrapi.js` or `instagrapi.min.js` and create the corresponding file in your assets.
+[jsdelivr](https://www.jsdelivr.com/package/npm/instagrapi?path=dist%2Fbundle) selecting the `instagrapi.min.js` file and then right click "save as".
 
 ## Usage
 
+First you must get the cookie called "sessionId" by logging in to your instagram account. To do this you must follow these steps:
+
+1. Go to https://www.instagram.com
+2. If you don't have a session logged in start one
+3. Open development tools witch `Ctrl + Shift + I`
+4. Get to the `application` section and then to `Cookies` and select on the right hand side `sessionId`
+    - For chromium browsers: `application`
+    - For firefox browsers: `storage`
+
+Now you can use the library by instantiating an object and passing the `sessionId` as an argument
+
 ```js
-const { instagrapi } = require('instagrapi');
+const { Instagrapi } = require('instagrapi');
+
+const instagrapi = new Instagrapi({
+  sessionId: process.env.SESSION_ID // Load sessionId from an environment
+})
 
 instagrapi.getProfile('USERNAME').then(profile => {
   console.log(profile.followers); // Numbers followers of instagram account
@@ -53,7 +66,11 @@ instagrapi.getProfile('USERNAME').then(profile => {
 Using typescript and async/await.
 
 ```ts
-import { instagrapi, TPost, TComment } from 'instagrapi';
+import { Instagrapi, TPost, TComment } from 'instagrapi';
+
+const instagrapi = new Instagrapi({
+  sessionId: process.env.SESSION_ID
+})
 
 async function getComments(): Promise<string[] | undefined> {
   try {
@@ -92,7 +109,7 @@ type TProfile = {
   };
   qtyPosts: number;
   followers: number;
-  followed: number;
+  following: number;
   name: string;
   biography: string;
   externalUrl: string;
@@ -165,4 +182,4 @@ type TPost = {
 
 ## License
 
-[MIT License](./LICENSE) &copy; Edixon Piña
+[MIT](https://github.com/EdixonAlberto/instagrapi/blob/main/LICENSE) &copy; Edixon Piña
