@@ -1,6 +1,6 @@
-import { RequestService } from './Request.service'
-import { Utils } from '../utils'
-import { TConfig, TProfile, TLastPosts, TPost, TMedia, TTagged } from '../types'
+import { RequestService } from '~SERVICES/Request.service'
+import { Utils } from '~UTILS'
+import { TConfig, TProfile, TLastPosts, TPost, TMedia, TTagged } from '~TYPES'
 
 class InstagramApiService {
   private request: RequestService

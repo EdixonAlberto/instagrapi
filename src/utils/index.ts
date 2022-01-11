@@ -1,4 +1,4 @@
-import { TComment, TPost } from '../types'
+import { TComment, TPost } from '~TYPES'
 
 class Utils {
   public static msToDate(ms: number): string {
