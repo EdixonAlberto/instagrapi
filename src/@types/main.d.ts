@@ -1,4 +1,4 @@
-type TConfig = {
+type TConfigApi = {
   urlBase: string
 }
 
@@ -6,6 +6,6 @@ type TConfig = {
 
 declare namespace NodeJS {
   interface Global {
-    config: TConfig
+    config: TConfigApi
   }
 }

@@ -21,7 +21,7 @@
     "clean": "rimraf ./dist",
     "test": "jest",
     "lint": "prettier --write src/**/*.ts demo/**/*.{js,css,html}",
-    "dev": "nodemon -e ts -w src --exec \"ts-node src\"",
+    "dev": "nodemon --config",
     "pre-publish": "yarn lint && yarn clean && yarn build && yarn bundle && yarn minify",
     "bundle": "node tools/createBundle.js",
     "minify": "node tools/minifyBundle.js",
@@ -30,13 +30,27 @@
     "deploy": "gh-pages -o github -d ./demo",
     "serve": "live-server --port=80 ./demo"
   },
+  "nodemonConfig": {
+    "ext": ".ts,.env",
+    "watch": [
+      "./",
+      "src/*"
+    ],
+    "verbose": false,
+    "exec": "yarn build && node dist",
+    "ignore": [
+      "node_modules/",
+      "dist/",
+      "tests/"
+    ]
+  },
   "dependencies": {
     "axios": "^0.21.0"
   },
   "devDependencies": {
     "@types/jest": "^26.0.17",
-    "@types/node": "^13.7.4",
     "browserify": "^17.0.0",
+    "dotenv": "^10.0.0",
     "gh-pages": "^3.1.0",
     "jest": "^26.6.3",
     "live-server": "^1.2.1",
@@ -44,8 +58,7 @@
     "prettier": "^1.19.1",
     "rimraf": "^3.0.2",
     "ts-jest": "^26.4.4",
-    "ts-node": "^8.6.2",
-    "typescript": "4.0.3",
+    "typescript": "^4.5.4",
     "uglify-js": "^3.12.1"
   },
   "homepage": "https://github.com/EdixonAlberto/instagrapi#readme",

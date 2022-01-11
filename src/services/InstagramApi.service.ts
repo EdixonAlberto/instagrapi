@@ -1,12 +1,12 @@
 import { RequestService } from './Request.service'
 import { Utils } from '../utils'
-import { TProfile, TLastPosts, TPost, TMedia, TTagged } from '../types'
+import { TConfig, TProfile, TLastPosts, TPost, TMedia, TTagged } from '../types'
 
 class InstagramApiService {
   private request: RequestService
 
-  constructor(sessionId: string) {
-    this.request = new RequestService(sessionId)
+  constructor(config: TConfig) {
+    this.request = new RequestService(config.sessionId)
   }
 
   public async getProfile(username: string): Promise<TProfile> {

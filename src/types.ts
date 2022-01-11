@@ -1,3 +1,7 @@
+export type TConfig = {
+  sessionId: string
+}
+
 export type TProfile = {
   username: string
   image: {

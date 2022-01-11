@@ -1,5 +1,6 @@
+import { config } from 'dotenv'
 import { Utils } from '../src/utils'
-import { instagrapi, TProfile, TLastPosts, TPost, TComment } from '../src'
+import { Instagrapi, TProfile, TLastPosts, TPost, TComment } from '../src'
 
 describe('Utils', () => {
   test('Convert ms to date', () => {
@@ -12,6 +13,12 @@ describe('Utils', () => {
 })
 
 describe('Instagrapi', () => {
+  config()
+
+  const instagrapi = new Instagrapi({
+    sessionId: process.env.SESSION_ID
+  })
+
   test('Get Profile', async () => {
     const profile: TProfile = await instagrapi.getProfile('instagram')
     expect(profile).toMatchObject(<TProfile>{ name: 'Instagram' })
