@@ -1,13 +1,15 @@
 .vscode/
 .github/
 src/
-test/
 tools/
 demo/
 tests/
+images/
+docs/
 
 tsconfig.json
 jest.config.js
-.prettierrc
+.prettier*
 yarn.lock
 *.log
+.env*

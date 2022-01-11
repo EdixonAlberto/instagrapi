@@ -182,4 +182,4 @@ type TPost = {
 
 ## License
 
-[MIT](https://github.com/EdixonAlberto/instagrapi/blob/main/LICENSE) &copy; Edixon Piña
+[MIT](LICENSE) &copy; Edixon Piña
