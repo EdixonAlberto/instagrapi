@@ -6,7 +6,7 @@ const year = new Date().getFullYear().toString()
 
 module.exports.PATH_BASE = resolve('dist', 'bundle')
 
-module.exports.getHeaderMessage = `/*!
+module.exports.headerMessage = `/*!
  *   ${pkg.name} v${pkg.version}
  *   ${pkg.description}
  *   Copyright (c) 2020-${year} ${pkg.author.name}
