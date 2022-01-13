@@ -11,9 +11,7 @@ export class InstagramApiService {
 
   public async getProfile(username: string): Promise<TProfile> {
     try {
-      const data = <TInstagramApi>await this.request.api(username)
-
-      const user = data.graphql.user
+      const { user } = <TInstagramApi['graphql']>await this.request.api(username)
 
       const profile: TProfile = {
         username: user.username,
@@ -34,16 +32,16 @@ export class InstagramApiService {
 
       return profile
     } catch (error) {
-      console.error('ERROR-GET-PROFILE ->', (error as Error).message)
-      throw error
+      GeneralUtil.logger('GET-PROFILE', error)
+      throw new Error('Username not found')
     }
   }
 
   public async getLastPosts(username: string): Promise<TLastPosts> {
     try {
-      const data = <TInstagramApi>await this.request.api(username)
+      const { user } = <TInstagramApi['graphql']>await this.request.api(username)
 
-      const { edges } = data.graphql.user.edge_owner_to_timeline_media
+      const edges = user.edge_owner_to_timeline_media.edges
 
       const lastPosts: TLastPosts = edges.map(({ node: media }: TEdgeMedia) => ({
         postUrl: GeneralUtil.getPostUrl(media.shortcode),
@@ -61,16 +59,14 @@ export class InstagramApiService {
 
       return lastPosts
     } catch (error) {
-      console.error('ERROR-GET-LAST-POSTS ->', (error as Error).message)
-      throw error
+      GeneralUtil.logger('GET-LAST-POSTS', error)
+      throw Error('Username not found')
     }
   }
 
   public async getPost(postUrl: string): Promise<TPost> {
     try {
-      const data = <TPostApi>await this.request.api(postUrl)
-
-      const media = data.graphql.shortcode_media
+      const { shortcode_media: media } = <TPostApi['graphql']>await this.request.api(postUrl)
 
       // Note: if there are children, they will always be older than one
       const children = media.edge_sidecar_to_children?.edges || []
@@ -153,8 +149,8 @@ export class InstagramApiService {
 
       return post
     } catch (error) {
-      console.error('ERROR-GET-POST ->', (error as Error).message)
-      throw error
+      GeneralUtil.logger('GET-POST', error)
+      throw new Error('Post url not found')
     }
   }
 }
