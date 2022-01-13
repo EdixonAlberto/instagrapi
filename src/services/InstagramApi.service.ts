@@ -93,7 +93,7 @@ export class InstagramApiService {
               type: media.product_type,
               views: media.video_view_count,
               duration: media.video_duration,
-              hasAudio: media.clips_music_attribution_info
+              audio: media.clips_music_attribution_info
                 ? {
                     artist: media.clips_music_attribution_info.artist_name,
                     song: media.clips_music_attribution_info.song_name
@@ -120,7 +120,7 @@ export class InstagramApiService {
                     type: media.product_type,
                     views: sidecar.video_view_count,
                     duration: media.video_duration,
-                    hasAudio: sidecar.has_audio
+                    audio: sidecar.has_audio
                   }
                 : null,
               taggedUsers: taggeds.map(

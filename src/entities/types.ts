@@ -67,7 +67,7 @@ export type TVideo = {
   type: string | 'clips' | 'igtv' | 'feed'
   views: number | null
   duration: number
-  hasAudio:
+  audio:
     | boolean
     | {
         artist: string
