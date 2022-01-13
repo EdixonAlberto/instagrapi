@@ -1,6 +1,6 @@
 {
   "name": "instagrapi",
-  "version": "1.0.0",
+  "version": "4.0.4",
   "description": "Library to obtain information from an Instagram account in a friendly and intuitive way",
   "keywords": [
     "instagram",
@@ -22,7 +22,7 @@
     "lint-demo": "prettier --write demo/**/*.{js,css,html}",
     "lint-lib": "prettier --write src/**/*.ts",
     "dev": "nodemon --config",
-    "pre-publish": "yarn lint-lib && yarn clean && yarn build",
+    "pre-publish": "yarn lint-lib && yarn clean && yarn build && yarn try-publish",
     "try-publish": "npm publish --dry-run",
     "build": "tsc && tsc-alias",
     "start": "node dist",

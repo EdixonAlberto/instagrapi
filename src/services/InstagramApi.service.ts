@@ -1,8 +1,8 @@
 import { RequestService } from '~SERVICES/Request.service'
-import { Utils } from '~UTILS'
+import { GeneralUtil, InstragramUtil } from '~UTILS'
 import { TConfig, TProfile, TLastPosts, TPost, TMedia, TTagged } from '~TYPES'
 
-class InstagramApiService {
+export class InstagramApiService {
   private request: RequestService
 
   constructor(config: TConfig) {
@@ -46,7 +46,7 @@ class InstagramApiService {
       const { edges } = data.graphql.user.edge_owner_to_timeline_media
 
       const lastPosts: TLastPosts = edges.map(({ node: media }: TEdgeMedia) => ({
-        postUrl: Utils.getPostUrl(media.shortcode),
+        postUrl: GeneralUtil.getPostUrl(media.shortcode),
         image: media.display_url,
         video: media.is_video
           ? {
@@ -54,7 +54,7 @@ class InstagramApiService {
               views: media?.video_view_count
             }
           : null,
-        content: Utils.getCaption(media),
+        content: InstragramUtil.getCaption(media),
         likes: media.edge_liked_by.count,
         qtyComments: media.edge_media_to_comment.count
       }))
@@ -82,7 +82,7 @@ class InstagramApiService {
       const commentList = media.edge_media_to_parent_comment.edges
 
       const post: TPost = {
-        postUrl: Utils.getPostUrl(media.shortcode),
+        postUrl: GeneralUtil.getPostUrl(media.shortcode),
         image: {
           standard: images.shift()!.src,
           hd: images.pop()!.src
@@ -101,7 +101,7 @@ class InstagramApiService {
                 : media.has_audio
             }
           : null,
-        content: Utils.getCaption(media),
+        content: InstragramUtil.getCaption(media),
         likes: media.edge_media_preview_like.count,
         qtyComments: media.edge_media_to_parent_comment.count,
         media: children.map(
@@ -146,9 +146,9 @@ class InstagramApiService {
           isVerified: user.is_verified,
           isPrivate: user.is_private
         },
-        lastComments: Utils.getComments(commentList),
-        location: media.location ? Utils.getLocation(media.location.address_json) : null,
-        date: Utils.msToDate(media.taken_at_timestamp)
+        lastComments: InstragramUtil.getComments(commentList),
+        location: media.location ? InstragramUtil.getLocation(media.location.address_json) : null,
+        date: GeneralUtil.msToDate(media.taken_at_timestamp)
       }
 
       return post
@@ -158,5 +158,3 @@ class InstagramApiService {
     }
   }
 }
-
-export { InstagramApiService }

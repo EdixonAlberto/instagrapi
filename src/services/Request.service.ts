@@ -1,11 +1,12 @@
 import axios from 'axios'
+import { configApi } from '~UTILS'
 
-class RequestService {
+export class RequestService {
   constructor(private id: string) {}
 
   public async api(query: string): Promise<TInstagramApi | TPostApi> {
     const isUrl = query.search(/^(https)/) > -1
-    const url: string = isUrl ? query : `${global.config.urlBase}/${query}`
+    const url: string = isUrl ? query : `${configApi.urlBase}/${query}`
 
     const { status, data } = await axios.get(url + '/?__a=1', {
       headers: {
@@ -20,5 +21,3 @@ class RequestService {
     }
   }
 }
-
-export { RequestService }

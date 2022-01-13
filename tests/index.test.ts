@@ -1,12 +1,12 @@
 import { config } from 'dotenv'
-import { Utils } from '../src/utils'
+import { GeneralUtil } from '../src/utils'
 import { Instagrapi, TProfile, TLastPosts, TPost, TComment } from '../src'
 
 describe('Utils', () => {
   test('Convert ms to date', () => {
     const nowDate = new Date()
     const ms = nowDate.getTime()
-    const date = Utils.msToDate(ms)
+    const date = GeneralUtil.msToDate(ms)
 
     expect(date).toBe(nowDate.toISOString())
   })
