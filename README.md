@@ -57,7 +57,7 @@ Now you can use the library by instantiating an object and passing the `sessionI
 const { Instagrapi } = require('instagrapi')
 
 const instagrapi = new Instagrapi({
-  sessionId: process.env.SESSION_ID // Load sessionId from an environment
+  sessionId: process.env.SESSION_ID // Load sessionId from an environment variable
 })
 
 instagrapi.getProfile('USERNAME').then(profile => {

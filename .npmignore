@@ -1,7 +1,6 @@
 .vscode/
 .github/
 src/
-tools/
 demo/
 tests/
 images/

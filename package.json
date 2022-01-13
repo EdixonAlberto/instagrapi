@@ -22,13 +22,12 @@
     "lint-demo": "prettier --write demo/**/*.{js,css,html}",
     "lint-lib": "prettier --write src/**/*.ts",
     "dev": "nodemon --config",
-    "pre-publish": "yarn lint-lib && yarn clean && yarn build && yarn bundle",
+    "pre-publish": "yarn lint-lib && yarn clean && yarn build",
     "try-publish": "npm publish --dry-run",
-    "bundle": "node tools/createBundle.js",
     "build": "tsc && tsc-alias",
     "start": "node dist",
-    "deploy": "yarn lint-demo && gh-pages -o github -d ./demo",
-    "serve": "live-server --port=80 ./demo"
+    "deploy": "gh-pages -o github -d ./demo",
+    "serve": "live-server --host=localhost --port=80 ./demo"
   },
   "nodemonConfig": {
     "ext": ".ts,.env",
