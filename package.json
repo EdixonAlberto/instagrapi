@@ -1,6 +1,6 @@
 {
   "name": "instagrapi",
-  "version": "4.0.4",
+  "version": "4.0.8",
   "description": "Library to obtain information from an Instagram account in a friendly and intuitive way",
   "keywords": [
     "instagram",
@@ -36,7 +36,7 @@
       "src/*"
     ],
     "verbose": false,
-    "exec": "yarn build && node dist",
+    "exec": "yarn build && yarn start",
     "ignore": [
       "node_modules/",
       "dist/",
