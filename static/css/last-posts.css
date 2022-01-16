@@ -1,29 +1,33 @@
-.posts {
+section#lastposts .posts {
   margin: 0 20px;
 }
 
-.post-card {
+section#lastposts .code-lastposts .language-js {
+  height: 468px;
+}
+
+section#lastposts .post-card {
   cursor: pointer;
   height: 152.8px;
   width: 100%;
   position: relative;
 }
 
-.post-card img {
+section#lastposts .post-card img {
   position: absolute;
   height: 100%;
   width: 100%;
   text-align: right;
 }
 
-.post-card .fa-video-camera {
+section#lastposts .post-card .fa-video-camera {
   position: absolute;
   top: 5px;
   right: 5px;
   color: var(--color-secondary);
 }
 
-.post-card .content {
+section#lastposts .post-card .content {
   visibility: hidden;
   height: 100%;
   width: 100%;
@@ -36,7 +40,7 @@
   padding: 20px;
 }
 
-.post-card .content::before {
+section#lastposts .post-card .content::before {
   content: '';
   position: absolute;
   top: 0;
@@ -46,35 +50,31 @@
   background-color: #212529a1;
 }
 
-.post-card:hover .content {
+section#lastposts .post-card:hover .content {
   visibility: visible;
 }
 
-.post-card .content p,
+section#lastposts .post-card .content p,
 .post-data .fa,
 .post-data span {
   position: relative;
   color: white;
 }
 
-.post-card .content p {
+section#lastposts .post-card .content p {
   font-size: 0.8rem;
 }
 
-.post-data {
+section#lastposts .post-data {
   display: inline-flex;
   width: 100%;
 }
 
-.post-data .data {
+section#lastposts .post-data .data {
   margin: auto;
 }
 
-.post-data span {
+section#lastposts .post-data span {
   font-family: 'Segoe-UI', Helvetica, sans-serif;
   font-size: 0.7rem;
-}
-
-.code-lastposts .language-js {
-  height: 468px;
 }

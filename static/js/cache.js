@@ -6,19 +6,19 @@ const cache = {
   },
 
   getData() {
-    const localData = JSON.parse(localStorage.getItem('data'));
-    return localData || this.data;
+    const localData = JSON.parse(localStorage.getItem('data'))
+    return localData || this.data
   },
 
   setData(newData) {
     const localData = {
       ...this.getData(),
       ...newData
-    };
-    localStorage.setItem('data', JSON.stringify(localData));
+    }
+    localStorage.setItem('data', JSON.stringify(localData))
   },
 
   cleanData() {
-    localStorage.clear();
+    localStorage.clear()
   }
-};
+}
