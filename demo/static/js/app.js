@@ -28,7 +28,8 @@ new Vue({
     lastPosts: [],
     post: null,
     play: false,
-    proxy: 'https://css-battle-proxy.herokuapp.com/'
+    proxy: 'https://css-battle-proxy.herokuapp.com/',
+    version: ''
   },
 
   created() {
@@ -48,6 +49,7 @@ new Vue({
     async loadData(cleanCache = true) {
       if (cleanCache) this.reset()
 
+      this.version = await this.getVersion()
       this.profile = await this.searchProfile()
 
       if (this.profile) {
@@ -60,11 +62,14 @@ new Vue({
       }
     },
 
-    async instagrapi(query, data) {
+    async instagrapi(query = '', data = '') {
+      // const URL_BASE = 'http://localhost:5000'
       const URL_BASE = 'https://service-instagrapi.herokuapp.com'
 
       return await new Promise(resolve => {
-        fetch(`${URL_BASE}/api/${query}/?data=${data}`, { method: 'GET' })
+        const endpoint = query ? `/${query}/?data=${data}` : ''
+
+        fetch(`${URL_BASE}/api${endpoint}`, { method: 'GET' })
           .then(async response => {
             const data = await response.json()
             if (response.status === 200) resolve(data)
@@ -77,6 +82,11 @@ new Vue({
             resolve(null)
           })
       })
+    },
+
+    async getVersion() {
+      const data = await this.instagrapi()
+      return data.versionInstagrapi
     },
 
     async searchProfile() {
