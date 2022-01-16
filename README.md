@@ -1,12 +1,12 @@
 # Instagrapi
 
-[![](https://img.shields.io/github/license/edixonalberto/instagrapi?style=flat-square)](./LICENSE)
-[![](https://data.jsdelivr.com/v1/package/npm/instagrapi/badge)](https://www.jsdelivr.com/package/npm/instagrapi?path=dist%2Fbundle)
-[![](https://img.shields.io/npm/v/instagrapi?color=CB0000&style=flat-square)](https://npmjs.com/package/@edixon/instagrapi)
-[![](https://img.shields.io/npm/dt/instagrapi?color=CB0000&style=flat-square)](https://npmjs.com/package/@edixon/instagrapi)
+[![](https://img.shields.io/badge/author-Edixon_Piña-F0DB4E?style=for-the-badge)](https://github.com/EdixonAlberto/)
+[![](https://img.shields.io/github/license/edixonalberto/instagrapi?style=for-the-badge)](LICENSE)
+[![](https://img.shields.io/npm/v/instagrapi?color=CB0000&style=for-the-badge)](https://npmjs.com/package/@edixon/instagrapi)
+[![](https://img.shields.io/npm/dt/instagrapi?color=CB0000&style=for-the-badge)](https://npmjs.com/package/@edixon/instagrapi)
 
-[![](https://img.shields.io/badge/types-TypeScript-blue?style=flat-square)](https://github.com/microsoft/TypeScript)
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+[![](https://img.shields.io/badge/types-TypeScript-blue?style=for-the-badge)](https://github.com/microsoft/TypeScript)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=for-the-badge)](https://github.com/prettier/prettier)
 
 Library to obtain information from an Instagram account in a friendly and intuitive way.
 
@@ -17,27 +17,21 @@ Created with NodeJS and Typescript, all types are exposed for use.
 <img src="https://github.com/EdixonAlberto/instagrapi/blob/main/images/typescript.png" width="17px" alt="Logo typescript" /> +
 💗
 
-### 🌐 [Demo website](https://edixonalberto.github.io/instagrapi) &#x279c;
+> 📃 **NOTE:** This library can only be used on the server with Nodejs.
+
+> 📃 **NOTE:** Login to Instagram required to obtain an ID.
+
+### 🌐 [Demo Web Site](https://edixonalberto.github.io/instagrapi) &#x279c;
+
+### 🔌 [Example in Nodejs](https://github.com/EdixonAlberto/service-instagrapi) &#x279c;
 
 ## Installation
 
-- NPM
-
 ```sh
 npm install instagrapi
+# or
+yarn add instagrapi
 ```
-
-- CDN
-
-```html
-<!-- Bundle minify and optimized to production -->
-<script src="https://cdn.jsdelivr.net/npm/instagrapi@3/dist/bundle/instagrapi.min.js"></script>
-```
-
-- DOWNLOAD
-
-Download the bundle from [jsdelivr](https://www.jsdelivr.com/package/npm/instagrapi?path=dist%2Fbundle) selecting the
-`instagrapi.min.js` file and then right click "save as".
 
 ## Usage
 
@@ -93,10 +87,10 @@ getComments()
 
 ## Methods
 
-- `getProfile(<USERNAME>)`
+- `getProfile(USERNAME)`
 
-Get all the profile information of an instagram account. Receives as argument: `<USERNAME>`, the username of the
-instagram account.
+Get all the profile information of an instagram account. Receives as argument: `USERNAME`, the username of the instagram
+account.
 
 Type of output in typescript:
 
@@ -119,10 +113,9 @@ type TProfile = {
 }
 ```
 
-- `getLastPosts(<USERNAME>)`
+- `getLastPosts(USERNAME)`
 
-Get the last 12 posts of an instagram account. Receives as argument: `<USERNAME>`, the username of the instagram
-account.
+Get the last 12 posts of an instagram account. Receives as argument: `USERNAME`, the username of the instagram account.
 
 Type of output in typescript:
 
@@ -140,9 +133,9 @@ type TLastPosts = Array<{
 }>
 ```
 
-- `getPost(<POST_URL>):`
+- `getPost(POST_URL):`
 
-Get all the details of a post of an instagram account. Receives as argument `<POST_URL>`, the url of the post on
+Get all the details of a post of an instagram account. Receives as argument `POST_URL`, the url of the post on
 instagram.
 
 Type of output in typescript:
