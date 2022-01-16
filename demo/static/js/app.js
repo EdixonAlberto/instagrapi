@@ -18,7 +18,7 @@ new Vue({
         'Developed in NodeJS and Typescript',
         'All types of data are exposed',
         'Methods based in promises',
-        'Bundle optimized for use on the client',
+        'Code optimized for use on the server',
         'Code open source published in Github'
       ]
     },
@@ -40,22 +40,44 @@ new Vue({
       if (cleanCache) this.reset()
 
       this.profile = await this.searchProfile()
-      this.lastPosts = await this.getPosts()
 
-      cache.setData({
-        profile: this.profile,
-        lastPosts: this.lastPosts
+      if (this.profile) {
+        this.lastPosts = await this.getPosts()
+
+        cache.setData({
+          profile: this.profile,
+          lastPosts: this.lastPosts
+        })
+      }
+    },
+
+    async instagrapi(query, data) {
+      const URL_BASE = 'https://service-instagrapi.herokuapp.com'
+
+      return await new Promise(resolve => {
+        fetch(`${URL_BASE}/api/${query}/?data=${data}`, { method: 'GET' })
+          .then(async response => {
+            const data = await response.json()
+            if (response.status === 200) resolve(data)
+            else throw data
+          })
+          .catch(error => {
+            console.error('ERROR-INSTAGRAPI', error.message)
+            alert(`ERROR: ${error.message}`)
+
+            resolve(null)
+          })
       })
     },
 
     async searchProfile() {
       const profile = cache.getData().profile
-      return !profile ? await instagrapi.getProfile(this.username) : profile
+      return profile || (await this.instagrapi('getProfile', this.username))
     },
 
     async getPosts() {
       const lastPosts = cache.getData().lastPosts
-      return !lastPosts.length ? await instagrapi.getLastPosts(this.username) : lastPosts
+      return lastPosts.length ? lastPosts : await this.instagrapi('getLastPosts', this.username)
     },
 
     async getPost(postUrl) {
@@ -63,9 +85,10 @@ new Vue({
       const post = cache.getData().post
 
       if (!post || post.postUrl !== postUrl) {
-        this.post = await instagrapi.getPost(postUrl)
+        const data = await this.instagrapi('getPost', postUrl)
+        this.post = data
 
-        cache.setData({ post: this.post })
+        cache.setData({ post: data })
       } else this.post = post
     },
 
@@ -93,7 +116,7 @@ new Vue({
   }
 })
 
-// FILTERS
+// FILTERS _____________________________________________________________________________________________________________
 
 Vue.filter('round', nro => {
   let round = ''

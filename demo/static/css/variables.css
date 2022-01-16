@@ -1,13 +1,14 @@
 :root {
   --color-gray: #55504a;
   --color-primary: #ffb545;
-  --color-secondary: #f92672;
+  --color-secondary: #fc685e;
   --color-background: #fffdfa;
+  --color-rose-dark: #f92672;
   --color-instagram: linear-gradient(
     220deg,
-    var(--color-secondary) 0%,
+    var(--color-rose-dark) 0%,
     var(--color-primary) 50%,
-    var(--color-secondary) 100%
+    var(--color-rose-dark) 100%
   );
   --height-modal-post: 540px;
 }
