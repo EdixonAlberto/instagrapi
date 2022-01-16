@@ -2,8 +2,8 @@
 
 [![](https://img.shields.io/badge/author-Edixon_Piña-F0DB4E?style=for-the-badge)](https://github.com/EdixonAlberto/)
 [![](https://img.shields.io/github/license/edixonalberto/instagrapi?style=for-the-badge)](LICENSE)
-[![](https://img.shields.io/npm/v/instagrapi?color=CB0000&style=for-the-badge)](https://npmjs.com/package/@edixon/instagrapi)
-[![](https://img.shields.io/npm/dt/instagrapi?color=CB0000&style=for-the-badge)](https://npmjs.com/package/@edixon/instagrapi)
+[![](https://img.shields.io/npm/v/instagrapi?color=CB0000&style=for-the-badge)](https://npmjs.com/package/instagrapi)
+[![](https://img.shields.io/npm/dt/instagrapi?color=CB0000&style=for-the-badge)](https://npmjs.com/package/instagrapi)
 
 [![](https://img.shields.io/badge/types-TypeScript-blue?style=for-the-badge)](https://github.com/microsoft/TypeScript)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=for-the-badge)](https://github.com/prettier/prettier)
