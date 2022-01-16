@@ -27,12 +27,20 @@ new Vue({
     profile: null,
     lastPosts: [],
     post: null,
-    isPlay: false
+    play: false
   },
 
   created() {
     this.username = cache.getData().profile?.username || 'instagram'
     this.loadData(false)
+  },
+
+  mounted() {
+    const modalPost = document.getElementById('modal-post')
+
+    modalPost.addEventListener('hidden.bs.modal', () => {
+      this.play = false
+    })
   },
 
   methods: {
@@ -98,20 +106,20 @@ new Vue({
       cache.cleanData()
     },
 
-    play() {
-      const video = this.$refs.video
-
-      if (this.isPlay) video.pause()
-      else video.play()
-
-      this.isPlay = !this.isPlay
-    },
-
     goDemo() {
       scrollTo({
         top: document.getElementById('profile').offsetTop,
         behavior: 'smooth'
       })
+    }
+  },
+
+  watch: {
+    play(val) {
+      const video = this.$refs.video
+
+      if (val) video.play()
+      else video.pause()
     }
   }
 })

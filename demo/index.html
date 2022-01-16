@@ -188,10 +188,10 @@
               <h2>Last Posts</h2>
 
               <div v-if="post" class="row">
-                <div class="col-md-6 col-12 mb-md-0 mb-4">
+                <div class="col-md-5 col-12 mb-md-0 mb-4">
                   <div class="post-card">
                     <div v-if="post.video" class="video">
-                      <i v-if="!isPlay" class="fa fa-play" aria-hidden="true"></i>
+                      <i v-if="!play" class="fa fa-play" aria-hidden="true"></i>
 
                       <video
                         ref="video"
@@ -199,7 +199,7 @@
                         type="video/mp4"
                         loop
                         crossorigin="anonymous"
-                        @click="play()"
+                        @click="play = !play"
                       ></video>
                     </div>
 
@@ -222,7 +222,7 @@
                   </div>
                 </div>
 
-                <div class="col-md-6 col-12">
+                <div class="col-md-7 col-12">
                   <code-highlight class="code-post" language="js">{{ post }} </code-highlight>
                 </div>
               </div>
