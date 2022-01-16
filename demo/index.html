@@ -113,7 +113,7 @@
               <div class="render-profile">
                 <div v-if="profile" class="profile-container">
                   <div class="border-color">
-                    <img :src="profile.image.standard" alt="Logo profile" crossorigin="anonymous" />
+                    <img :src="proxy + profile.image.standard" alt="Logo profile" crossorigin="anonymous" />
                   </div>
 
                   <h3>{{ profile.name }}</h3>
@@ -147,7 +147,7 @@
                 <div class="col-md-3 col-6 p-0" v-for="(post, i) in lastPosts" :key="i">
                   <a data-bs-toggle="modal" data-bs-target="#modal-post" @click="getPost(post.postUrl)">
                     <div class="post-card">
-                      <img :src="post.image" :alt="`Post ${i + 1}`" crossorigin="anonymous" />
+                      <img :src="proxy + post.image" :alt="`Post ${i + 1}`" crossorigin="anonymous" />
                       <i v-if="post.video" class="fa fa-video-camera" aria-hidden="true"></i>
 
                       <div class="content">
@@ -184,7 +184,7 @@
       <div id="modal-post" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl">
           <div class="modal-content">
-            <section id="post" class="modal-body">
+            <section id="post" class="modal-body py-0">
               <h2>Last Posts</h2>
 
               <div v-if="post" class="row">
@@ -195,7 +195,7 @@
 
                       <video
                         ref="video"
-                        :src="post.video.url"
+                        :src="proxy + post.video.url"
                         type="video/mp4"
                         loop
                         crossorigin="anonymous"
@@ -203,14 +203,14 @@
                       ></video>
                     </div>
 
-                    <img v-else :src="post.image.standard" alt="Post image" crossorigin="anonymous" />
+                    <img v-else :src="proxy + post.image.standard" alt="Post image" crossorigin="anonymous" />
 
                     <div class="panel-comments">
                       <h2>Last Comments</h2>
 
                       <ul>
                         <li v-for="(comment, i) in post.lastComments" :key="i" class="comment">
-                          <img :src="comment.author.image" alt="Avatar comment" crossorigin="anonymous" />
+                          <img :src="proxy + comment.author.image" alt="Avatar comment" crossorigin="anonymous" />
 
                           <div class="d-block">
                             <span class="user">@{{ comment.author.username }}</span>

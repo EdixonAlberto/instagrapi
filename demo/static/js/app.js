@@ -27,7 +27,8 @@ new Vue({
     profile: null,
     lastPosts: [],
     post: null,
-    play: false
+    play: false,
+    proxy: 'https://css-battle-proxy.herokuapp.com/'
   },
 
   created() {
@@ -108,7 +109,7 @@ new Vue({
 
     goDemo() {
       scrollTo({
-        top: document.getElementById('profile').offsetTop,
+        top: document.getElementById('demo').offsetTop,
         behavior: 'smooth'
       })
     }
