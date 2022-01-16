@@ -100,3 +100,32 @@ section#post .post-card .panel-comments {
 section#post .post-card .panel-comments:hover {
   height: 400px !important;
 }
+
+section#post .loading {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+section#post .loading .spinner-border {
+  width: 100px;
+  height: 100px;
+
+  border-color: var(--color-secondary);
+  border-right-color: transparent;
+}
+
+/* CUSTOM MODAL ______________________________________________________________________________________________________*/
+
+@media screen and (min-width: 767px) {
+  #modal-post .modal-xl {
+    max-width: 90%;
+  }
+
+  #modal-post .modal-content {
+    height: 600px;
+  }
+}
