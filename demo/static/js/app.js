@@ -28,7 +28,6 @@ new Vue({
     lastPosts: [],
     post: null,
     play: false,
-    proxy: 'https://css-battle-proxy.herokuapp.com/',
     version: ''
   },
 

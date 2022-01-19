@@ -22,7 +22,7 @@
     "lint-demo": "prettier --write demo/**/*.{js,css,html}",
     "lint-lib": "prettier --write src/**/*.ts",
     "dev": "nodemon --config",
-    "prepublish": "yarn build && yarn test",
+    "pre-publish": "yarn build && yarn test && yarn try-publish",
     "try-publish": "npm publish --dry-run",
     "build-ts": "tsc && tsc-alias",
     "build": "yarn lint-lib && yarn clean && yarn build-ts",
