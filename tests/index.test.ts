@@ -13,11 +13,12 @@ describe('Utils', () => {
 })
 
 describe('Instagrapi', () => {
-  process.env.NODE_ENV = 'testing'
+  // process.env.NODE_ENV = 'testing'
   config()
 
   const instagrapi = new Instagrapi({
-    sessionId: process.env.SESSION_ID as string
+    sessionId: process.env.SESSION_ID as string,
+    proxy: ''
   })
 
   describe('OK', () => {

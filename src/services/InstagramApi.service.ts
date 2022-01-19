@@ -4,8 +4,15 @@ import { TConfig, TProfile, TLastPosts, TPost, TMedia, TTagged } from '~TYPES'
 
 export class InstagramApiService {
   private request: RequestService
+  private proxy: string
 
   constructor(config: TConfig) {
+    try {
+      this.proxy = config.proxy ? new URL('/', config.proxy).href : ''
+    } catch (error) {
+      this.proxy = ''
+    }
+
     this.request = new RequestService(config.sessionId)
   }
 
@@ -16,8 +23,8 @@ export class InstagramApiService {
       const profile: TProfile = {
         username: user.username,
         image: {
-          standard: user.profile_pic_url,
-          hd: user.profile_pic_url_hd
+          standard: this.proxy + user.profile_pic_url,
+          hd: this.proxy + user.profile_pic_url_hd
         },
         qtyPosts: user.edge_owner_to_timeline_media.count,
         followers: user.edge_followed_by.count,
@@ -40,15 +47,14 @@ export class InstagramApiService {
   public async getLastPosts(username: string): Promise<TLastPosts> {
     try {
       const { user } = <TInstagramApi['graphql']>await this.request.api(username)
-
       const edges = user.edge_owner_to_timeline_media.edges
 
       const lastPosts: TLastPosts = edges.map(({ node: media }: TEdgeMedia) => ({
         postUrl: GeneralUtil.getPostUrl(media.shortcode),
-        image: media.display_url,
+        image: this.proxy + media.display_url,
         video: media.is_video
           ? {
-              url: media.video_url,
+              url: this.proxy + media.video_url,
               views: media?.video_view_count
             }
           : null,
@@ -80,12 +86,12 @@ export class InstagramApiService {
       const post: TPost = {
         postUrl: GeneralUtil.getPostUrl(media.shortcode),
         image: {
-          standard: images.shift()!.src,
-          hd: images.pop()!.src
+          standard: this.proxy + images.shift()!.src,
+          hd: this.proxy + images.pop()!.src
         },
         video: media.is_video
           ? {
-              url: media.video_url,
+              url: this.proxy + media.video_url,
               type: media.product_type,
               views: media.video_view_count,
               duration: media.video_duration,
@@ -107,12 +113,12 @@ export class InstagramApiService {
 
             return {
               image: {
-                standard: images.shift()!.src,
-                hd: images.pop()!.src
+                standard: this.proxy + images.shift()!.src,
+                hd: this.proxy + images.pop()!.src
               },
               video: sidecar.is_video
                 ? {
-                    url: sidecar.video_url,
+                    url: this.proxy + sidecar.video_url,
                     type: media.product_type,
                     views: sidecar.video_view_count,
                     duration: media.video_duration,
@@ -121,7 +127,7 @@ export class InstagramApiService {
                 : null,
               taggedUsers: taggeds.map(
                 ({ node: tagged }: TEdgeTagged): TTagged => ({
-                  image: tagged.user.profile_pic_url,
+                  image: this.proxy + tagged.user.profile_pic_url,
                   name: tagged.user.full_name,
                   isVerified: tagged.user.is_verified,
                   coordinates: {
@@ -135,14 +141,14 @@ export class InstagramApiService {
         ),
         author: {
           username: user.username,
-          image: user.profile_pic_url,
+          image: this.proxy + user.profile_pic_url,
           qtyPosts: user.edge_owner_to_timeline_media.count,
           followers: user.edge_followed_by.count,
           name: user.full_name,
           isVerified: user.is_verified,
           isPrivate: user.is_private
         },
-        lastComments: InstragramUtil.getComments(commentList),
+        lastComments: InstragramUtil.getComments(commentList, this.proxy),
         location: media.location ? InstragramUtil.getLocation(media.location.address_json) : null,
         date: GeneralUtil.msToDate(media.taken_at_timestamp)
       }

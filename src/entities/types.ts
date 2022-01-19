@@ -1,5 +1,6 @@
 export type TConfig = {
   sessionId: string
+  proxy?: string
 }
 
 export type TProfile = {

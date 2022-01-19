@@ -10,7 +10,7 @@ export class InstragramUtil {
     return caption ? caption : media.is_video ? media.title : null
   }
 
-  public static getComments(commentList: Array<TEdgeComment> | undefined): TComment[] {
+  public static getComments(commentList: Array<TEdgeComment> | undefined, proxy: string): TComment[] {
     if (commentList?.length) {
       return commentList.map(({ node: comment }: TEdgeComment) => {
         const user = comment.owner
@@ -20,11 +20,11 @@ export class InstragramUtil {
           content: comment.text,
           author: {
             username: user.username,
-            image: user.profile_pic_url,
+            image: proxy + user.profile_pic_url,
             isVerified: user.is_verified
           },
           likes: comment.edge_liked_by.count,
-          responses: InstragramUtil.getComments(commentList),
+          responses: InstragramUtil.getComments(commentList, proxy),
           isSpam: comment.did_report_as_spam,
           date: GeneralUtil.msToDate(comment.created_at)
         }

@@ -7,9 +7,10 @@ export class RequestService {
   public async api(query: string): Promise<TResponseApi['graphql']> {
     const isUrl = query.search(/^(https?)/) > -1
     const url: string = isUrl ? query : `${configApi.urlBase}/${query}`
+    const endpoint = url + '/?__a=1'
 
     try {
-      const { status, data } = await axios.get<TResponseApi>(url + '/?__a=1', {
+      const { status, data } = await axios.get<TResponseApi>(endpoint, {
         headers: {
           cookie: `sessionid=${this.id}`
         }
