@@ -11,6 +11,7 @@
     var(--color-rose-dark) 100%
   );
   --height-modal-post: 540px;
+  --height-card-post: 140px;
 }
 
 @font-face {

@@ -85,7 +85,7 @@ new Vue({
 
     async getVersion() {
       const data = await this.instagrapi()
-      return data.versionInstagrapi
+      return data?.versionInstagrapi || ''
     },
 
     async searchProfile() {
