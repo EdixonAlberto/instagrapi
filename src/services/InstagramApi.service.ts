@@ -60,7 +60,7 @@ export class InstagramApiService {
       return lastPosts
     } catch (error) {
       GeneralUtil.logger('GET-LAST-POSTS', error)
-      throw Error('Username not found')
+      throw new Error('Username not found')
     }
   }
 
