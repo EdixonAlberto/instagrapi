@@ -2,7 +2,7 @@ import { RequestService } from '~SERVICES/Request.service'
 import { GeneralUtil, InstragramUtil } from '~UTILS'
 import { TConfig, TProfile, TLastPosts, TPost, TMedia, TTagged } from '~TYPES'
 
-export class InstagramApiService {
+class InstagramApiService {
   private request: RequestService
   private proxy: string
 
@@ -160,3 +160,5 @@ export class InstagramApiService {
     }
   }
 }
+
+export { InstagramApiService as Instagrapi }

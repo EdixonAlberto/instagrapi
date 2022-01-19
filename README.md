@@ -1,6 +1,6 @@
 # Instagrapi
 
-[![](https://img.shields.io/badge/author-Edixon_Piña-F0DB4E?style=for-the-badge)](https://github.com/EdixonAlberto/)
+[![](https://img.shields.io/badge/author-Edixon_Piña-yellow?style=for-the-badge)](https://github.com/EdixonAlberto/)
 [![](https://img.shields.io/github/license/edixonalberto/instagrapi?style=for-the-badge)](LICENSE)
 [![](https://img.shields.io/npm/v/instagrapi?color=CB0000&style=for-the-badge)](https://npmjs.com/package/instagrapi)
 [![](https://img.shields.io/npm/dt/instagrapi?color=CB0000&style=for-the-badge)](https://npmjs.com/package/instagrapi)
@@ -14,7 +14,7 @@ The library works as a wrapper for the basic Instagram API, to abstract long or 
 clean and readable data structure.
 
 Created with NodeJS and Typescript, all types are exposed for use.
-<img src="https://github.com/EdixonAlberto/instagrapi/blob/main/images/typescript.png" width="17px" alt="Logo typescript" /> +
+<img src="https://github.com/EdixonAlberto/instagrapi/blob/main/images/typescript.png" width="18px" alt="Logo typescript" /> +
 💗
 
 > 📃 **NOTE:** This library can only be used on the server with Nodejs.
@@ -83,6 +83,27 @@ async function getComments(): Promise<string[] | undefined> {
 }
 
 getComments()
+```
+
+## Media Files
+
+By default Instagram API return media files via a CDN configured with CORS rules so tha they can only be consumed from
+the official page.
+
+To work around this you can build your own proxy server and add it in instance confiuration. In this way the library
+will automatically add the proxy as a prefix in all the media files that are found in the response.
+
+```js
+const instagrapi = new Instagrapi({
+  sessionId: process.env.SESSION_ID,
+  proxy: 'https://proxy-example.com'
+})
+
+instagrapi.getProfile('USERNAME').then(profile => {
+  const imgUrl = profile.image.standard
+
+  console.log(imgUrl) /* https://proxy-example.com/img-url... */
+})
 ```
 
 ## Methods

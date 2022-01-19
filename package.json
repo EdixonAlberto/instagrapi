@@ -22,9 +22,10 @@
     "lint-demo": "prettier --write demo/**/*.{js,css,html}",
     "lint-lib": "prettier --write src/**/*.ts",
     "dev": "nodemon --config",
-    "pre-publish": "yarn lint-lib && yarn clean && yarn build && yarn try-publish",
+    "prepublish": "yarn build && yarn test",
     "try-publish": "npm publish --dry-run",
-    "build": "tsc && tsc-alias",
+    "build-ts": "tsc && tsc-alias",
+    "build": "yarn lint-lib && yarn clean && yarn build-ts",
     "start": "node dist",
     "deploy": "gh-pages -o github -d ./demo",
     "serve": "live-server --host=localhost --port=80 ./demo"
@@ -36,7 +37,7 @@
       "src/*"
     ],
     "verbose": false,
-    "exec": "yarn build && yarn start",
+    "exec": "yarn build-ts && yarn start",
     "ignore": [
       "node_modules/",
       "dist/",

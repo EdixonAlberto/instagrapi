@@ -1,6 +1,6 @@
 import { config } from 'dotenv'
-import { GeneralUtil } from '../src/utils'
-import { Instagrapi, TProfile, TLastPosts, TPost, TComment } from '../src'
+import { GeneralUtil } from '../dist/utils'
+import { Instagrapi, TProfile, TLastPosts, TPost, TComment } from '../dist/index'
 
 describe('Utils', () => {
   test('Convert ms to date', () => {
@@ -13,12 +13,11 @@ describe('Utils', () => {
 })
 
 describe('Instagrapi', () => {
-  // process.env.NODE_ENV = 'testing'
+  process.env.NODE_ENV = 'testing'
   config()
 
   const instagrapi = new Instagrapi({
-    sessionId: process.env.SESSION_ID as string,
-    proxy: ''
+    sessionId: process.env.SESSION_ID as string
   })
 
   describe('OK', () => {
@@ -37,6 +36,20 @@ describe('Instagrapi', () => {
       const comment: TComment = post.lastComments[0]
 
       expect(comment.author).toBeDefined()
+    })
+
+    test('Get media file with proxy', async () => {
+      const proxy = 'https://css-battle-proxy.herokuapp.com'
+
+      const instagrapiWithProxy = new Instagrapi({
+        sessionId: process.env.SESSION_ID as string,
+        proxy
+      })
+
+      const profile: TProfile = await instagrapiWithProxy.getProfile('instagram')
+      const regex = new RegExp(`(${proxy})/https://instagram*`)
+
+      expect(profile.image.standard).toMatch(regex)
     })
   })
 
