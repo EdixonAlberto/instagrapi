@@ -28,7 +28,6 @@ new Vue({
     lastPosts: [],
     post: null,
     play: false,
-    proxy: 'https://css-battle-proxy.herokuapp.com/',
     version: ''
   },
 
@@ -86,7 +85,7 @@ new Vue({
 
     async getVersion() {
       const data = await this.instagrapi()
-      return data.versionInstagrapi
+      return data?.versionInstagrapi || ''
     },
 
     async searchProfile() {

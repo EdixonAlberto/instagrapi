@@ -3,12 +3,12 @@ section#lastposts .posts {
 }
 
 section#lastposts .code-lastposts .language-js {
-  height: 468px;
+  height: calc(var(--height-card-post) * 3);
 }
 
 section#lastposts .post-card {
   cursor: pointer;
-  height: 152.8px;
+  height: var(--height-card-post);
   width: 100%;
   position: relative;
 }

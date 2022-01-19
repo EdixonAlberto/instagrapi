@@ -1,0 +1,53 @@
+/* DESKTOP ___________________________________________________________________________________________________________*/
+@media screen and (min-width: 1920px) {
+  main .title h1 {
+    font-size: 100px;
+  }
+
+  section#lastposts {
+    --height-card-post: 190px;
+  }
+}
+
+/* MOBILE ____________________________________________________________________________________________________________*/
+@media screen and (max-width: 767px) {
+  section {
+    padding-bottom: 30px !important;
+  }
+
+  section.row {
+    padding-bottom: 0 !important;
+  }
+
+  main .title {
+    margin-bottom: 0;
+  }
+
+  main p {
+    font-size: 15px;
+    margin: 0 5px;
+  }
+
+  main .row {
+    padding-right: 13px;
+  }
+
+  .features ul {
+    padding-left: 13px;
+    margin: 25px 0;
+  }
+
+  .features ul > li {
+    height: 25px;
+    font-size: 12px;
+    margin: 18px 0;
+  }
+
+  .links button {
+    margin-bottom: 12px;
+  }
+
+  .search {
+    padding-top: 30px;
+  }
+}
