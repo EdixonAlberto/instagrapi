@@ -4,23 +4,18 @@ import { configApi, GeneralUtil } from '~UTILS'
 export class RequestService {
   constructor(private id: string) {}
 
-  public async api(query: string): Promise<TResponseApi['graphql']> {
+  public async api<R = TProfileApi | TPostApi>(query: string): Promise<R> {
     const isUrl = query.search(/^(https?)/) > -1
-    const url: string = isUrl ? query : `${configApi.urlBase}/${query}`
-    const endpoint = url + '/?__a=1'
+    const endpoint = (isUrl ? query : `${configApi.urlBase}/${query}`) + '/?__a=1'
 
     try {
-      const { status, data } = await axios.get<TResponseApi>(endpoint, {
+      const { data } = await axios.get<R>(endpoint, {
         headers: {
           cookie: `sessionid=${this.id}`
         }
       })
 
-      if (status === 200) return data.graphql
-      else {
-        GeneralUtil.logger('WARN-REQUEST', data)
-        throw new Error('Status incorrect in request api')
-      }
+      return data
     } catch (error) {
       GeneralUtil.logger('ERROR-REQUEST', error)
       throw error

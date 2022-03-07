@@ -5,6 +5,7 @@ demo/
 tests/
 images/
 docs/
+server/
 
 tsconfig.json
 jest.config.js

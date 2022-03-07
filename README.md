@@ -118,6 +118,7 @@ Type of output in typescript:
 ```ts
 type TProfile = {
   username: string
+  name: string
   image: {
     standard: string
     hd: string
@@ -125,7 +126,6 @@ type TProfile = {
   qtyPosts: number
   followers: number
   following: number
-  name: string
   biography: string
   externalUrl: string
   isBusiness: boolean
@@ -172,23 +172,19 @@ type TPost = {
   content: string | null
   likes: number
   qtyComments: number
-  media: Array<TMedia>
-  author: {
-    username: string
-    image: string
-    qtyPosts: number
-    followers: number
-    name: string
-    isVerified: boolean
-    isPrivate: boolean
-  }
-  lastComments: Array<TComment>
+  gallery: Array<TMedia>
+  author: TAuthor
+  coauthors: Array<TAuthor>
+  previewComments: Array<TComment>
   location: null | {
     country: string | null
     region: string | null
     city: string | null
     street: string | null
-    zipCode: string | null
+    coordinates: {
+      lat: number
+      lng: number
+    }
   }
   date: string
 }

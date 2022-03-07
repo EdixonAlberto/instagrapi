@@ -16,8 +16,10 @@ describe('Instagrapi', () => {
   process.env.NODE_ENV = 'testing'
   config()
 
+  const { SESSION_ID, PROXY } = process.env
+
   const instagrapi = new Instagrapi({
-    sessionId: process.env.SESSION_ID as string
+    sessionId: SESSION_ID as string
   })
 
   describe('OK', () => {
@@ -33,21 +35,19 @@ describe('Instagrapi', () => {
 
     test('Get post', async () => {
       const post: TPost = await instagrapi.getPost('https://www.instagram.com/p/CI8nNX0DC4U')
-      const comment: TComment = post.lastComments[0]
+      const comment: TComment = post.previewComments[0]
 
       expect(comment.author).toBeDefined()
     })
 
     test('Get media file with proxy', async () => {
-      const proxy = 'https://css-battle-proxy.herokuapp.com'
-
       const instagrapiWithProxy = new Instagrapi({
-        sessionId: process.env.SESSION_ID as string,
-        proxy
+        sessionId: SESSION_ID as string,
+        proxy: PROXY as string
       })
 
       const profile: TProfile = await instagrapiWithProxy.getProfile('instagram')
-      const regex = new RegExp(`(${proxy})/https://instagram*`)
+      const regex = new RegExp(`(${PROXY})/https://instagram*`)
 
       expect(profile.image.standard).toMatch(regex)
     })

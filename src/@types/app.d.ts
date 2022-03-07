@@ -3,6 +3,4 @@ type TConfigApi = {
   urlBase: string
 }
 
-type TResponseApi = {
-  graphql: TInstagramApi['graphql'] | TPostApi['graphql']
-}
+type TLocationApi = TPostApi['items'][0]['location']

@@ -5,6 +5,7 @@ export type TConfig = {
 
 export type TProfile = {
   username: string
+  name: string
   image: {
     standard: string
     hd: string
@@ -12,7 +13,6 @@ export type TProfile = {
   qtyPosts: number
   followers: number
   following: number
-  name: string
   biography: string
   externalUrl: string
   isBusiness: boolean
@@ -42,68 +42,64 @@ export type TPost = {
   content: string | null
   likes: number
   qtyComments: number
-  media: Array<TMedia>
-  author: {
-    username: string
-    image: string
-    qtyPosts: number
-    followers: number
-    name: string
-    isVerified: boolean
-    isPrivate: boolean
-  }
-  lastComments: Array<TComment>
+  gallery: Array<TMedia>
+  author: TAuthor
+  coauthors: Array<TAuthor>
+  previewComments: Array<TComment>
   location: null | {
     country: string | null
     region: string | null
     city: string | null
     street: string | null
-    zipCode: string | null
+    coordinates: {
+      lat: number
+      lng: number
+    }
   }
   date: string
 }
 
 export type TVideo = {
-  url: string
-  type: string | 'clips' | 'igtv' | 'feed'
-  views: number | null
+  url: TQualities
+  type: 'feed' | 'clips' | 'carousel_container'
   duration: number
-  audio:
-    | boolean
-    | {
-        artist: string
-        song: string
-      }
+  views?: number | null
+  audio?: {
+    artist: string
+    song: string | null
+  } | null
 }
 
 export type TMedia = {
-  image: {
-    standard: string
-    hd: string
-  }
+  image: TQualities
   video: TVideo | null
   taggedUsers: Array<TTagged>
+}
+
+export type TQualities = {
+  standard: string
+  hd: string
 }
 
 export type TTagged = {
   image: string
   name: string
   isVerified: boolean
-  coordinates: {
-    x: number
-    y: number
-  }
+  position: Array<number>
 }
 
 export type TComment = {
   content: string
-  author: {
-    username: string
-    image: string
-    isVerified: boolean
-  }
+  author: TAuthor
   likes: number
-  responses: Array<TComment>
   isSpam: boolean
   date: string
+}
+
+export type TAuthor = {
+  username: string
+  name: string
+  image: string
+  isVerified: boolean
+  isPrivate: boolean
 }

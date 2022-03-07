@@ -13,8 +13,8 @@ export class GeneralUtil {
 
   public static logger(title: string, event: unknown): void {
     if (configApi.devMode) {
-      if (typeof event === 'string' || 'object') console.log(title + ':', event)
-      else console.error(title + ':', (event as Error).message)
+      if (typeof event === 'object') console.error(`${title}: ${(event as Error)?.message || ''}`)
+      else console.log(`${title}: ${event}`)
     }
   }
 }

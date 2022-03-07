@@ -1,6 +1,6 @@
 {
   "name": "instagrapi",
-  "version": "4.2.1",
+  "version": "4.2.2",
   "description": "Library to obtain information from an Instagram account in a friendly and intuitive way",
   "keywords": [
     "instagram",
@@ -26,7 +26,7 @@
     "try-publish": "npm publish --dry-run",
     "build-ts": "tsc && tsc-alias",
     "build": "yarn lint-lib && yarn clean && yarn build-ts",
-    "start": "node dist",
+    "start": "node server",
     "deploy": "gh-pages -o github -d ./demo",
     "serve": "live-server --host=localhost --port=80 ./demo"
   },
@@ -50,6 +50,7 @@
   "devDependencies": {
     "@types/jest": "^26.0.17",
     "dotenv": "^10.0.0",
+    "express": "^4.17.3",
     "gh-pages": "^3.1.0",
     "jest": "^27.4.7",
     "live-server": "^1.2.1",
