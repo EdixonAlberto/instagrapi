@@ -21,6 +21,8 @@ Created with NodeJS and Typescript, all types are exposed for use.
 
 > 📃 **NOTE:** Login to Instagram required to obtain an ID.
 
+> 📃 **NOTE:** In version 4.x.x the "getPost" method no longer works due to changes in the Instagram api.
+
 ### 🌐 [Demo Web Site](https://edixonalberto.github.io/instagrapi) &#x279c;
 
 ### 🔌 [Example in Nodejs](https://github.com/EdixonAlberto/service-instagrapi) &#x279c;
@@ -42,8 +44,6 @@ these steps:
 2. If you don't have a session logged in start one
 3. Open development tools witch `Ctrl + Shift + I`
 4. Get to the `application` section and then to `Cookies` and select on the right hand side `sessionId`
-   - For chromium browsers: `application`
-   - For firefox browsers: `storage`
 
 Now you can use the library by instantiating an object and passing the `sessionId` as an argument
 
@@ -71,10 +71,9 @@ const instagrapi = new Instagrapi({
 async function getComments(): Promise<string[] | undefined> {
   try {
     const post: TPost = await instagrapi.getPost('POST_URL')
+    const comments: string[] = post.previewComments.map((comment: TComment) => comment.content)
 
-    const comments: string[] = post.lastComments.map((comment: TComment) => comment.content)
-
-    console.log(comments) // Last comments of the post
+    console.log(comments) // Preview comments of the post
 
     return comments
   } catch (error) {

@@ -4,11 +4,17 @@ const { Instagrapi } = require('../dist')
 
 config()
 
-const { PORT, SESSION_ID } = process.env
+const { PORT, SESSION_ID, PROXY } = process.env
 
 const server = express()
 const instagrapi = new Instagrapi({
-  sessionId: SESSION_ID
+  sessionId: SESSION_ID,
+  proxy: PROXY
+})
+
+server.use((_, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  next()
 })
 
 server.get('/:command', async (req, res) => {
