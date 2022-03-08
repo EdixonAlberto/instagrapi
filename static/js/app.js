@@ -62,13 +62,13 @@ new Vue({
     },
 
     async instagrapi(query = '', data = '') {
-      // const URL_BASE = 'http://localhost:5000'
-      const URL_BASE = 'https://service-instagrapi.herokuapp.com'
+      // const URL_BASE = 'http://localhost:3000'
+      const URL_BASE = 'https://service-instagrapi.herokuapp.com/api'
 
       return await new Promise(resolve => {
         const endpoint = query ? `/${query}/?data=${data}` : ''
 
-        fetch(`${URL_BASE}/api${endpoint}`, { method: 'GET' })
+        fetch(`${URL_BASE}${endpoint}`, { method: 'GET' })
           .then(async response => {
             const data = await response.json()
             if (response.status === 200) resolve(data)
@@ -76,7 +76,7 @@ new Vue({
           })
           .catch(error => {
             console.error('ERROR-INSTAGRAPI', error.message)
-            alert(`ERROR: ${error.message}`)
+            if (query) alert(`ERROR: ${error.message}`)
 
             resolve(null)
           })

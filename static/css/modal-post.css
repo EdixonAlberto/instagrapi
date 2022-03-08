@@ -76,7 +76,6 @@ section#post .post-card .panel-comments > ul li {
 
 section#post .post-card .panel-comments > ul .comment {
   display: flex;
-  align-items: end;
   text-align: left;
 }
 
@@ -98,7 +97,7 @@ section#post .post-card .panel-comments {
 }
 
 section#post .post-card .panel-comments:hover {
-  height: 400px !important;
+  height: max-content !important;
 }
 
 section#post .loading {

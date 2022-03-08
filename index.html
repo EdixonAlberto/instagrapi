@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,45 +8,31 @@
     <title>Instagrapi</title>
 
     <!-- SEO -->
-    <meta
-      name="description"
-      content="Library to obtain information from an Instagram account in a friendly and intuitive way"
-    />
+    <meta name="description"
+      content="Library to obtain information from an Instagram account in a friendly and intuitive way" />
     <meta name="author" content="Edixon Piña" />
     <meta name="keywords" content="instagram, api, nodejs, typescript" />
     <!-- OPEN-GRAPH -->
     <meta property="og:url" content="https://edixonalberto.github.io/instagrapi" />
     <meta property="og:title" content="Instagrapi" />
-    <meta
-      property="og:description"
-      content="Library to obtain information from an Instagram account in a friendly and intuitive way"
-    />
+    <meta property="og:description"
+      content="Library to obtain information from an Instagram account in a friendly and intuitive way" />
     <meta property="og:type" content="image/png" />
-    <meta
-      property="og:image"
-      content="https://raw.githubusercontent.com/EdixonAlberto/instagrapi/main/.github/template-github.png"
-    />
+    <meta property="og:image"
+      content="https://raw.githubusercontent.com/EdixonAlberto/instagrapi/main/.github/template-github.png" />
     <!-- TWITTER -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Instagrapi" />
-    <meta
-      name="twitter:description"
-      content="Library to obtain information from an Instagram account in a friendly and intuitive way"
-    />
-    <meta
-      name="twitter:image"
-      content="https://raw.githubusercontent.com/EdixonAlberto/instagrapi/main/.github/template-github.png"
-    />
+    <meta name="twitter:description"
+      content="Library to obtain information from an Instagram account in a friendly and intuitive way" />
+    <meta name="twitter:image"
+      content="https://raw.githubusercontent.com/EdixonAlberto/instagrapi/main/.github/template-github.png" />
     <!-- STYLES-VUE-CODE-HIGHLIGHT -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vue-code-highlight@0.7.6/themes/prism-dark.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vue-code-highlight@0.7.6/themes/window.min.css" />
     <!-- STYLES-BOOTSTRAP -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
-      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
-      crossorigin="anonymous"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous" />
     <!-- STYLES-FONTAWESOME-4 -->
     <link rel="stylesheet" href="https://use.fontawesome.com/878cc38dc0.css" />
     <!-- STYLES-CSS -->
@@ -113,7 +100,7 @@
               <div class="render-profile">
                 <div v-if="profile" class="profile-container">
                   <div class="border-color">
-                    <img :src="profile.image.standard" alt="Logo profile" crossorigin="anonymous" />
+                    <img :src="profile.image.standard" alt="Logo profile" crossorigin="anonymous" draggable="false" />
                   </div>
 
                   <h3>{{ profile.name }}</h3>
@@ -147,7 +134,7 @@
                 <div class="col-md-3 col-6 p-0" v-for="(post, i) in lastPosts" :key="i">
                   <a data-bs-toggle="modal" data-bs-target="#modal-post" @click="getPost(post.postUrl)">
                     <div class="post-card">
-                      <img :src="post.image" :alt="`Post ${i + 1}`" crossorigin="anonymous" />
+                      <img :src="post.image" :alt="`Post ${i + 1}`" crossorigin="anonymous" draggable="false" />
                       <i v-if="post.video" class="fa fa-video-camera" aria-hidden="true"></i>
 
                       <div class="content">
@@ -193,24 +180,19 @@
                     <div v-if="post.video" class="video">
                       <i v-if="!play" class="fa fa-play" aria-hidden="true"></i>
 
-                      <video
-                        ref="video"
-                        :src="post.video.url"
-                        type="video/mp4"
-                        loop
-                        crossorigin="anonymous"
-                        @click="play = !play"
-                      ></video>
+                      <video ref="video" :src="post.video.url.standard" type="video/mp4" loop crossorigin="anonymous"
+                        @click="play = !play"></video>
                     </div>
 
-                    <img v-else :src="post.image.standard" alt="Post image" crossorigin="anonymous" />
+                    <img v-else :src="post.image.standard" alt="Post image" crossorigin="anonymous" draggable="false" />
 
                     <div class="panel-comments">
-                      <h2>Last Comments</h2>
+                      <h2>Preview Comments</h2>
 
                       <ul>
-                        <li v-for="(comment, i) in post.lastComments" :key="i" class="comment">
-                          <img :src="comment.author.image" alt="Avatar comment" crossorigin="anonymous" />
+                        <li v-for="(comment, i) in post.previewComments" :key="i" class="comment">
+                          <img :src="comment.author.image" alt="Avatar comment" crossorigin="anonymous"
+                            draggable="false" />
 
                           <div class="d-block">
                             <span class="user">@{{ comment.author.username }}</span>
@@ -243,13 +225,12 @@
     <!-- VUE-HIGHLIGHT -->
     <script src="https://cdn.jsdelivr.net/npm/vue-code-highlight@0.7.6/dist/vue-code-highlight.min.js"></script>
     <!-- BOOTSTRAP -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
-      crossorigin="anonymous"
-    ></script>
+      crossorigin="anonymous"></script>
     <!-- APP -->
     <script src="static/js/cache.js"></script>
     <script src="static/js/app.js"></script>
   </body>
+
 </html>
