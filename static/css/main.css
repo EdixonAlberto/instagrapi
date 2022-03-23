@@ -56,7 +56,6 @@ article {
   border: none;
   border-radius: 10px;
   padding: 8px 20px;
-  margin: 0 25px;
 
   font-size: 1rem;
   color: white;
@@ -154,6 +153,14 @@ li .icon-container {
 .icon-container img {
   height: 12px;
   width: 12px;
+}
+
+.links {
+  user-select: none;
+}
+
+.links a {
+  margin: 0 25px;
 }
 
 .started {
