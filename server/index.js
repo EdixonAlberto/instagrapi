@@ -17,6 +17,12 @@ server.use((_, res, next) => {
   next()
 })
 
+server.get('/', async (_req, res) => {
+  res.status(200).json({
+    versionInstagrapi: '0.0.0'
+  })
+})
+
 server.get('/:command', async (req, res) => {
   const { command } = req.params
   const { data } = req.query
@@ -28,7 +34,7 @@ server.get('/:command', async (req, res) => {
     res.status(200).json(response)
   } catch (error) {
     res.status(500).json({
-      message: error.message
+      message: error?.message || error
     })
   }
 })

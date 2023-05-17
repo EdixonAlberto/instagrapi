@@ -77,7 +77,6 @@ new Vue({
           .catch(error => {
             console.error('ERROR-INSTAGRAPI', error.message)
             if (query) alert(`ERROR: ${error.message}`)
-
             resolve(null)
           })
       })

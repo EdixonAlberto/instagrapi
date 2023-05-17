@@ -28,7 +28,7 @@
     "build": "yarn lint-lib && yarn clean && yarn build-ts",
     "start": "node server",
     "deploy": "gh-pages -o github -d ./demo",
-    "serve": "live-server --host=localhost --port=80 ./demo"
+    "serve": "live-server --host=localhost --port=8080 ./demo"
   },
   "nodemonConfig": {
     "ext": ".ts,.env",
